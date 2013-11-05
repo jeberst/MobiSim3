@@ -19,7 +19,6 @@
 package edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.model;
 
 import edu.sharif.ce.dml.common.data.entity.DataLocation;
-import edu.sharif.ce.dml.common.data.entity.NodeShadow;
 import edu.sharif.ce.dml.common.data.trace.TraceWriter;
 import edu.sharif.ce.dml.common.logic.entity.Location;
 import edu.sharif.ce.dml.common.parameters.logic.Parameter;
@@ -27,7 +26,6 @@ import edu.sharif.ce.dml.common.parameters.logic.complex.ParameterableParameter;
 import edu.sharif.ce.dml.common.parameters.logic.complex.SelectOneParameterable;
 import edu.sharif.ce.dml.common.parameters.logic.exception.InvalidParameterInputException;
 import edu.sharif.ce.dml.common.parameters.logic.parameterable.ParameterableImplement;
-import edu.sharif.ce.dml.common.parameters.logic.primitives.DoubleParameter;
 import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.logic.GeneratorNode;
 import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.logic.Simulation;
 import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.model.initiallocation.LocationInitializer;
@@ -39,7 +37,7 @@ import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.logic.SensorNode;
 
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -61,14 +59,16 @@ public abstract class Model extends ParameterableImplement {
 
 
     protected List<GeneratorNode> modelNodes;
+    protected List<GeneratorNode> Sensors;
     protected SelectOneParameterable mapSelect = new SelectOneParameterable(true);
     protected NodePainter nodePainter;
     protected ParameterableParameter mapEditor = new ParameterableParameter();
     protected SelectOneParameterable locationInitializerParameter = new SelectOneParameterable(true);
     protected SelectOneParameterable rangeSelect = new SelectOneParameterable(true);
-    int SensorCount = 5;
-    int SensorRange = 5;
-    List<GeneratorNode> Sensors;
+    private int SensorCount;
+    private int SensorRange;
+    private boolean updatenodes = false;
+   
     List<GeneratorNode> Cluster;
     //protected double range = 0;
 
@@ -115,6 +115,10 @@ public abstract class Model extends ParameterableImplement {
     public List<GeneratorNode> getModelNodes() {
         return modelNodes;
     }
+       public List<GeneratorNode> getSensors() {
+        return Sensors;
+    }
+    
 
     /**
      * sets nodes that this model should manage their movement. models can ovveride this to initiates
@@ -123,8 +127,25 @@ public abstract class Model extends ParameterableImplement {
      * @param modelNodes
      */
     public void setModelNodes(List<GeneratorNode> modelNodes) throws ModelInitializationException {
-        this.modelNodes = modelNodes;
+            this.modelNodes = modelNodes;
+            nodePainter = new NodePainter();
+            System.out.println("Nodes " +this.modelNodes.size());
+        
+      
+    }
+    
+    public void setSensorNodes(List<GeneratorNode> SensorNodes)
+    {
+        this.Sensors = SensorNodes;
         nodePainter = new NodePainter();
+    }
+    
+    public void adjustSensorNodes(List<GeneratorNode> Sensors, List<GeneratorNode> ModelNodes)
+    {
+       for(GeneratorNode node : Sensors)
+       {
+         node.setSpeed(0);
+       }
     }
 
     protected abstract void initNode(GeneratorNode node) throws ModelInitializationException;
@@ -140,6 +161,16 @@ public abstract class Model extends ParameterableImplement {
         }
         return location;
     }
+    
+            public int GetSensorCount()
+        {
+            return SensorCount;
+        }
+        public void setSensorCountandRange(int count, int range)
+        {
+            SensorCount = count;
+            SensorRange = range;
+        }
 
     protected abstract void getNextStep(double timeStep, GeneratorNode node);
 
@@ -149,17 +180,11 @@ public abstract class Model extends ParameterableImplement {
      * @param timeStep
      */
     public void updateNodes(double timeStep) {
-  
+        
         for (GeneratorNode node : getModelNodes()) {
-            if(node.isSensorNode())
-            {
-                 getNextStep(timeStep, node);
-            }
-            else
-            {
             getNextStep(timeStep, node);
-            }
         }
+        
         updateRanges();
     }
 
@@ -174,14 +199,7 @@ public abstract class Model extends ParameterableImplement {
     public void initNodes() throws ModelInitializationException {
         for (GeneratorNode node : getModelNodes()) {
             initNode(node);
-            if(node.getIntName() < SensorCount)
-            {
-                node.setSensorNode(true);
-                 //     Sensors.add(node);   
-            }
         }
-      
-        
         updateRanges();
     }
 
@@ -199,6 +217,7 @@ public abstract class Model extends ParameterableImplement {
         for (GeneratorNode node : getModelNodes()) {
             outputMap.put(node, new NodePainter(nodePainter1));
         }
+
         return outputMap;
     }
 
@@ -279,14 +298,7 @@ public abstract class Model extends ParameterableImplement {
         }
 
         public int getSize(GeneratorNode node) {
-            if(node.isSensorNode())
-            {
-            return GeneratorNode.CIRCLE_RADIUS*SensorRange;
-            }
-            else
-            {
             return GeneratorNode.CIRCLE_RADIUS;
-            }
         }
 
         public void resetNodePositions() {
@@ -298,17 +310,19 @@ public abstract class Model extends ParameterableImplement {
         }
 
         public void paint(Graphics2D g, GeneratorNode node) {
-           
-            int size = getSize(node);
-            DataLocation loc = node.getLocation();
-            if(node.getIntName() < SensorCount)
+            
+            if(node.isSensorNode())
             {
+                 int size = getSize(node) * SensorRange;
+                DataLocation loc = node.getLocation();
                 g.setColor(Color.RED);
                 g.drawOval(loc.getX() - size, loc.getY() - size, 2 * size, 2 * size);
                
             }
             else
             {
+                int size = getSize(node);
+                DataLocation loc = node.getLocation();
                 Color lastColor = Color.BLACK;
                 g.setColor(Color.BLACK);
                 g.fillOval(loc.getX() - size, loc.getY() - size, 2 * size, 2 * size);
@@ -324,6 +338,8 @@ public abstract class Model extends ParameterableImplement {
             }
             return GeneratorNode.NodeColors[pos % GeneratorNode.NodeColors.length];
         }
+        
+
 
     }
 

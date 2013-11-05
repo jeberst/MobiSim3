@@ -18,12 +18,14 @@
 
 package edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.model.group;
 
+import edu.sharif.ce.dml.common.data.entity.DataLocation;
 import edu.sharif.ce.dml.common.logic.entity.Location;
 import edu.sharif.ce.dml.common.parameters.logic.Parameter;
 import edu.sharif.ce.dml.common.parameters.logic.complex.LazySelectOneParameterable;
 import edu.sharif.ce.dml.common.parameters.logic.exception.InvalidParameterInputException;
 import edu.sharif.ce.dml.common.parameters.logic.primitives.*;
 import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.logic.GeneratorNode;
+import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.logic.SensorNode;
 import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.model.MapHandleSupport;
 import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.model.Model;
 import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.model.ModelInitializationException;
@@ -82,6 +84,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
     protected boolean perGroupRange = false;
     protected List<Integer> groupMembersNum;
     protected int stackDepth = 0;
+    protected List<GeneratorNode> sensors = new LinkedList<GeneratorNode>();
 
     public AbstractGroupModel() {
         super();
@@ -147,12 +150,14 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
      * @param modelNodes
      */
     public void setModelNodes(List<GeneratorNode> modelNodes) throws ModelInitializationException {
+        System.out.println("Abstract group " + modelNodes.size());
         super.setModelNodes(modelNodes);
+          
         //calculating group members
-        if (sumGroupNodes() != modelNodes.size()) {
+        if (sumGroupNodes() != (modelNodes.size())) {
             int numberOfGroups = Math.min(groupMembersNum.size(), modelNodes.size());//number of groups at most can be equal to number of nodes.
             groupMembersNum = new LinkedList<Integer>();
-            int currentGroupSize = modelNodes.size() / numberOfGroups;
+            int currentGroupSize = (modelNodes.size()) / numberOfGroups;
             for (int i = 0; i < numberOfGroups - 1; i++) {
                 groupMembersNum.add(currentGroupSize);
             }
@@ -225,6 +230,20 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                 if (!anyNodeInGroup.isLeader()) {
                     getNextStep(timeStep, anyNodeInGroup.getNode());
                 }
+                if(anyNodeInGroup.node.isSensorNode())
+                {
+                    if(anyNodeInGroup.node.getIntName()==5)
+                    {
+                    anyNodeInGroup.node.setSpeed(0);
+                    DataLocation L = new DataLocation(200, 200);
+                    anyNodeInGroup.node.setLocation(L);
+                    }
+                    else
+                    {
+                    anyNodeInGroup.node.setSpeed(1);
+                    getNextSensorStep(timeStep, anyNodeInGroup.node);
+                    }
+                }
             }
         }
         updateRanges();
@@ -296,6 +315,11 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                 if (!nodeInGroup.isLeader()) {
                     initNode(nodeInGroup.getNode());
                 }
+                if(nodeInGroup.node.isSensorNode())
+                {
+                    sensors.add(nodeInGroup.node);
+                }
+                System.out.println("Sensors size: " + sensors.size());
             }
         }
         updateRanges();
@@ -303,6 +327,33 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
 
     @Override
     protected void getNextStep(double timeStep, GeneratorNode node) {
+        //update member node location according to speed and destNode location and map reflection
+        Location loc = node.getDoubleLocation();
+        //creating the next location according to current speed and angle
+        Location nextStepLoc = new Location(loc.getX() + node.getSpeed() * timeStep * Math.cos(node.getDirection()),
+                loc.getY() + node.getSpeed() * timeStep * Math.sin(node.getDirection()));
+        //checks if it is hit the border reflect it
+        Location mirror = new Location(nextStepLoc.getX(), nextStepLoc.getY());
+        //mirror will be the mirror point of the nextstep location
+        Location hit = ((ReflectiveMap) getMap()).isHitBorder(loc, nextStepLoc, mirror);
+        if (hit != null) {
+            double timePassed = (mirror.getLength(hit) + hit.getLength(loc)) / node.getSpeed();
+            //if it hit because in next timeStep new transition should be created now
+            // new transition is not created and only mirror position used
+            loc.pasteCoordination(mirror);
+            node.setDirection(Location.calculateRadianAngle(hit, mirror));
+            getNextStep(timeStep - timePassed, node);
+
+        } else {
+            loc.pasteCoordination(nextStepLoc);
+        }
+//                    DevelopmentLogger.logger.debug(anyNode.getName()+" : "+nextStepLoc +" : "+mirror +" : "+ hit);
+
+        GeneratorNode leaderNode = nodeNodeInGroup.get(node).getGroup().getLeader().getNode();
+        updateGroupNodeProperties(node, leaderNode);
+    }
+    
+      protected void getNextSensorStep(double timeStep, GeneratorNode node) {
         //update member node location according to speed and destNode location and map reflection
         Location loc = node.getDoubleLocation();
         //creating the next location according to current speed and angle
@@ -541,6 +592,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         }
 
         public List<NodeInGroup> getNodes() {
+            
             return nodes;
         }
 
@@ -586,12 +638,20 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
             if (size < 0) {
                 size = nodePainter.getSize(node);
             }
+            if(node.isSensorNode())
+            {
+                size = nodePainter.getSize(node) * 5;
+            }
             return size;
         }
 
         public Color getColor(GeneratorNode node) {
             if (color == null) {
                 color = nodePainter.getColor(node);
+                if(node.isSensorNode())
+                {
+                    color = Color.RED;
+                }
             }
             return color;
         }

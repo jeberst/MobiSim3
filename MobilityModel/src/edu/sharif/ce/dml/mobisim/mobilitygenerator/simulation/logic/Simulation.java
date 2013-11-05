@@ -82,6 +82,9 @@ public class Simulation extends ParameterableImplement implements TraceOwner, Wi
     private SnapShotData graphicalSnapShotData;
     private static Random randomGenerator;
     private long inputSeed;
+    
+    private int SensorCount = 2;
+    private int SensorRange = 5;
 
     public Simulation() {
         super();
@@ -261,15 +264,31 @@ public class Simulation extends ParameterableImplement implements TraceOwner, Wi
         }
         ParameterableImplement.resetParameters(this);
         List<GeneratorNode> nodes = new LinkedList<GeneratorNode>();
+         List<GeneratorNode> sensors = new LinkedList<GeneratorNode>();
+         
+        
         for (int i = 0; i < nodeNumber; i++) {
             GeneratorNode node = new GeneratorNode();
             node.setName("" + i);
             nodes.add(node);
         }
+        
+        
+        for(int i=0; i< SensorCount; i++)
+        {
+            SensorNode node = new SensorNode("" + nodes.size());
+            node.setSensorNode(true);
+            sensors.add(node);
+            nodes.add(node);
+        }
+        
         Model currentModel = getCurrentModel();
         try {
             currentModel.setModelNodes(nodes);
+            System.out.println("Node Size " + nodes.size());
             currentModel.initNodes();
+            //currentModel.setSensorNodes(sensors);
+            currentModel.setSensorCountandRange(SensorCount, SensorRange);
 
             if (shower != null) {//so is graphical
                 MyTimer.play(this, shower.getSpeedRatio());

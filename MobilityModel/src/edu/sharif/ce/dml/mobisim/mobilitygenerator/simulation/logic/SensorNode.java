@@ -11,6 +11,7 @@ package edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.logic;
  * @author Josh
  */
 
+import edu.sharif.ce.dml.common.data.entity.DataLocation;
 import edu.sharif.ce.dml.common.logic.entity.Location;
 
 import java.util.List;
@@ -37,7 +38,19 @@ public class SensorNode extends GeneratorNode {
         this.defaultnode = defaultnode;
         this.center = center;
     }
-    
+    public SensorNode()
+    {
+        this.setSpeed(0);
+
+    }
+    public SensorNode(String name)
+    {
+        this.setName(name);
+        this.location = new DataLocation(200,200);
+        this.direction = 0;
+        this.speed=0;
+        this.range = 0;
+    }
 
     public void setSensorLocation(Location location, SensorNode node)
     {
