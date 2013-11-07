@@ -25,9 +25,10 @@ import edu.sharif.ce.dml.common.parameters.logic.complex.LazySelectOneParametera
 import edu.sharif.ce.dml.common.parameters.logic.exception.InvalidParameterInputException;
 import edu.sharif.ce.dml.common.parameters.logic.primitives.*;
 import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.logic.GeneratorNode;
-import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.logic.SensorNode;
+import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.logic.Simulation;
 import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.model.MapHandleSupport;
 import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.model.Model;
+import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.model.Model.NodePainter;
 import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.model.ModelInitializationException;
 import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.model.SubModelException;
 import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.model.maps.IncludableMap;
@@ -40,6 +41,7 @@ import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.ui.map.MapHandleGr
 import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.ui.map.multi.MultiMapHandleGroup;
 
 import java.awt.*;
+import java.io.PrintWriter;
 import java.util.*;
 import java.util.List;
 
@@ -85,6 +87,10 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
     protected List<Integer> groupMembersNum;
     protected int stackDepth = 0;
     protected List<GeneratorNode> sensors = new LinkedList<GeneratorNode>();
+    
+    
+            
+
 
     public AbstractGroupModel() {
         super();
@@ -95,7 +101,11 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         groupMembersNum = new LinkedList<Integer>();
         leadersModel = new LazySelectOneParameterable();
         perGroupRange = false;
+      
     }
+    
+                  
+           
 
     public Map<String, Parameter> getParameters() {
         Map<String, Parameter> parameters = super.getParameters();
@@ -242,12 +252,44 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                     {
                     anyNodeInGroup.node.setSpeed(1);
                     getNextSensorStep(timeStep, anyNodeInGroup.node);
+                    
+       
+                        int coverage = pollSensor(modelNodes, anyNodeInGroup.node);
+                        super.setNodeCoverage(coverage);
+                        
+                        //write("Node count for time: " + timeStep +  " = " + x);
+                            Simulation.writecoverage(anyNodeInGroup.node.getName() + " Nodes covered: " + coverage + "\r\n");
+                      
                     }
                 }
             }
         }
         updateRanges();
     }
+    
+    
+ 
+         public int pollSensor(List<GeneratorNode> nodes, GeneratorNode sensor)
+        {
+            System.out.println("Calculated Sensor Range " + super.getSensorRange());
+            int nodesinrange = 0;
+           for(GeneratorNode node : nodes)
+           {
+               System.out.println("Distance " + node.getName() + "=" + calcDistance(node, sensor));
+              if(calcDistance(node, sensor) < super.getSensorRange() && !node.isSensorNode() )
+              {
+                  nodesinrange++;
+              }
+           }
+            return nodesinrange;
+        }
+        
+        public double calcDistance (GeneratorNode nodeone, GeneratorNode nodetwo)
+        {
+           return  Math.sqrt((nodeone.getLocation().getX()-nodetwo.getLocation().getX())*(nodeone.getLocation().getX()-nodetwo.getLocation().getX()) + (nodeone.getLocation().getY()-nodetwo.getLocation().getY())*(nodeone.getLocation().getY()-nodetwo.getLocation().getY()));
+        }
+        
+        
 
     public void updateRanges(){
         if (perGroupRange) {
@@ -319,7 +361,6 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                 {
                     sensors.add(nodeInGroup.node);
                 }
-                System.out.println("Sensors size: " + sensors.size());
             }
         }
         updateRanges();
@@ -486,6 +527,8 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
             output.add(nodeInGroup.group.getGroupId());
             output.add(nodeInGroup.isLeader());
         }
+        
+        
         return output;
     }
 
@@ -569,6 +612,8 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
             loc.translate(offset.getX(), offset.getY());
             return loc;
         }
+        
+
     }
 
     /**
@@ -655,6 +700,8 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
             }
             return color;
         }
+
+        
     }
 
     protected class GroupMemberNodePainter extends NodePainter {
@@ -677,5 +724,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         public Color getColor(GeneratorNode node) {
             return leaderPainter.getColor(nodeNodeInGroup.get(node).getGroup().getLeader().getNode());
         }
+        
+
     }
 }

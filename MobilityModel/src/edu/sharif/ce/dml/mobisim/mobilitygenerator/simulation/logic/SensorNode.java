@@ -22,6 +22,7 @@ public class SensorNode extends GeneratorNode {
     private SensorNode leftnode;
     private SensorNode rightnode;
     private boolean center;
+    public int sensorrange;
     GeneratorNode defaultnode;
     
     public SensorNode(GeneratorNode defaultnode, boolean center, SensorNode top,  SensorNode right, SensorNode bottom,  SensorNode left)

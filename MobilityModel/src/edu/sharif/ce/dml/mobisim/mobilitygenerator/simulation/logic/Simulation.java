@@ -52,7 +52,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -73,6 +76,7 @@ public class Simulation extends ParameterableImplement implements TraceOwner, Wi
     private TraceWriter currentTraceWriter;
     private boolean simulationSetup = false;
     public static final String GRAPHICAL_CONFIG_FILE = "graphicalconfigFile2";
+   
 
     ////
     private MiniShower<SnapShotData> shower;
@@ -84,7 +88,10 @@ public class Simulation extends ParameterableImplement implements TraceOwner, Wi
     private long inputSeed;
     
     private int SensorCount = 2;
-    private int SensorRange = 5;
+    private int SensorRange = 25;
+    
+    private static FileWriter fw;
+    private static BufferedWriter bw;
 
     public Simulation() {
         super();
@@ -109,6 +116,7 @@ public class Simulation extends ParameterableImplement implements TraceOwner, Wi
         return randomGenerator.nextDouble();
     }
 
+ 
     /**
      * don't use in set parameters
      *
@@ -207,6 +215,7 @@ public class Simulation extends ParameterableImplement implements TraceOwner, Wi
         shower.addWindowListener(this);
         edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.model.maps.Map map = getCurrentModel().getMap();
         shower.setSize2(map.getWidth(), map.getHeight());
+        
     }
 
     public void reset() {
@@ -257,6 +266,7 @@ public class Simulation extends ParameterableImplement implements TraceOwner, Wi
      * actual work of simulation is in this method after initialization.
      */
     public void initializeAndPlay() {
+         FileWriter();
         if (inputSeed == 0) {
             randomGenerator = new Random();
         } else {
@@ -285,19 +295,21 @@ public class Simulation extends ParameterableImplement implements TraceOwner, Wi
         Model currentModel = getCurrentModel();
         try {
             currentModel.setModelNodes(nodes);
-            System.out.println("Node Size " + nodes.size());
             currentModel.initNodes();
             //currentModel.setSensorNodes(sensors);
             currentModel.setSensorCountandRange(SensorCount, SensorRange);
 
             if (shower != null) {//so is graphical
                 MyTimer.play(this, shower.getSpeedRatio());
+ 
             } else {
                 MyTimer.resetTime();
                 for (int i = 1; i <= maxSimulationTime; i++) {
                     MyTimer.incTime();
                     this.updateNodes();
+                  
                 }
+                  
                 flushAndClose();
             }
         } catch (ModelInitializationException e) {
@@ -309,8 +321,45 @@ public class Simulation extends ParameterableImplement implements TraceOwner, Wi
             } else {
                 throw new UnfinishedSimulationException(e.getMessage());
             }
+       
         }
     }
+    
+    public void FileWriter()
+    {
+               try{
+                                  
+                    File file = new File("coverage.txt");
+ 
+			// if file doesnt exists, then create it
+			if (!file.exists()) {
+				file.createNewFile();
+			} 
+                        fw = new FileWriter(file.getAbsoluteFile());
+                       
+                        
+                        }
+        catch(Exception e)
+        {
+            
+        }
+    }
+    public static void writecoverage(String output)
+    {
+        try{
+                  bw = new BufferedWriter(fw);
+			bw.write(output);
+                         bw.flush();
+                         bw.flush();
+        }
+        catch(Exception e)
+        {
+            
+        }
+                         
+     
+    }
+       
 
 
     /**
@@ -319,6 +368,7 @@ public class Simulation extends ParameterableImplement implements TraceOwner, Wi
     public void updateNodes() {
         getCurrentModel().updateNodes((int) MyTimer.calculationTimeStep);
         writeTraces(getTraceWriter());
+
     }
 
     /**
@@ -337,6 +387,7 @@ public class Simulation extends ParameterableImplement implements TraceOwner, Wi
         graphicalSnapShotData.setTime(time);
         shower.setSnapShot(graphicalSnapShotData);
         shower.repaint();
+        
     }
 
     ////////////////////////////output part
@@ -351,6 +402,7 @@ public class Simulation extends ParameterableImplement implements TraceOwner, Wi
     public void writeTraces(TraceWriter writer) {
         Model m = getCurrentModel();
         m.writeTraces(writer, Arrays.asList(MyTimer.getTime()), new Location(0, 0));
+        
     }
 
     public String[] getTraceLabels() {

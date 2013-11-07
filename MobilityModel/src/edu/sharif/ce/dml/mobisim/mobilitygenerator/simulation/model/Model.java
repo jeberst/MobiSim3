@@ -68,6 +68,7 @@ public abstract class Model extends ParameterableImplement {
     private int SensorCount;
     private int SensorRange;
     private boolean updatenodes = false;
+    private int nodecoverage;
    
     List<GeneratorNode> Cluster;
     //protected double range = 0;
@@ -130,14 +131,17 @@ public abstract class Model extends ParameterableImplement {
             this.modelNodes = modelNodes;
             nodePainter = new NodePainter();
             System.out.println("Nodes " +this.modelNodes.size());
-        
-      
     }
     
     public void setSensorNodes(List<GeneratorNode> SensorNodes)
     {
         this.Sensors = SensorNodes;
         nodePainter = new NodePainter();
+    }
+    
+    public void setNodeCoverage(int coverage)
+    {
+        this.nodecoverage = coverage;
     }
     
     public void adjustSensorNodes(List<GeneratorNode> Sensors, List<GeneratorNode> ModelNodes)
@@ -166,11 +170,20 @@ public abstract class Model extends ParameterableImplement {
         {
             return SensorCount;
         }
+         public int getSensorRange()
+        {
+            return SensorRange;
+        }
         public void setSensorCountandRange(int count, int range)
         {
             SensorCount = count;
             SensorRange = range;
         }
+        
+   public int getCoverage()
+    {
+        return nodecoverage;
+    }
 
     protected abstract void getNextStep(double timeStep, GeneratorNode node);
 
@@ -308,15 +321,18 @@ public abstract class Model extends ParameterableImplement {
         public Location getOffset() {
             return offset;
         }
+        
+
 
         public void paint(Graphics2D g, GeneratorNode node) {
             
             if(node.isSensorNode())
             {
-                 int size = getSize(node) * SensorRange;
+                 int size = SensorRange;
                 DataLocation loc = node.getLocation();
                 g.setColor(Color.RED);
                 g.drawOval(loc.getX() - size, loc.getY() - size, 2 * size, 2 * size);
+                
                
             }
             else
