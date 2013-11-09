@@ -41,7 +41,6 @@ import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.ui.map.MapHandleGr
 import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.ui.map.multi.MultiMapHandleGroup;
 
 import java.awt.*;
-import java.io.PrintWriter;
 import java.util.*;
 import java.util.List;
 
@@ -87,6 +86,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
     protected List<Integer> groupMembersNum;
     protected int stackDepth = 0;
     protected List<GeneratorNode> sensors = new LinkedList<GeneratorNode>();
+    private Hashtable coverednodes = new Hashtable();
     
     
             
@@ -230,6 +230,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
      * @param timeStep
      */
     public void updateNodes(double timeStep) {
+        coverednodes.clear();
         getLeadersModel().updateNodes(timeStep);
         //for each group (by each group leader)
         for (NodeInGroup groupLeader : leaderGroup.keySet()) {
@@ -244,18 +245,22 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                 {
                     if(anyNodeInGroup.node.getIntName()==5)
                     {
-                    anyNodeInGroup.node.setSpeed(0);
+                    /*anyNodeInGroup.node.setSpeed(0);
                     DataLocation L = new DataLocation(200, 200);
-                    anyNodeInGroup.node.setLocation(L);
+                    anyNodeInGroup.node.setLocation(L);*/
+                      anyNodeInGroup.node.setSpeed(1);
+                    getNextSensorStep(timeStep, anyNodeInGroup.node);
+                    int sensor1coverage = pollSensor(modelNodes, anyNodeInGroup.node);
+                    super.setNodeCoverage(super.getCoverage() + sensor1coverage);
+                          Simulation.writecoverage(anyNodeInGroup.node.getName() + " Nodes covered: " + sensor1coverage + "\r\n");
                     }
                     else
                     {
                     anyNodeInGroup.node.setSpeed(1);
                     getNextSensorStep(timeStep, anyNodeInGroup.node);
                     
-       
                         int coverage = pollSensor(modelNodes, anyNodeInGroup.node);
-                        super.setNodeCoverage(coverage);
+                        super.setNodeCoverage(super.getCoverage() + coverage);
                         
                         //write("Node count for time: " + timeStep +  " = " + x);
                             Simulation.writecoverage(anyNodeInGroup.node.getName() + " Nodes covered: " + coverage + "\r\n");
@@ -276,9 +281,10 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
            for(GeneratorNode node : nodes)
            {
                System.out.println("Distance " + node.getName() + "=" + calcDistance(node, sensor));
-              if(calcDistance(node, sensor) < super.getSensorRange() && !node.isSensorNode() )
+              if(calcDistance(node, sensor) < super.getSensorRange() && !node.isSensorNode() && coverednodes.get(node.getIntName()) == null )
               {
                   nodesinrange++;
+                  coverednodes.put(node.getIntName(), node);
               }
            }
             return nodesinrange;
