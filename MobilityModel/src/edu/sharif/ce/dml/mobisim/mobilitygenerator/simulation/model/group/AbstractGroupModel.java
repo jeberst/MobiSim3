@@ -273,7 +273,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                     int coverage = pollSensor(modelNodes, anyNodeInGroup.node);
                         Model.nodecoverage += coverage;
                         //write("Node count for time: " + timeStep +  " = " + x);
-                            Simulation.writecoverage(anyNodeInGroup.node.getName() + " Nodes covered: " + coverage + "\r\n");
+                            Simulation.writecoverage(anyNodeInGroup.node.getName() + "\t" + coverage + "\r\n");
 
                 }
             }

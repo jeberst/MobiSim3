@@ -336,8 +336,10 @@ public class Simulation extends ParameterableImplement implements TraceOwner, Wi
 				file.createNewFile();
 			} 
                         fw = new FileWriter(file.getAbsoluteFile());
-                       
-                        
+                        bw = new BufferedWriter(fw);
+                        bw.write("Sensor Name\tNodes Covered\r\n");
+                        bw.flush();
+                        bw.flush();
                         }
         catch(Exception e)
         {
