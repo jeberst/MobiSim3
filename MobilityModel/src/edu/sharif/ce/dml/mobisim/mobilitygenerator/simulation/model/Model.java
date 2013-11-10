@@ -68,7 +68,7 @@ public abstract class Model extends ParameterableImplement {
     private int SensorCount;
     private int SensorRange;
     private boolean updatenodes = false;
-    private int nodecoverage;
+    public static int nodecoverage;
    
     List<GeneratorNode> Cluster;
     //protected double range = 0;
@@ -130,7 +130,6 @@ public abstract class Model extends ParameterableImplement {
     public void setModelNodes(List<GeneratorNode> modelNodes) throws ModelInitializationException {
             this.modelNodes = modelNodes;
             nodePainter = new NodePainter();
-            System.out.println("Nodes " +this.modelNodes.size());
     }
     
     public void setSensorNodes(List<GeneratorNode> SensorNodes)
@@ -197,7 +196,7 @@ public abstract class Model extends ParameterableImplement {
         for (GeneratorNode node : getModelNodes()) {
             getNextStep(timeStep, node);
         }
-        
+      
         updateRanges();
     }
 

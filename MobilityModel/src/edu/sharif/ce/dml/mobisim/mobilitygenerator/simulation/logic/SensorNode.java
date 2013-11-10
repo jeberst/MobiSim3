@@ -24,6 +24,7 @@ public class SensorNode extends GeneratorNode {
     private boolean center;
     public int sensorrange;
     GeneratorNode defaultnode;
+    private int coverage;
     
     public SensorNode(GeneratorNode defaultnode, boolean center, SensorNode top,  SensorNode right, SensorNode bottom,  SensorNode left)
     {
@@ -51,6 +52,16 @@ public class SensorNode extends GeneratorNode {
         this.direction = 0;
         this.speed=0;
         this.range = 0;
+    }
+    
+    public SensorNode(GeneratorNode node)
+    {
+        this.defaultnode = node;
+        this.setName("" + node.getName());
+        this.location = node.getLocation();
+        this.direction = node.getDirection();
+        this.speed = node.getSpeed();
+        this.range = node.getRange();
     }
 
     public void setSensorLocation(Location location, SensorNode node)
@@ -91,6 +102,20 @@ public class SensorNode extends GeneratorNode {
         return node.center;
     }
     
+    public void setCoverage(int c)
+    {
+        this.coverage = c;
+    }
+    
+    public int getCoverage()
+    {
+        return this.coverage;
+    }
+    
+    public void setSpeed(int speed)
+    {
+        this.defaultnode.setSpeed(speed);
+    }
     //Public setCenter
     //Public Set Node(s)
     

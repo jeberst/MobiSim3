@@ -25,6 +25,7 @@ import edu.sharif.ce.dml.common.parameters.logic.complex.LazySelectOneParametera
 import edu.sharif.ce.dml.common.parameters.logic.exception.InvalidParameterInputException;
 import edu.sharif.ce.dml.common.parameters.logic.primitives.*;
 import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.logic.GeneratorNode;
+import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.logic.SensorNode;
 import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.logic.Simulation;
 import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.model.MapHandleSupport;
 import edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.model.Model;
@@ -86,7 +87,8 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
     protected List<Integer> groupMembersNum;
     protected int stackDepth = 0;
     protected List<GeneratorNode> sensors = new LinkedList<GeneratorNode>();
-    private Hashtable coverednodes = new Hashtable();
+    private HashSet coverednodes = new HashSet();
+  
     
     
             
@@ -230,12 +232,13 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
      * @param timeStep
      */
     public void updateNodes(double timeStep) {
+        super.setNodeCoverage(0);
         coverednodes.clear();
         getLeadersModel().updateNodes(timeStep);
         //for each group (by each group leader)
         for (NodeInGroup groupLeader : leaderGroup.keySet()) {
             //update group leader
-//            getLeadersModel().updateLoc(timeStep, groupLeader.getNode());
+            //getLeadersModel().updateLoc(timeStep, groupLeader.getNode());
             //update group's other nodes
             for (NodeInGroup anyNodeInGroup : leaderGroup.get(groupLeader).getNodes()) {
                 if (!anyNodeInGroup.isLeader()) {
@@ -243,32 +246,40 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                 }
                 if(anyNodeInGroup.node.isSensorNode())
                 {
-                    if(anyNodeInGroup.node.getIntName()==5)
+                  /*  if(anyNodeInGroup.node.getIntName()==5)
                     {
                     /*anyNodeInGroup.node.setSpeed(0);
                     DataLocation L = new DataLocation(200, 200);
-                    anyNodeInGroup.node.setLocation(L);*/
+                    anyNodeInGroup.node.setLocation(L);
                       anyNodeInGroup.node.setSpeed(1);
                     getNextSensorStep(timeStep, anyNodeInGroup.node);
                     int sensor1coverage = pollSensor(modelNodes, anyNodeInGroup.node);
-                    super.setNodeCoverage(super.getCoverage() + sensor1coverage);
+                    //super.setNodeCoverage(super.getCoverage() + sensor1coverage);
+                    Model.nodecoverage += sensor1coverage;
                           Simulation.writecoverage(anyNodeInGroup.node.getName() + " Nodes covered: " + sensor1coverage + "\r\n");
                     }
                     else
                     {
-                    anyNodeInGroup.node.setSpeed(1);
-                    getNextSensorStep(timeStep, anyNodeInGroup.node);
-                    
                         int coverage = pollSensor(modelNodes, anyNodeInGroup.node);
-                        super.setNodeCoverage(super.getCoverage() + coverage);
-                        
+                        //super.setNodeCoverage(super.getCoverage() + coverage);
+                        Model.nodecoverage += coverage;
                         //write("Node count for time: " + timeStep +  " = " + x);
                             Simulation.writecoverage(anyNodeInGroup.node.getName() + " Nodes covered: " + coverage + "\r\n");
-                      
-                    }
+                    }*/
+                    SensorNode s = new SensorNode(anyNodeInGroup.node);
+                    //anyNodeInGroup.node.setSpeed(1);
+                    s.setSpeed(1);
+                    getNextSensorStep(timeStep, anyNodeInGroup.node);
+                    int coverage = pollSensor(modelNodes, anyNodeInGroup.node);
+                        Model.nodecoverage += coverage;
+                        //write("Node count for time: " + timeStep +  " = " + x);
+                            Simulation.writecoverage(anyNodeInGroup.node.getName() + " Nodes covered: " + coverage + "\r\n");
+
                 }
             }
+            
         }
+             Simulation.writecoverage( "Total Nodes covered: " + Model.nodecoverage + "\r\n");
         updateRanges();
     }
     
@@ -281,10 +292,10 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
            for(GeneratorNode node : nodes)
            {
                System.out.println("Distance " + node.getName() + "=" + calcDistance(node, sensor));
-              if(calcDistance(node, sensor) < super.getSensorRange() && !node.isSensorNode() && coverednodes.get(node.getIntName()) == null )
+              if(calcDistance(node, sensor) < super.getSensorRange() && !node.isSensorNode() && !coverednodes.contains(node))
               {
                   nodesinrange++;
-                  coverednodes.put(node.getIntName(), node);
+                  coverednodes.add(node);
               }
            }
             return nodesinrange;
@@ -293,6 +304,22 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         public double calcDistance (GeneratorNode nodeone, GeneratorNode nodetwo)
         {
            return  Math.sqrt((nodeone.getLocation().getX()-nodetwo.getLocation().getX())*(nodeone.getLocation().getX()-nodetwo.getLocation().getX()) + (nodeone.getLocation().getY()-nodetwo.getLocation().getY())*(nodeone.getLocation().getY()-nodetwo.getLocation().getY()));
+        }
+        
+        public DataLocation calculateAverageCenter (List<GeneratorNode> nodes)
+        {
+            int x=0;
+            int y=0;
+            
+            for(GeneratorNode node : nodes)
+            {
+                x+=node.getLocation().getX();
+                y+=node.getLocation().getY();
+            }
+            x= x/nodes.size();
+            y = y/nodes.size();
+            
+            return new DataLocation(x, y);
         }
         
         
@@ -534,7 +561,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
             output.add(nodeInGroup.isLeader());
         }
         
-        
+      
         return output;
     }
 
