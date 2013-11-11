@@ -14,7 +14,6 @@ package edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.logic;
 import edu.sharif.ce.dml.common.data.entity.DataLocation;
 import edu.sharif.ce.dml.common.logic.entity.Location;
 
-import java.util.List;
 
 public class SensorNode extends GeneratorNode {
     private SensorNode topnode;
@@ -23,8 +22,8 @@ public class SensorNode extends GeneratorNode {
     private SensorNode rightnode;
     private boolean center;
     public int sensorrange;
-    GeneratorNode defaultnode;
-    private int coverage;
+    public GeneratorNode defaultnode;
+    public static int coverage;
     
     public SensorNode(GeneratorNode defaultnode, boolean center, SensorNode top,  SensorNode right, SensorNode bottom,  SensorNode left)
     {
@@ -116,6 +115,7 @@ public class SensorNode extends GeneratorNode {
     {
         this.defaultnode.setSpeed(speed);
     }
+    
     //Public setCenter
     //Public Set Node(s)
     

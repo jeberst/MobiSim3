@@ -86,7 +86,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
     protected boolean perGroupRange = false;
     protected List<Integer> groupMembersNum;
     protected int stackDepth = 0;
-    protected List<GeneratorNode> sensors = new LinkedList<GeneratorNode>();
+    protected List<SensorNode> sensors = new LinkedList<SensorNode>();
     private HashSet coverednodes = new HashSet();
   
     
@@ -162,7 +162,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
      * @param modelNodes
      */
     public void setModelNodes(List<GeneratorNode> modelNodes) throws ModelInitializationException {
-        System.out.println("Abstract group " + modelNodes.size());
+       // System.out.println("Abstract group " + modelNodes.size());
         super.setModelNodes(modelNodes);
           
         //calculating group members
@@ -269,11 +269,12 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                     SensorNode s = new SensorNode(anyNodeInGroup.node);
                     //anyNodeInGroup.node.setSpeed(1);
                     s.setSpeed(1);
+
                     getNextSensorStep(timeStep, anyNodeInGroup.node);
-                    int coverage = pollSensor(modelNodes, anyNodeInGroup.node);
-                        Model.nodecoverage += coverage;
+                     s.coverage = pollSensor(modelNodes, anyNodeInGroup.node);
+                        Model.nodecoverage += s.coverage;
                         //write("Node count for time: " + timeStep +  " = " + x);
-                            Simulation.writecoverage(anyNodeInGroup.node.getName() + "\t" + coverage + "\r\n");
+                            Simulation.writecoverage(anyNodeInGroup.node.getName() + "\t" + s.coverage + "\r\n");
 
                 }
             }
@@ -284,14 +285,77 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
     }
     
     
+ public Location positionSensors(List<SensorNode> sensorNodes, HashSet coveredNodes, List<GeneratorNode> allNodes)
+ {
+     
+     List<GeneratorNode> uncoveredNodes = new LinkedList<GeneratorNode>();
+     uncoveredNodes.clear();
+     DataLocation newSensorLocation =   newSensorLocation = new DataLocation(200, 200);;
+     int x = 0;
+     int y = 0;
+
+     for (SensorNode sensor : sensorNodes)
+     {
+         
+        for(GeneratorNode node : allNodes)
+            {
+                if(!coveredNodes.contains(node) && !node.isSensorNode())
+                {
+                    uncoveredNodes.add(node);
+                }
+            }
+         //These Location Calculations are causing issues, not sure what is wrong.
+         int x2 = sensor.defaultnode.getLocation().getX();
+         int y2 = sensor.defaultnode.getLocation().getY();
+         
+         
+         if(!uncoveredNodes.isEmpty())
+         {
+                      x = calculateAverageCenter(uncoveredNodes).getX();
+                       y = calculateAverageCenter(uncoveredNodes).getY();
+                       
+            if(calcDistance(x, x2, y, y2) <= canLinkDistance(sensorNodes))
+            {
+               newSensorLocation = calculateAverageCenter(uncoveredNodes);
+               sensor.coverage = pollSensor(allNodes, sensor.defaultnode);
+               
+            }
+               else
+               {
+
+                   //This needs to be fixed to figure out what the next best postion would be if you can't get to this point.
+                    newSensorLocation = calculateAverageCenter(uncoveredNodes);
+                    
+                   /*for (SensorNode scansensor : sensorNodes)
+                   {
+                       if(scansensor.getCoverage() >= bestsensor.getCoverage())
+                       {
+                           bestsensor = scansensor;
+                           int newx = scansensor.defaultnode.getLocation().getX() - 25;
+                           int newy = scansensor.defaultnode.getLocation().getY() - 25;
+                           newSensorLocation = new DataLocation(newx, newy);
+                       }
+                   }*/
+               }
+         }
+         
+         //need an else here to figure out what to do when all the nodes are covered.
+     }
+
+     return new Location(newSensorLocation);
+ }
  
+ public double canLinkDistance(List<SensorNode> sensorNodes)
+ {
+     return super.getSensorRange();
+ }
          public int pollSensor(List<GeneratorNode> nodes, GeneratorNode sensor)
         {
-            System.out.println("Calculated Sensor Range " + super.getSensorRange());
+            //System.out.println("Calculated Sensor Range " + super.getSensorRange());
             int nodesinrange = 0;
            for(GeneratorNode node : nodes)
            {
-               System.out.println("Distance " + node.getName() + "=" + calcDistance(node, sensor));
+               //("Distance " + node.getName() + "=" + calcDistance(node, sensor));
               if(calcDistance(node, sensor) < super.getSensorRange() && !node.isSensorNode() && !coverednodes.contains(node))
               {
                   nodesinrange++;
@@ -304,6 +368,11 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         public double calcDistance (GeneratorNode nodeone, GeneratorNode nodetwo)
         {
            return  Math.sqrt((nodeone.getLocation().getX()-nodetwo.getLocation().getX())*(nodeone.getLocation().getX()-nodetwo.getLocation().getX()) + (nodeone.getLocation().getY()-nodetwo.getLocation().getY())*(nodeone.getLocation().getY()-nodetwo.getLocation().getY()));
+        }
+        
+        public double calcDistance(int x1, int x2, int y1, int y2)
+        {
+            return Math.sqrt((x1 - x2) * (x1 -x2) + (y1 - y2)*(y1-y2));
         }
         
         public DataLocation calculateAverageCenter (List<GeneratorNode> nodes)
@@ -392,7 +461,13 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                 }
                 if(nodeInGroup.node.isSensorNode())
                 {
-                    sensors.add(nodeInGroup.node);
+                    SensorNode s = new SensorNode(nodeInGroup.node);
+                    //anyNodeInGroup.node.setSpeed(1);
+                        s.setSpeed(1);
+                    if(!sensors.contains(s))
+                    {
+                    sensors.add(s);
+                    }
                 }
             }
         }
@@ -431,10 +506,11 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         //update member node location according to speed and destNode location and map reflection
         Location loc = node.getDoubleLocation();
         //creating the next location according to current speed and angle
-        Location nextStepLoc = new Location(loc.getX() + node.getSpeed() * timeStep * Math.cos(node.getDirection()),
-                loc.getY() + node.getSpeed() * timeStep * Math.sin(node.getDirection()));
+       // Location nextStepLoc = new Location(loc.getX() + node.getSpeed() * timeStep * Math.cos(node.getDirection()),
+                //loc.getY() + node.getSpeed() * timeStep * Math.sin(node.getDirection()));
+        Location nextStepLoc = positionSensors(this.sensors, coverednodes, modelNodes);
         //checks if it is hit the border reflect it
-        Location mirror = new Location(nextStepLoc.getX(), nextStepLoc.getY());
+      /*  Location mirror = new Location(nextStepLoc.getX(), nextStepLoc.getY());
         //mirror will be the mirror point of the nextstep location
         Location hit = ((ReflectiveMap) getMap()).isHitBorder(loc, nextStepLoc, mirror);
         if (hit != null) {
@@ -447,7 +523,8 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
 
         } else {
             loc.pasteCoordination(nextStepLoc);
-        }
+        }*/
+        loc.pasteCoordination(nextStepLoc);
 //                    DevelopmentLogger.logger.debug(anyNode.getName()+" : "+nextStepLoc +" : "+mirror +" : "+ hit);
 
         GeneratorNode leaderNode = nodeNodeInGroup.get(node).getGroup().getLeader().getNode();
