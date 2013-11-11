@@ -289,6 +289,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
  {
      
      List<GeneratorNode> uncoveredNodes = new LinkedList<GeneratorNode>();
+     List<SensorNode> usedSensors = new LinkedList<SensorNode>();
      uncoveredNodes.clear();
      DataLocation newSensorLocation =   newSensorLocation = new DataLocation(200, 200);;
      int x = 0;
@@ -299,7 +300,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
          
         for(GeneratorNode node : allNodes)
             {
-                if(!coveredNodes.contains(node) && !node.isSensorNode())
+                if(!coveredNodes.contains(node) && !node.isSensorNode() && !uncoveredNodes.contains(node))
                 {
                     uncoveredNodes.add(node);
                 }
@@ -318,13 +319,30 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
             {
                newSensorLocation = calculateAverageCenter(uncoveredNodes);
                sensor.coverage = pollSensor(allNodes, sensor.defaultnode);
-               
+               usedSensors.add(sensor);
             }
                else
                {
 
                    //This needs to be fixed to figure out what the next best postion would be if you can't get to this point.
-                    newSensorLocation = calculateAverageCenter(uncoveredNodes);
+                   GeneratorNode bestnode = new GeneratorNode();
+                   int bestnodechoice = 0;
+                   
+                  for(GeneratorNode uncoverednode : uncoveredNodes)
+                  {
+                      int poll = pollNode(uncoveredNodes, uncoverednode);
+                               if(poll > bestnodechoice)
+                              {
+                                  bestnodechoice = poll;
+                                  bestnode = uncoverednode;
+                                  newSensorLocation = bestnode.getLocation();
+                              }
+                
+                  }
+                  if(bestnodechoice == 0)
+                  {
+                  newSensorLocation = calculateAverageCenter(uncoveredNodes);
+                  }
                     
                    /*for (SensorNode scansensor : sensorNodes)
                    {
@@ -360,6 +378,21 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
               {
                   nodesinrange++;
                   coverednodes.add(node);
+              }
+           }
+            return nodesinrange;
+        }
+         
+          public int pollNode(List<GeneratorNode> nodes, GeneratorNode sensor)
+        {
+            //System.out.println("Calculated Sensor Range " + super.getSensorRange());
+            int nodesinrange = 0;
+           for(GeneratorNode node : nodes)
+           {
+               //("Distance " + node.getName() + "=" + calcDistance(node, sensor));
+              if(calcDistance(node, sensor) < super.getSensorRange() && !node.isSensorNode() && !coverednodes.contains(node))
+              {
+                  nodesinrange++;
               }
            }
             return nodesinrange;
