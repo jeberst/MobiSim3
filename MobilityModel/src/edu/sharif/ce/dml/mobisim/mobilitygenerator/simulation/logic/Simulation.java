@@ -225,6 +225,7 @@ public class Simulation extends ParameterableImplement implements TraceOwner, Wi
         graphicalSnapShotData = null;
         currentTraceWriter = null;
         simulationSetup = false;
+        
     }
 
     private TraceWriter getTraceWriter() {

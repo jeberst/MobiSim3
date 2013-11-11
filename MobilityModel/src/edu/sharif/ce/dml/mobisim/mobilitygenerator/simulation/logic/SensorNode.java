@@ -100,6 +100,15 @@ public class SensorNode extends GeneratorNode {
     {
         return node.center;
     }
+    public boolean isCenter()
+    {
+        return center;
+    }
+    
+    public void setCenter()
+    {
+        center = true;
+    }
     
     public void setCoverage(int c)
     {

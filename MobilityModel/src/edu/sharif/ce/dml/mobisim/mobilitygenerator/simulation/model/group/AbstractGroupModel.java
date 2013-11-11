@@ -88,6 +88,8 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
     protected int stackDepth = 0;
     protected List<SensorNode> sensors = new LinkedList<SensorNode>();
     private HashSet coverednodes = new HashSet();
+    
+    private List<SensorNode> usedSensors = new LinkedList<SensorNode>();
   
     
     
@@ -234,9 +236,12 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
     public void updateNodes(double timeStep) {
         super.setNodeCoverage(0);
         coverednodes.clear();
+        usedSensors.clear();
+       
         getLeadersModel().updateNodes(timeStep);
         //for each group (by each group leader)
         for (NodeInGroup groupLeader : leaderGroup.keySet()) {
+            usedSensors.clear();
             //update group leader
             //getLeadersModel().updateLoc(timeStep, groupLeader.getNode());
             //update group's other nodes
@@ -280,24 +285,27 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
             }
             
         }
+        
+        
              Simulation.writecoverage( "Total Nodes covered: " + Model.nodecoverage + "\r\n");
         updateRanges();
     }
     
     
- public Location positionSensors(List<SensorNode> sensorNodes, HashSet coveredNodes, List<GeneratorNode> allNodes)
+ public Location positionSensors(SensorNode sensor, HashSet coveredNodes, List<GeneratorNode> allNodes)
  {
-     
      List<GeneratorNode> uncoveredNodes = new LinkedList<GeneratorNode>();
-     List<SensorNode> usedSensors = new LinkedList<SensorNode>();
      uncoveredNodes.clear();
      DataLocation newSensorLocation =   newSensorLocation = new DataLocation(200, 200);;
      int x = 0;
      int y = 0;
 
-     for (SensorNode sensor : sensorNodes)
-     {
-         
+
+                   if(sensor.defaultnode.getIntName() % 5 ==0)
+                    {
+                        sensor.setCenter();
+                    }
+     
         for(GeneratorNode node : allNodes)
             {
                 if(!coveredNodes.contains(node) && !node.isSensorNode() && !uncoveredNodes.contains(node))
@@ -315,50 +323,31 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                       x = calculateAverageCenter(uncoveredNodes).getX();
                        y = calculateAverageCenter(uncoveredNodes).getY();
                        
-            if(calcDistance(x, x2, y, y2) <= canLinkDistance(sensorNodes))
+            if(sensor.isCenter())
             {
                newSensorLocation = calculateAverageCenter(uncoveredNodes);
                sensor.coverage = pollSensor(allNodes, sensor.defaultnode);
                usedSensors.add(sensor);
+               sensor.setCenter();
+         
+               
             }
-               else
+            else
                {
-
-                   //This needs to be fixed to figure out what the next best postion would be if you can't get to this point.
-                   GeneratorNode bestnode = new GeneratorNode();
-                   int bestnodechoice = 0;
-                   
-                  for(GeneratorNode uncoverednode : uncoveredNodes)
-                  {
-                      int poll = pollNode(uncoveredNodes, uncoverednode);
-                               if(poll > bestnodechoice)
-                              {
-                                  bestnodechoice = poll;
-                                  bestnode = uncoverednode;
-                                  newSensorLocation = bestnode.getLocation();
-                              }
-                
-                  }
-                  if(bestnodechoice == 0)
-                  {
-                  newSensorLocation = calculateAverageCenter(uncoveredNodes);
-                  }
-                    
-                   /*for (SensorNode scansensor : sensorNodes)
+                   for(SensorNode usedsensor : usedSensors)
                    {
-                       if(scansensor.getCoverage() >= bestsensor.getCoverage())
+                       if(usedsensor.isCenter())
                        {
-                           bestsensor = scansensor;
-                           int newx = scansensor.defaultnode.getLocation().getX() - 25;
-                           int newy = scansensor.defaultnode.getLocation().getY() - 25;
-                           newSensorLocation = new DataLocation(newx, newy);
+                           //This needs to be changed to support searching through the nodes.
+                           newSensorLocation = new DataLocation(usedsensor.defaultnode.getLocation().getX(), usedsensor.defaultnode.getLocation().getY()+25);
+                           sensor.coverage = pollSensor(allNodes, sensor.defaultnode);
+                           break;
                        }
-                   }*/
+                   }
                }
          }
          
          //need an else here to figure out what to do when all the nodes are covered.
-     }
 
      return new Location(newSensorLocation);
  }
@@ -485,6 +474,8 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
      * used to put member nodes around leader node using maxinitialdistance
      */
     public void initNodes() throws ModelInitializationException {
+             usedSensors.clear();
+             sensors.clear();
         getLeadersModel().initNodes();
 
         for (NodeInGroup groupLeader : leaderGroup.keySet()) {
@@ -541,7 +532,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         //creating the next location according to current speed and angle
        // Location nextStepLoc = new Location(loc.getX() + node.getSpeed() * timeStep * Math.cos(node.getDirection()),
                 //loc.getY() + node.getSpeed() * timeStep * Math.sin(node.getDirection()));
-        Location nextStepLoc = positionSensors(this.sensors, coverednodes, modelNodes);
+        Location nextStepLoc = positionSensors(this.sensors.get(this.sensors.indexOf(node)), coverednodes, modelNodes);
         //checks if it is hit the border reflect it
       /*  Location mirror = new Location(nextStepLoc.getX(), nextStepLoc.getY());
         //mirror will be the mirror point of the nextstep location
