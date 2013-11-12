@@ -334,22 +334,126 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
             }
             else
                {
-                   for(SensorNode usedsensor : usedSensors)
-                   {
-                       if(usedsensor.isCenter())
-                       {
                            //This needs to be changed to support searching through the nodes.
-                           newSensorLocation = new DataLocation(usedsensor.defaultnode.getLocation().getX(), usedsensor.defaultnode.getLocation().getY()+25);
-                           sensor.coverage = pollSensor(allNodes, sensor.defaultnode);
-                           break;
-                       }
-                   }
+                           newSensorLocation = BreadthFirstSearch(uncoveredNodes, usedSensors.get(0), sensor);
+                           //newSensorLocation = new DataLocation(usedsensor.defaultnode.getLocation().getX(), usedsensor.defaultnode.getLocation().getY()+25);
+                           sensor.coverage = pollSensor(allNodes, sensor.defaultnode); 
+                   
                }
+         }
+         else
+         {
+         newSensorLocation = usedSensors.get(0).defaultnode.getLocation();
          }
          
          //need an else here to figure out what to do when all the nodes are covered.
-
+         
      return new Location(newSensorLocation);
+ }
+ 
+ public DataLocation BreadthFirstSearch(List<GeneratorNode> nodes, SensorNode rootSensor, SensorNode sensor)
+ {
+     Queue<SensorNode> sensorqueue = new LinkedList<SensorNode>();
+     sensorqueue.add(rootSensor);
+     int bestcoverage = 0;
+     SensorNode s;
+     SensorNode basenode = rootSensor;
+     int position = 0;
+     
+     int debugi = 0;
+     
+     while(!sensorqueue.isEmpty())
+     {
+         debugi++;
+         if(debugi > 50)
+         {
+             debugi = 0;
+         }
+         s = sensorqueue.remove();
+        
+         if(s.topnode != null && s.topnode != rootSensor && s.topnode != sensor )
+         {
+             sensorqueue.add(s.topnode);
+         }
+         else
+         {
+             int poll = pollPosition(nodes, new DataLocation(s.defaultnode.getLocation().getX(), s.defaultnode.getLocation().getY()+25));
+             if( poll > bestcoverage)
+             {
+                 bestcoverage = poll;
+                 basenode = s;
+                 position = 1;
+             }
+         }
+          if(s.rightnode != null && s.rightnode != rootSensor && s.rightnode != sensor)
+         {
+             sensorqueue.add(s.rightnode);
+         }
+         else
+         {
+             int poll = pollPosition(nodes, new DataLocation(s.defaultnode.getLocation().getX()+25, s.defaultnode.getLocation().getY()));
+             if( poll > bestcoverage)
+             {
+                 bestcoverage = poll;
+                 basenode = s;
+                 position = 2;
+             }
+         }
+           if(s.bottomnode != null && s.bottomnode != rootSensor && s.bottomnode != sensor)
+         {
+             sensorqueue.add(s.bottomnode);
+         }
+          else
+         {
+             int poll = pollPosition(nodes, new DataLocation(s.defaultnode.getLocation().getX(), s.defaultnode.getLocation().getY()-25));
+             if( poll > bestcoverage)
+             {
+                 bestcoverage = poll;
+                 basenode = s;
+                 position = 3;
+             }
+         }
+            if(s.leftnode != null && s.leftnode != rootSensor  && s.leftnode != sensor)
+         {
+             sensorqueue.add(s.leftnode);
+         }
+         else
+         {
+             int poll = pollPosition(nodes, new DataLocation(s.defaultnode.getLocation().getX()-25, s.defaultnode.getLocation().getY()));
+             if( poll > bestcoverage)
+             {
+                 bestcoverage = poll;
+                 basenode = s;
+                 position = 4;
+             }
+         }
+     }
+     
+     
+     if(position == 1)
+     {
+         basenode.topnode = sensor;
+         return new DataLocation(basenode.defaultnode.getLocation().getX(), basenode.defaultnode.getLocation().getY()+25);
+     }
+     else if(position == 2)
+     {
+         basenode.rightnode = sensor;
+         return new DataLocation(basenode.defaultnode.getLocation().getX()+25, basenode.defaultnode.getLocation().getY());
+     }
+      else if(position == 3)
+     {
+         basenode.bottomnode = sensor;
+         return new DataLocation(basenode.defaultnode.getLocation().getX(), basenode.defaultnode.getLocation().getY()-25);
+     }
+      else if(position == 4)
+     {
+         basenode.leftnode = sensor;
+         return new DataLocation(basenode.defaultnode.getLocation().getX()-25, basenode.defaultnode.getLocation().getY());
+     }
+     
+     //This is where we should input the logic for moving sensors with no values to bridge the gap between nodes that we can reach.
+     
+     return rootSensor.defaultnode.getLocation();
  }
  
  public double canLinkDistance(List<SensorNode> sensorNodes)
@@ -380,6 +484,21 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
            {
                //("Distance " + node.getName() + "=" + calcDistance(node, sensor));
               if(calcDistance(node, sensor) < super.getSensorRange() && !node.isSensorNode() && !coverednodes.contains(node))
+              {
+                  nodesinrange++;
+              }
+           }
+            return nodesinrange;
+        }
+        
+        public int pollPosition(List<GeneratorNode> nodes, DataLocation pollLocation)
+        {
+            //System.out.println("Calculated Sensor Range " + super.getSensorRange());
+            int nodesinrange = 0;
+           for(GeneratorNode node : nodes)
+           {
+               //("Distance " + node.getName() + "=" + calcDistance(node, sensor));
+              if(calcDistance(node.getLocation().getX(), pollLocation.getX(), node.getLocation().getY(), pollLocation.getY()) < super.getSensorRange() && !node.isSensorNode() && !coverednodes.contains(node))
               {
                   nodesinrange++;
               }

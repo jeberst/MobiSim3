@@ -16,10 +16,10 @@ import edu.sharif.ce.dml.common.logic.entity.Location;
 
 
 public class SensorNode extends GeneratorNode {
-    private SensorNode topnode;
-    private SensorNode bottomnode;
-    private SensorNode leftnode;
-    private SensorNode rightnode;
+    public  SensorNode topnode;
+    public SensorNode bottomnode;
+    public SensorNode leftnode;
+    public SensorNode rightnode;
     private boolean center;
     public int sensorrange;
     public GeneratorNode defaultnode;
