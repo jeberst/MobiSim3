@@ -338,7 +338,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                            newSensorLocation = BreadthFirstSearch(uncoveredNodes, usedSensors.get(0), sensor);
                            //newSensorLocation = new DataLocation(usedsensor.defaultnode.getLocation().getX(), usedsensor.defaultnode.getLocation().getY()+25);
                            sensor.coverage = pollSensor(allNodes, sensor.defaultnode); 
-                   
+                           int localcoverage = sensor.coverage;
                }
          }
          else
@@ -354,6 +354,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
  public DataLocation BreadthFirstSearch(List<GeneratorNode> nodes, SensorNode rootSensor, SensorNode sensor)
  {
      Queue<SensorNode> sensorqueue = new LinkedList<SensorNode>();
+     List<SensorNode> visited = new LinkedList<SensorNode>();
      sensorqueue.add(rootSensor);
      int bestcoverage = 0;
      SensorNode s;
@@ -365,13 +366,14 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
      while(!sensorqueue.isEmpty())
      {
          debugi++;
-         if(debugi > 50)
+         if(debugi > 1000)
          {
-             debugi = 0;
+             debugi =0;
          }
          s = sensorqueue.remove();
+         visited.add(s);
         
-         if(s.topnode != null && s.topnode != rootSensor && s.topnode != sensor )
+         if(s.topnode != null && s.topnode != rootSensor && s.topnode != sensor && !sensorqueue.contains(s.topnode) && !visited.contains(s.topnode) )
          {
              sensorqueue.add(s.topnode);
          }
@@ -385,7 +387,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                  position = 1;
              }
          }
-          if(s.rightnode != null && s.rightnode != rootSensor && s.rightnode != sensor)
+         if(s.rightnode != null && s.rightnode != rootSensor && s.rightnode != sensor && !sensorqueue.contains(s.rightnode) && !visited.contains(s.rightnode))
          {
              sensorqueue.add(s.rightnode);
          }
@@ -399,9 +401,9 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                  position = 2;
              }
          }
-           if(s.bottomnode != null && s.bottomnode != rootSensor && s.bottomnode != sensor)
+         if(s.bottomnode != null && s.bottomnode != rootSensor && s.bottomnode != sensor && !sensorqueue.contains(s.bottomnode) && !visited.contains(s.bottomnode))
          {
-             sensorqueue.add(s.bottomnode);
+              sensorqueue.add(s.bottomnode);
          }
           else
          {
@@ -413,7 +415,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                  position = 3;
              }
          }
-            if(s.leftnode != null && s.leftnode != rootSensor  && s.leftnode != sensor)
+         if(s.leftnode != null && s.leftnode != rootSensor  && s.leftnode != sensor && !sensorqueue.contains(s.leftnode) && !visited.contains(s.leftnode))
          {
              sensorqueue.add(s.leftnode);
          }
@@ -433,27 +435,31 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
      if(position == 1)
      {
          basenode.topnode = sensor;
+         sensor.bottomnode = basenode;
          return new DataLocation(basenode.defaultnode.getLocation().getX(), basenode.defaultnode.getLocation().getY()+25);
      }
      else if(position == 2)
      {
          basenode.rightnode = sensor;
+         sensor.leftnode = basenode;
          return new DataLocation(basenode.defaultnode.getLocation().getX()+25, basenode.defaultnode.getLocation().getY());
      }
       else if(position == 3)
      {
          basenode.bottomnode = sensor;
+         sensor.topnode = basenode;
          return new DataLocation(basenode.defaultnode.getLocation().getX(), basenode.defaultnode.getLocation().getY()-25);
      }
       else if(position == 4)
      {
          basenode.leftnode = sensor;
+         sensor.rightnode = basenode;
          return new DataLocation(basenode.defaultnode.getLocation().getX()-25, basenode.defaultnode.getLocation().getY());
      }
      
      //This is where we should input the logic for moving sensors with no values to bridge the gap between nodes that we can reach.
-     
-     return rootSensor.defaultnode.getLocation();
+     return new DataLocation(0,0);
+     //return rootSensor.defaultnode.getLocation();
  }
  
  public double canLinkDistance(List<SensorNode> sensorNodes)
