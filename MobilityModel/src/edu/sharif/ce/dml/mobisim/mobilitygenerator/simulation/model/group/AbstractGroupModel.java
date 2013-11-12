@@ -273,7 +273,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                     }*/
                     SensorNode s = new SensorNode(anyNodeInGroup.node);
                     //anyNodeInGroup.node.setSpeed(1);
-                    s.setSpeed(1);
+                    s.setSpeed(3);
 
                     getNextSensorStep(timeStep, anyNodeInGroup.node);
                      s.coverage = pollSensor(modelNodes, anyNodeInGroup.node);
@@ -458,8 +458,8 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
      }
      
      //This is where we should input the logic for moving sensors with no values to bridge the gap between nodes that we can reach.
-     return new DataLocation(0,0);
-     //return rootSensor.defaultnode.getLocation();
+     //return new DataLocation(0,0);
+     return rootSensor.defaultnode.getLocation();
  }
  
  public double canLinkDistance(List<SensorNode> sensorNodes)
@@ -652,12 +652,16 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
     }
     
       protected void getNextSensorStep(double timeStep, GeneratorNode node) {
+          
+          Location BestPosition = positionSensors(this.sensors.get(this.sensors.indexOf(node)), coverednodes, modelNodes);
         //update member node location according to speed and destNode location and map reflection
         Location loc = node.getDoubleLocation();
+        node.setDirection(Location.calculateRadianAngle(loc, BestPosition));
+        
         //creating the next location according to current speed and angle
-       // Location nextStepLoc = new Location(loc.getX() + node.getSpeed() * timeStep * Math.cos(node.getDirection()),
-                //loc.getY() + node.getSpeed() * timeStep * Math.sin(node.getDirection()));
-        Location nextStepLoc = positionSensors(this.sensors.get(this.sensors.indexOf(node)), coverednodes, modelNodes);
+        Location nextStepLoc = new Location(loc.getX() + node.getSpeed() * timeStep * Math.cos(node.getDirection()),
+                loc.getY() + node.getSpeed() * timeStep * Math.sin(node.getDirection()));
+       
         //checks if it is hit the border reflect it
       /*  Location mirror = new Location(nextStepLoc.getX(), nextStepLoc.getY());
         //mirror will be the mirror point of the nextstep location
