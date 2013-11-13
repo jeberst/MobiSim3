@@ -237,7 +237,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         super.setNodeCoverage(0);
         coverednodes.clear();
         usedSensors.clear();
-        visited.clear();
+      
         HashSet<GeneratorNode> localCoveredNodes = new HashSet<GeneratorNode>();
        
         getLeadersModel().updateNodes(timeStep);
@@ -336,6 +336,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                     int value = rand.nextInt(this.usedSensors.size()); 
                            //This needs to be changed to support searching through the nodes.
                            //newSensorLocation = BreadthFirstSearch(uncoveredNodes, this.usedSensors.get(value), sensor);
+                           visited.clear();
                            newSensorLocation = DistributedBreadthFirstSearch(uncoveredNodes, this.usedSensors.get(0), sensor).candidateLocation;
                            //newSensorLocation = new DataLocation(usedsensor.defaultnode.getLocation().getX(), usedsensor.defaultnode.getLocation().getY()+25);
                            sensor.idealcoverage = pollLocalSensor(allNodes, sensor.defaultnode, coveredNodes); 
@@ -582,7 +583,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
          s = rootSensor;
          visited.add(s);
         
-         if(s.topnode != null && !visited.contains(s.topnode) )
+         if(s.topnode != null && !visited.contains(s.topnode) && s != sensor )
          {
             candidateLocations.add(DistributedBreadthFirstSearch(nodes, s.topnode, sensor));
          }
@@ -599,7 +600,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                  candidateLocations.add(bestLocation);
              }
          }
-         if(s.rightnode != null && !visited.contains(s.rightnode))
+         if(s.rightnode != null && !visited.contains(s.rightnode) && s != sensor)
          {
              candidateLocations.add(DistributedBreadthFirstSearch(nodes,s.rightnode,sensor));
          }
@@ -615,7 +616,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                  candidateLocations.add(bestLocation);
              }
          }
-         if(s.bottomnode != null && !visited.contains(s.bottomnode))
+         if(s.bottomnode != null && !visited.contains(s.bottomnode) && s != sensor)
          {
                 candidateLocations.add(DistributedBreadthFirstSearch(nodes,s.bottomnode,sensor));
          }
@@ -631,7 +632,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                  candidateLocations.add(bestLocation);
              }
          }
-         if(s.leftnode != null && !visited.contains(s.leftnode))
+         if(s.leftnode != null && !visited.contains(s.leftnode) && s != sensor)
          {
              candidateLocations.add(DistributedBreadthFirstSearch(nodes,s.leftnode,sensor));
          }
@@ -658,6 +659,8 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
          }
      }
      
+ 
+      
      if(bestLocation.position == 1)
      {
          bestLocation.basenode.topnode = sensor;
