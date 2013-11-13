@@ -26,6 +26,9 @@ public class SensorNode extends GeneratorNode {
     public int coverage;
     public int idealcoverage;
     
+    //These fields will be used for Distributed BFS
+    int idealposition = 0;
+    
     public SensorNode(GeneratorNode defaultnode, boolean center, SensorNode top,  SensorNode right, SensorNode bottom,  SensorNode left)
     {
         this.defaultnode = defaultnode;
