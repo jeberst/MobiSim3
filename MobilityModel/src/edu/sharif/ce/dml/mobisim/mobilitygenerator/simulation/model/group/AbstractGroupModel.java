@@ -86,11 +86,10 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
     protected boolean perGroupRange = false;
     protected List<Integer> groupMembersNum;
     protected int stackDepth = 0;
-    protected List<SensorNode> sensors = new LinkedList<SensorNode>();
+    protected List<SensorNode> sensors = new LinkedList<>();
     private HashSet coverednodes = new HashSet();
     
-    
-    private List<SensorNode> usedSensors = new LinkedList<SensorNode>();
+    private List<SensorNode> usedSensors = new LinkedList<>();
   
     
     
@@ -303,10 +302,6 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
      int x = 0;
      int y = 0;
 
-                   if(sensor.defaultnode.getIntName() % 5 ==0)
-                    {
-                        sensor.setCenter();
-                    }
      
         for(GeneratorNode node : allNodes)
             {
@@ -325,22 +320,25 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                       x = calculateAverageCenter(uncoveredNodes).getX();
                        y = calculateAverageCenter(uncoveredNodes).getY();
                        
-            if(sensor.isCenter())
+                       int j= allNodes.size()-super.GetSensorCount();
+             //Place the first node.
+            if(uncoveredNodes.size() == j)
             {
                newSensorLocation = calculateAverageCenter(uncoveredNodes);
                sensor.idealcoverage = pollLocalSensor(allNodes, sensor.defaultnode, coveredNodes);
-               usedSensors.add(sensor);
+               this.usedSensors.add(sensor);
                sensor.setCenter();
-         
-               
             }
             else
                {
+                   Random rand = new Random(); 
+                    int value = rand.nextInt(this.usedSensors.size()); 
                            //This needs to be changed to support searching through the nodes.
-                           newSensorLocation = BreadthFirstSearch(uncoveredNodes, usedSensors.get(0), sensor);
+                           newSensorLocation = BreadthFirstSearch(uncoveredNodes, this.usedSensors.get(value), sensor);
                            //newSensorLocation = new DataLocation(usedsensor.defaultnode.getLocation().getX(), usedsensor.defaultnode.getLocation().getY()+25);
                            sensor.idealcoverage = pollLocalSensor(allNodes, sensor.defaultnode, coveredNodes); 
                            int localcoverage = sensor.idealcoverage;
+                           this.usedSensors.add(sensor);
                }
          }
          else
