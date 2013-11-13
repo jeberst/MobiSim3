@@ -238,7 +238,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         super.setNodeCoverage(0);
         coverednodes.clear();
         usedSensors.clear();
-        HashSet localCoveredNodes = new HashSet<>();
+        HashSet<GeneratorNode> localCoveredNodes = new HashSet<GeneratorNode>();
        
         getLeadersModel().updateNodes(timeStep);
         //for each group (by each group leader)
@@ -352,6 +352,97 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
          
      return new Location(newSensorLocation);
  }
+ 
+ public List<GeneratorNode> getNonSensorNodes() {
+     List<GeneratorNode> modelNodeList = new ArrayList<GeneratorNode>();
+     for (GeneratorNode node : this.modelNodes) {
+         if (!node.isSensorNode()) {
+             modelNodeList.add(node);
+         }
+     }
+     return modelNodeList;
+ }
+ 
+ public GeneratorNode[] getNonSensorNodesArray() {
+     List<GeneratorNode> modelNodeList = getNonSensorNodes();
+     return modelNodeList.toArray(new GeneratorNode[modelNodeList.size()]);
+ }
+
+ /**
+  * Single-link clustering algorithm
+  * Reference http://www.cs.princeton.edu/courses/archive/spring10/cos233/lectures/cos233-234-lecture7.pdf for algorithm description
+  * @return a list of Cluster objects
+  */ 
+ public List<Cluster> getClusters() {
+     List<Cluster> clusters = new ArrayList<Cluster>();
+     GeneratorNode[] nonSensorNodes = getNonSensorNodesArray();
+     double INFINITY = Double.POSITIVE_INFINITY;
+     
+     // compute distance between all nodes
+     double distance[][] = new double[nonSensorNodes.length][nonSensorNodes.length];
+     int distanceMinimum[] = new int[nonSensorNodes.length];
+     for (int i = 0; i < nonSensorNodes.length; i++) {
+         for (int j = 0; j < nonSensorNodes.length; j++) {
+             if (i == j) {
+                 distance[i][j] = INFINITY;
+             }
+             else {
+                 distance[i][j] = calcDistance(nonSensorNodes[i], nonSensorNodes[j]);
+             }
+             if (distance[i][j] < distance[i][distanceMinimum[i]]) {
+                 distanceMinimum[i] = j;
+             }
+         }
+     }
+     
+     // single-link clustering main loop
+     for (int s = 0; s < (nonSensorNodes.length - 1); s++) {
+         // find closest pair of clusters (i1, i2)
+         int i1 = 0;
+         for (int i = 0; i < nonSensorNodes.length; i++) {
+             if (distance[i][distanceMinimum[i]] < distance[i1][distanceMinimum[i1]]) {
+                 i1 = i;
+             }
+         }
+         int i2 = distanceMinimum[i1];
+         
+         // overwrite row i1 with minimum of entries in row i1 and i2
+         for (int j = 0; j < nonSensorNodes.length; j++) {
+             if (distance[i2][j] < distance[i1][j]) {
+                 distance[i1][j] = distance[j][i1] = distance[i2][j];
+             }
+         }
+         distance[i1][i1] = INFINITY;
+         
+         // infinity-out old row i1 and column i2
+         for (int i = 0; i < nonSensorNodes.length; i++) {
+             distance[i2][i] = distance[i][i2] = INFINITY;
+         }
+     }
+     
+     return clusters;
+ }
+ 
+  /**
+  * @return an array of Cluster objects
+  */ 
+ public Cluster[] getClustersArray() {
+     List<Cluster> clusters = getClusters();
+     return clusters.toArray(new Cluster[clusters.size()]);
+ }
+ 
+ public Cluster getBiggestCluster() {
+     Cluster biggestCluster = null;
+     int biggestClusterSize = 0;
+     for (Cluster cluster : getClusters()) {
+         if (cluster.getClusterSize() > biggestClusterSize) {
+             biggestClusterSize = cluster.getClusterSize();
+             biggestCluster = cluster;
+         }
+     }
+     return biggestCluster;
+ }
+ 
  
  public DataLocation BreadthFirstSearch(List<GeneratorNode> nodes, SensorNode rootSensor, SensorNode sensor)
  {
@@ -897,6 +988,70 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         }
         
 
+    }
+    
+    /**
+     * a group of {@link GeneratorNode} objects that form a cluster
+     */
+    protected class Cluster implements Comparable {
+        protected int clusterSize;
+        protected List<GeneratorNode> clusteredNodes;
+        
+        public Cluster() {
+            this.clusterSize = 0;
+            this.clusteredNodes = new ArrayList<GeneratorNode>();
+        }
+        
+        public Cluster(List<GeneratorNode> nodes) {
+            this.clusteredNodes = nodes;
+            this.clusterSize = nodes.size();
+        }
+        
+        public void add(GeneratorNode node) {
+            this.clusteredNodes.add(node);
+            this.clusterSize++;
+        }
+        
+        public void addAll(List<GeneratorNode> nodes) {
+            this.clusteredNodes.addAll(nodes);
+            this.clusterSize += nodes.size();
+        }
+        
+        public void remove(GeneratorNode node) {
+            this.clusteredNodes.remove(node);
+            this.clusterSize--;
+        }
+        
+        public void remove(int index) {
+            this.clusteredNodes.remove(index);
+            this.clusterSize--;
+        }
+        
+        public List<GeneratorNode> getNodes() {
+            return this.clusteredNodes;
+        }
+        
+        public GeneratorNode getNode(int index) {
+            return this.clusteredNodes.get(index);
+        }
+        
+        public int getClusterSize() {
+            return this.clusterSize;
+        }
+        
+        @Override
+        public int compareTo(Object cluster) {
+            Cluster otherCluster = (Cluster)cluster;
+            if (this.clusterSize == otherCluster.getClusterSize()) {
+                return 0;
+            }
+            else if (this.clusterSize > otherCluster.getClusterSize()) {
+                return 1;
+            }
+            else {
+                return -1;
+            }
+        }
     }
 
     /**
