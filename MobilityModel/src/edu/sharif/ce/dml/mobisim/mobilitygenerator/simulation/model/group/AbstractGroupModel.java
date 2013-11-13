@@ -89,6 +89,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
     protected List<SensorNode> sensors = new LinkedList<SensorNode>();
     private HashSet coverednodes = new HashSet();
     
+    
     private List<SensorNode> usedSensors = new LinkedList<SensorNode>();
   
     
@@ -237,6 +238,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         super.setNodeCoverage(0);
         coverednodes.clear();
         usedSensors.clear();
+        HashSet localCoveredNodes = new HashSet<>();
        
         getLeadersModel().updateNodes(timeStep);
         //for each group (by each group leader)
@@ -275,7 +277,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                     //anyNodeInGroup.node.setSpeed(1);
                     s.setSpeed(3);
 
-                    getNextSensorStep(timeStep, anyNodeInGroup.node);
+                    getNextSensorStep(timeStep, anyNodeInGroup.node, localCoveredNodes);
                      s.coverage = pollSensor(modelNodes, anyNodeInGroup.node);
                         Model.nodecoverage += s.coverage;
                         //write("Node count for time: " + timeStep +  " = " + x);
@@ -294,12 +296,12 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
     
  public Location positionSensors(SensorNode sensor, HashSet coveredNodes, List<GeneratorNode> allNodes)
  {
+    
      List<GeneratorNode> uncoveredNodes = new LinkedList<GeneratorNode>();
      uncoveredNodes.clear();
      DataLocation newSensorLocation =   newSensorLocation = new DataLocation(200, 200);;
      int x = 0;
      int y = 0;
-
 
                    if(sensor.defaultnode.getIntName() % 5 ==0)
                     {
@@ -326,7 +328,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
             if(sensor.isCenter())
             {
                newSensorLocation = calculateAverageCenter(uncoveredNodes);
-               sensor.coverage = pollSensor(allNodes, sensor.defaultnode);
+               sensor.idealcoverage = pollLocalSensor(allNodes, sensor.defaultnode, coveredNodes);
                usedSensors.add(sensor);
                sensor.setCenter();
          
@@ -337,8 +339,8 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                            //This needs to be changed to support searching through the nodes.
                            newSensorLocation = BreadthFirstSearch(uncoveredNodes, usedSensors.get(0), sensor);
                            //newSensorLocation = new DataLocation(usedsensor.defaultnode.getLocation().getX(), usedsensor.defaultnode.getLocation().getY()+25);
-                           sensor.coverage = pollSensor(allNodes, sensor.defaultnode); 
-                           int localcoverage = sensor.coverage;
+                           sensor.idealcoverage = pollLocalSensor(allNodes, sensor.defaultnode, coveredNodes); 
+                           int localcoverage = sensor.idealcoverage;
                }
          }
          else
@@ -368,8 +370,10 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
          debugi++;
          if(debugi > 1000)
          {
+             //Caused an infinite loop
              debugi =0;
          }
+         
          s = sensorqueue.remove();
          visited.add(s);
         
@@ -477,6 +481,22 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
               {
                   nodesinrange++;
                   coverednodes.add(node);
+              }
+           }
+            return nodesinrange;
+        }
+         
+           public int pollLocalSensor(List<GeneratorNode> nodes, GeneratorNode sensor, HashSet localCoveredNodes)
+        {
+            //System.out.println("Calculated Sensor Range " + super.getSensorRange());
+            int nodesinrange = 0;
+           for(GeneratorNode node : nodes)
+           {
+               //("Distance " + node.getName() + "=" + calcDistance(node, sensor));
+              if(calcDistance(node, sensor) < super.getSensorRange() && !node.isSensorNode() && !localCoveredNodes.contains(node))
+              {
+                  nodesinrange++;
+                  localCoveredNodes.add(node);
               }
            }
             return nodesinrange;
@@ -651,9 +671,9 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         updateGroupNodeProperties(node, leaderNode);
     }
     
-      protected void getNextSensorStep(double timeStep, GeneratorNode node) {
+      protected void getNextSensorStep(double timeStep, GeneratorNode node, HashSet localCoveredNodes) {
           
-          Location BestPosition = positionSensors(this.sensors.get(this.sensors.indexOf(node)), coverednodes, modelNodes);
+          Location BestPosition = positionSensors(this.sensors.get(this.sensors.indexOf(node)), localCoveredNodes, modelNodes);
         //update member node location according to speed and destNode location and map reflection
         Location loc = node.getDoubleLocation();
         node.setDirection(Location.calculateRadianAngle(loc, BestPosition));
