@@ -302,6 +302,10 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
      DataLocation newSensorLocation =   newSensorLocation = new DataLocation(200, 200);;
      int x = 0;
      int y = 0;
+     sensor.topnode = null;
+     sensor.bottomnode = null;
+     sensor.rightnode = null;
+     sensor.leftnode = null;
 
      
         for(GeneratorNode node : allNodes)
@@ -335,9 +339,35 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                    Random rand = new Random(); 
                     int value = rand.nextInt(this.usedSensors.size()); 
                            //This needs to be changed to support searching through the nodes.
-                           //newSensorLocation = BreadthFirstSearch(uncoveredNodes, this.usedSensors.get(value), sensor);
+                           //DataLocation newSensorLocation2 = BreadthFirstSearch(uncoveredNodes, this.usedSensors.get(value), sensor);
                            visited.clear();
-                           newSensorLocation = DistributedBreadthFirstSearch(uncoveredNodes, this.usedSensors.get(0), sensor).candidateLocation;
+                           CandidateLocation placedsensor = DistributedBreadthFirstSearch(uncoveredNodes, this.usedSensors.get(0), sensor);
+                         
+                                        if(placedsensor.position == 1)
+                                        {
+                                            placedsensor.basenode.topnode = sensor;
+                                            sensor.bottomnode = placedsensor.basenode;
+                                  
+                                        }
+                                        else if(placedsensor.position == 2)
+                                        {
+                                            //placedsensor.basenode.rightnode = sensor;
+                                            //sensor.leftnode = placedsensor.basenode;
+                                   
+                                        }
+                                         else if(placedsensor.position == 3)
+                                        {
+                                            placedsensor.basenode.bottomnode = sensor;
+                                            sensor.topnode = placedsensor.basenode;
+                                        
+                                        }
+                                         else if(placedsensor.position == 4)
+                                        {
+                                            placedsensor.basenode.leftnode = sensor;
+                                            sensor.rightnode = placedsensor.basenode; 
+                                        }
+                                    newSensorLocation = placedsensor.candidateLocation;
+                            
                            //newSensorLocation = new DataLocation(usedsensor.defaultnode.getLocation().getX(), usedsensor.defaultnode.getLocation().getY()+25);
                            sensor.idealcoverage = pollLocalSensor(allNodes, sensor.defaultnode, coveredNodes); 
                            int localcoverage = sensor.idealcoverage;
@@ -558,7 +588,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
      return rootSensor.defaultnode.getLocation();
  }
  
- 
+ //Is there a problem with the way it uses uncovered nodes to guess the best position?
  public CandidateLocation DistributedBreadthFirstSearch(List<GeneratorNode> nodes, SensorNode rootSensor, SensorNode sensor)
  {
      Queue<SensorNode> sensorqueue = new LinkedList<>();
@@ -594,8 +624,6 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
              if( poll > bestcoverage)
              {
                  bestcoverage = poll;
-                 basenode = s;
-                 position = 1;
                  bestLocation = new CandidateLocation(poll, s, 1, new DataLocation(s.defaultnode.getLocation().getX(), s.defaultnode.getLocation().getY()+25));
                  candidateLocations.add(bestLocation);
              }
@@ -610,8 +638,6 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
              if( poll > bestcoverage)
              {
                  bestcoverage = poll;
-                 basenode = s;
-                 position = 2;
                  bestLocation = new CandidateLocation(poll, s, 2, new DataLocation(s.defaultnode.getLocation().getX()+25, s.defaultnode.getLocation().getY()));
                  candidateLocations.add(bestLocation);
              }
@@ -626,8 +652,6 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
              if( poll > bestcoverage)
              {
                  bestcoverage = poll;
-                 basenode = s;
-                 position = 3;
                  bestLocation = new CandidateLocation(poll, s, 3, new DataLocation(s.defaultnode.getLocation().getX(), s.defaultnode.getLocation().getY()-25));
                  candidateLocations.add(bestLocation);
              }
@@ -642,8 +666,6 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
              if( poll > bestcoverage)
              {
                  bestcoverage = poll;
-                 basenode = s;
-                 position = 4;
                  bestLocation = new CandidateLocation(poll, s, 4, new DataLocation(s.defaultnode.getLocation().getX()-25, s.defaultnode.getLocation().getY()));
                  candidateLocations.add(bestLocation);
              }
@@ -663,26 +685,26 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
       
      if(bestLocation.position == 1)
      {
-         bestLocation.basenode.topnode = sensor;
-         sensor.bottomnode = bestLocation.basenode;
+         //bestLocation.basenode.topnode = sensor;
+         //sensor.bottomnode = bestLocation.basenode;
          return bestLocation;
      }
      else if(bestLocation.position == 2)
      {
-         bestLocation.basenode.rightnode = sensor;
-         sensor.leftnode = bestLocation.basenode;
+         //bestLocation.basenode.rightnode = sensor;
+         //sensor.leftnode = bestLocation.basenode;
          return bestLocation; 
      }
       else if(bestLocation.position == 3)
      {
-         bestLocation.basenode.bottomnode = sensor;
-         sensor.topnode = bestLocation.basenode;
+         //bestLocation.basenode.bottomnode = sensor;
+        // sensor.topnode = bestLocation.basenode;
          return bestLocation;
      }
       else if(bestLocation.position == 4)
      {
-         bestLocation.basenode.leftnode = sensor;
-         sensor.rightnode = bestLocation.basenode;
+         //bestLocation.basenode.leftnode = sensor;
+         //sensor.rightnode = bestLocation.basenode;
          return bestLocation; 
      }
      
