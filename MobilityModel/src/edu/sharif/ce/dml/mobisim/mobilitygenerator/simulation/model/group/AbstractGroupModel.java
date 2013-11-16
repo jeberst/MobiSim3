@@ -88,6 +88,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
     protected int stackDepth = 0;
     protected List<SensorNode> sensors = new LinkedList<>();
     private HashSet coverednodes = new HashSet();
+    protected double distanceToNextCluster = 0.0;
     
     private List<SensorNode> usedSensors = new LinkedList<>();
     List<SensorNode> visited = new LinkedList<>();
@@ -296,7 +297,6 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
     
  public Location positionSensors(SensorNode sensor, HashSet coveredNodes, List<GeneratorNode> allNodes)
  {
-    
      List<GeneratorNode> uncoveredNodes = new LinkedList<GeneratorNode>();
      uncoveredNodes.clear();
      DataLocation newSensorLocation =   newSensorLocation = new DataLocation(200, 200);;
@@ -325,7 +325,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                       x = calculateAverageCenter(uncoveredNodes).getX();
                        y = calculateAverageCenter(uncoveredNodes).getY();
                        
-                       int j= allNodes.size()-super.GetSensorCount();
+                       int j= allNodes.size(); //-super.GetSensorCount();
              //Place the first node.
             if(uncoveredNodes.size() == j)
             {
@@ -405,8 +405,12 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
   * @return a list of Cluster objects
   */ 
  public List<Cluster> getClusters() {
-     List<Cluster> clusters = new ArrayList<Cluster>();
+     final int CLUSTERING_THRESHOLD = 50;
+     List<Cluster> clusters = new ArrayList<>();
      GeneratorNode[] nonSensorNodes = getNonSensorNodesArray();
+     HashMap<String, Cluster> pairedNodes = new HashMap<>();
+//     HashMap<String, List<ClusterSet>> pairedNodes = new HashMap<>();
+     Dendrogram clusterDendrogram = new Dendrogram();
      double INFINITY = Double.POSITIVE_INFINITY;
      
      // compute distance between all nodes
@@ -426,6 +430,11 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
          }
      }
      
+//     System.out.println(".....FIRST.....");
+//     for (int i = 0; i < distance.length; i++)
+//        System.out.println(i + " " + Arrays.toString(distance[i]));
+//     System.out.println(Arrays.toString(distanceMinimum));
+     
      // single-link clustering main loop
      for (int s = 0; s < (nonSensorNodes.length - 1); s++) {
          // find closest pair of clusters (i1, i2)
@@ -436,6 +445,12 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
              }
          }
          int i2 = distanceMinimum[i1];
+         
+         // stop clustering if the closest distance exceeds the threshold
+         if (distance[i1][i2] > CLUSTERING_THRESHOLD) {
+             distanceToNextCluster = distance[i1][i2];
+             break;
+         }
          
          // overwrite row i1 with minimum of entries in row i1 and i2
          for (int j = 0; j < nonSensorNodes.length; j++) {
@@ -449,7 +464,75 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
          for (int i = 0; i < nonSensorNodes.length; i++) {
              distance[i2][i] = distance[i][i2] = INFINITY;
          }
+         
+         // update distanceMinimum and replace ones that previously pointed to i2 to point to i1
+         for (int j = 0; j < nonSensorNodes.length; j++) {
+             if (distanceMinimum[j] == i2) {
+                 distanceMinimum[j] = i1;
+             }
+             if (distance[i1][j] < distance[i1][distanceMinimum[i1]]) {
+                 distanceMinimum[i1] = j;
+             }
+         }
+         
+//         for (int i = 0; i < distance.length; i++)
+//            System.out.println(i + " " + Arrays.toString(distance[i]));
+//         System.out.println(Arrays.toString(distanceMinimum));
+//         System.out.println("i1 = " + i1 + ", i2 = " + i2);
+         
+         // add interim clusters to dendrogram
+         if (pairedNodes.containsKey(nonSensorNodes[i1].getName()) || pairedNodes.containsKey(nonSensorNodes[i2].getName())) {
+             String name = nonSensorNodes[i1].getName();
+             Cluster clusterToAdd;
+             if (pairedNodes.containsKey(nonSensorNodes[i1].getName()) && pairedNodes.containsKey(nonSensorNodes[i2].getName())) {
+                 clusterToAdd = pairedNodes.get(name);
+                 Cluster clusterToMerge = pairedNodes.get(nonSensorNodes[i2].getName());
+                 clusterToAdd.mergeClusters(clusterToMerge);
+                 clusterToMerge.clear();
+                 clusterDendrogram.setLevelForNode(name, Math.max(clusterDendrogram.getLevelForNode(name), clusterDendrogram.getLevelForNode(nonSensorNodes[i2].getName())));
+                 pairedNodes.put(name, clusterToAdd);
+             }
+             else if (pairedNodes.containsKey(nonSensorNodes[i1].getName())) {
+                 clusterToAdd = pairedNodes.get(name);
+                 clusterToAdd.mergeClusters(new Cluster(nonSensorNodes[i2]));
+                 pairedNodes.put(name, clusterToAdd);
+             }
+             else {
+                 name = nonSensorNodes[i2].getName();
+                 clusterToAdd = pairedNodes.get(name);
+                 clusterToAdd.mergeClusters(new Cluster(nonSensorNodes[i1]));
+                 pairedNodes.put(nonSensorNodes[i1].getName(), clusterToAdd);
+                 clusterDendrogram.setLevelForNode(nonSensorNodes[i1].getName(), clusterDendrogram.getLevelForNode(name) + 1);
+             }
+             clusterDendrogram.addToLevel(clusterToAdd, (clusterDendrogram.getLevelForNode(name) + 1));
+         }
+         else {
+             Cluster nodePair = new Cluster();
+             nodePair.add(nonSensorNodes[i1]);
+             nodePair.add(nonSensorNodes[i2]);
+             pairedNodes.put(nonSensorNodes[i1].getName(), nodePair);
+             clusterDendrogram.addToLevel(nodePair, 0);
+         }
      }
+     
+     // clustering finished; add clusters to list
+     HashMap<String, String> addedClusters = new HashMap<>();
+     for (int i = (clusterDendrogram.getHeight() - 1); i >= 0; i--) {
+        for (Cluster clusterSet : clusterDendrogram.getLevel(i)) {
+            String strCluster = clusterSet.toString();
+            if (!addedClusters.containsKey(strCluster) && clusterSet.getNodes().size() > 0) {
+                clusters.add(clusterSet);
+                addedClusters.put(strCluster, "");
+            }
+        }
+     }
+     
+     
+//     System.out.println("\n.....FINAL.....");
+//     for (int i = 0; i < distance.length; i++)
+//        System.out.println(i + " " + Arrays.toString(distance[i]));
+//     System.out.println(Arrays.toString(distanceMinimum));
+//     System.out.println(clusterDendrogram);
      
      return clusters;
  }
@@ -782,7 +865,8 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         
         public double calcDistance (GeneratorNode nodeone, GeneratorNode nodetwo)
         {
-           return  Math.sqrt((nodeone.getLocation().getX()-nodetwo.getLocation().getX())*(nodeone.getLocation().getX()-nodetwo.getLocation().getX()) + (nodeone.getLocation().getY()-nodetwo.getLocation().getY())*(nodeone.getLocation().getY()-nodetwo.getLocation().getY()));
+            return Math.sqrt(Math.pow(Math.abs(nodeone.getLocation().getX()-nodetwo.getLocation().getX()), 2) + Math.pow(Math.abs(nodeone.getLocation().getY()-nodetwo.getLocation().getY()), 2));
+            //return  Math.sqrt((nodeone.getLocation().getX()-nodetwo.getLocation().getX())*(nodeone.getLocation().getX()-nodetwo.getLocation().getX()) + (nodeone.getLocation().getY()-nodetwo.getLocation().getY())*(nodeone.getLocation().getY()-nodetwo.getLocation().getY()));
         }
         
         public double calcDistance(int x1, int x2, int y1, int y2)
@@ -920,8 +1004,8 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
     }
     
       protected void getNextSensorStep(double timeStep, GeneratorNode node, HashSet localCoveredNodes) {
-          
-          Location BestPosition = positionSensors(this.sensors.get(this.sensors.indexOf(node)), localCoveredNodes, modelNodes);
+          Cluster biggestCluster = getBiggestCluster();
+          Location BestPosition = positionSensors(this.sensors.get(this.sensors.indexOf(node)), localCoveredNodes, biggestCluster.getNodes());
         //update member node location according to speed and destNode location and map reflection
         Location loc = node.getDoubleLocation();
         node.setDirection(Location.calculateRadianAngle(loc, BestPosition));
@@ -945,7 +1029,8 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         } else {
             loc.pasteCoordination(nextStepLoc);
         }*/
-        loc.pasteCoordination(nextStepLoc);
+        //loc.pasteCoordination(nextStepLoc);
+        loc.pasteCoordination(BestPosition);
 //                    DevelopmentLogger.logger.debug(anyNode.getName()+" : "+nextStepLoc +" : "+mirror +" : "+ hit);
 
         GeneratorNode leaderNode = nodeNodeInGroup.get(node).getGroup().getLeader().getNode();
@@ -1151,37 +1236,42 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
      * a group of {@link GeneratorNode} objects that form a cluster
      */
     protected class Cluster implements Comparable {
-        protected int clusterSize;
         protected List<GeneratorNode> clusteredNodes;
         
         public Cluster() {
-            this.clusterSize = 0;
-            this.clusteredNodes = new ArrayList<GeneratorNode>();
+            this.clusteredNodes = new ArrayList<>();
         }
         
+        public Cluster(GeneratorNode node) {
+            this();
+            this.clusteredNodes.add(node);
+        }
         public Cluster(List<GeneratorNode> nodes) {
             this.clusteredNodes = nodes;
-            this.clusterSize = nodes.size();
         }
         
         public void add(GeneratorNode node) {
             this.clusteredNodes.add(node);
-            this.clusterSize++;
         }
         
         public void addAll(List<GeneratorNode> nodes) {
             this.clusteredNodes.addAll(nodes);
-            this.clusterSize += nodes.size();
         }
         
         public void remove(GeneratorNode node) {
             this.clusteredNodes.remove(node);
-            this.clusterSize--;
         }
         
         public void remove(int index) {
             this.clusteredNodes.remove(index);
-            this.clusterSize--;
+        }
+        
+        public void removeAll(List<GeneratorNode> nodes) {
+            this.clusteredNodes.removeAll(nodes);
+        }
+        
+        public void clear() {
+            this.clusteredNodes.clear();
         }
         
         public List<GeneratorNode> getNodes() {
@@ -1193,21 +1283,127 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         }
         
         public int getClusterSize() {
-            return this.clusterSize;
+            return this.clusteredNodes.size();
+        }
+        
+        public void mergeClusters(Cluster clusterToMerge) {
+            this.addAll(clusterToMerge.getNodes());
         }
         
         @Override
         public int compareTo(Object cluster) {
             Cluster otherCluster = (Cluster)cluster;
-            if (this.clusterSize == otherCluster.getClusterSize()) {
+            if (this.getClusterSize() == otherCluster.getClusterSize()) {
                 return 0;
             }
-            else if (this.clusterSize > otherCluster.getClusterSize()) {
+            else if (this.getClusterSize() > otherCluster.getClusterSize()) {
                 return 1;
             }
             else {
                 return -1;
             }
+        }
+        
+        @Override
+        public String toString() {
+            return this.clusteredNodes.toString();
+        }
+    }
+    
+    /**
+     * Dendrogram class
+     */
+    protected class Dendrogram {
+        private List<DendrogramLevel> dendrogram;
+        private HashMap<String, Integer> nodeLevels;
+        private int level;
+        public Dendrogram() {
+            this.dendrogram = new ArrayList<>();
+            this.dendrogram.add(new DendrogramLevel());
+            this.level = 0;
+            this.nodeLevels = new HashMap<>();
+        }
+        
+        public void addToLevel(Cluster cluster, int level) {
+            if (level >= dendrogram.size()) {
+                addLevel(cluster);
+            }
+            else {
+                dendrogram.get(level).addCluster(cluster);
+                this.nodeLevels.put(cluster.getNodes().get(0).getName(), level);
+            }
+        }
+        
+        public void addLevel(Cluster cluster) {
+            dendrogram.add(new DendrogramLevel(cluster, ++level));
+            this.nodeLevels.put(cluster.getNodes().get(0).getName(), level);
+        }
+        
+        public List<DendrogramLevel> getDendrogram() {
+            return this.dendrogram;
+        }
+        
+        public List<Cluster> getLevel(int index) {
+            return this.dendrogram.get(index).getClustersForLevel();
+        }
+        
+        public int getLevelForNode(String name) {
+            return this.nodeLevels.get(name);
+        }
+        
+        public void setLevelForNode(String name, int level) {
+            this.nodeLevels.put(name, level);
+        }
+        
+        public int getHeight() {
+            return this.dendrogram.size();
+        }
+        
+        @Override
+        public String toString() {
+            String dendrogramString = "";
+            for (DendrogramLevel dendrogramLevel : dendrogram) {
+                dendrogramString += dendrogramLevel.toString() + "\n";
+            }
+            return dendrogramString;
+        }
+    }
+    
+    protected class DendrogramLevel {
+        private int level;
+        private List<Cluster> clusters;
+        
+        public DendrogramLevel() {
+            this.level = 0;
+            this.clusters = new ArrayList<>();
+        }
+        
+        public DendrogramLevel(Cluster cluster, int level) {
+            this();
+            this.clusters.add(cluster);
+            this.level = level;
+        }
+        
+        public DendrogramLevel(List<Cluster> clusters) {
+            this.clusters = clusters;
+            this.level = 1;
+        }
+        
+        public void addCluster(Cluster cluster) {
+            this.clusters.add(cluster);
+        }
+        
+        public List<Cluster> getClustersForLevel() {
+            return this.clusters;
+        }
+        
+        public int getLevelNumber() {
+            return this.level;
+        }
+        
+        @Override
+        public String toString() {
+            return this.level + ": " + clusters.toString(); 
         }
     }
 

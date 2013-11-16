@@ -1,0 +1,6001 @@
+Sensor Name	Nodes Covered
+100	37
+101	0
+102	0
+103	0
+104	0
+Total Nodes covered: 37
+100	36
+101	5
+102	6
+103	2
+104	3
+Total Nodes covered: 52
+100	36
+101	5
+102	4
+103	0
+104	0
+Total Nodes covered: 45
+100	39
+101	3
+102	5
+103	0
+104	0
+Total Nodes covered: 47
+100	37
+101	5
+102	5
+103	1
+104	0
+Total Nodes covered: 48
+100	36
+101	5
+102	2
+103	0
+104	0
+Total Nodes covered: 43
+100	38
+101	5
+102	5
+103	0
+104	0
+Total Nodes covered: 48
+100	36
+101	4
+102	7
+103	3
+104	2
+Total Nodes covered: 52
+100	36
+101	5
+102	6
+103	3
+104	0
+Total Nodes covered: 50
+100	36
+101	5
+102	6
+103	2
+104	0
+Total Nodes covered: 49
+100	35
+101	5
+102	7
+103	2
+104	3
+Total Nodes covered: 52
+100	36
+101	5
+102	2
+103	6
+104	0
+Total Nodes covered: 49
+100	34
+101	5
+102	2
+103	8
+104	0
+Total Nodes covered: 49
+100	36
+101	5
+102	5
+103	0
+104	0
+Total Nodes covered: 46
+100	37
+101	5
+102	4
+103	3
+104	2
+Total Nodes covered: 51
+100	36
+101	4
+102	2
+103	4
+104	4
+Total Nodes covered: 50
+100	37
+101	4
+102	5
+103	2
+104	0
+Total Nodes covered: 48
+100	38
+101	4
+102	4
+103	2
+104	0
+Total Nodes covered: 48
+100	36
+101	4
+102	2
+103	1
+104	0
+Total Nodes covered: 43
+100	39
+101	4
+102	4
+103	2
+104	1
+Total Nodes covered: 50
+100	1
+101	6
+102	11
+103	11
+104	10
+Total Nodes covered: 39
+100	2
+101	7
+102	11
+103	11
+104	12
+Total Nodes covered: 43
+100	6
+101	8
+102	24
+103	5
+104	9
+Total Nodes covered: 52
+100	9
+101	11
+102	7
+103	14
+104	8
+Total Nodes covered: 49
+100	13
+101	13
+102	11
+103	12
+104	9
+Total Nodes covered: 58
+100	17
+101	16
+102	11
+103	14
+104	8
+Total Nodes covered: 66
+100	24
+101	20
+102	12
+103	8
+104	8
+Total Nodes covered: 72
+100	26
+101	26
+102	11
+103	8
+104	8
+Total Nodes covered: 79
+100	31
+101	24
+102	15
+103	9
+104	8
+Total Nodes covered: 87
+100	33
+101	21
+102	14
+103	10
+104	8
+Total Nodes covered: 86
+100	31
+101	21
+102	10
+103	11
+104	8
+Total Nodes covered: 81
+100	32
+101	13
+102	10
+103	11
+104	5
+Total Nodes covered: 71
+100	29
+101	9
+102	10
+103	14
+104	7
+Total Nodes covered: 69
+100	22
+101	10
+102	11
+103	14
+104	8
+Total Nodes covered: 65
+100	14
+101	13
+102	17
+103	6
+104	5
+Total Nodes covered: 55
+100	8
+101	14
+102	12
+103	13
+104	12
+Total Nodes covered: 59
+100	4
+101	14
+102	11
+103	10
+104	15
+Total Nodes covered: 54
+100	33
+101	0
+102	7
+103	5
+104	3
+Total Nodes covered: 48
+100	30
+101	7
+102	6
+103	5
+104	4
+Total Nodes covered: 52
+100	32
+101	6
+102	6
+103	4
+104	0
+Total Nodes covered: 48
+100	34
+101	5
+102	5
+103	4
+104	4
+Total Nodes covered: 52
+100	28
+101	7
+102	6
+103	4
+104	0
+Total Nodes covered: 45
+100	31
+101	7
+102	5
+103	5
+104	3
+Total Nodes covered: 51
+100	34
+101	5
+102	4
+103	4
+104	3
+Total Nodes covered: 50
+100	32
+101	5
+102	5
+103	4
+104	0
+Total Nodes covered: 46
+100	32
+101	6
+102	4
+103	6
+104	0
+Total Nodes covered: 48
+100	31
+101	6
+102	6
+103	4
+104	0
+Total Nodes covered: 47
+100	34
+101	6
+102	5
+103	4
+104	0
+Total Nodes covered: 49
+100	33
+101	6
+102	4
+103	4
+104	4
+Total Nodes covered: 51
+100	31
+101	7
+102	4
+103	4
+104	4
+Total Nodes covered: 50
+100	32
+101	6
+102	5
+103	4
+104	0
+Total Nodes covered: 47
+100	35
+101	6
+102	4
+103	5
+104	0
+Total Nodes covered: 50
+100	35
+101	6
+102	4
+103	4
+104	2
+Total Nodes covered: 51
+100	35
+101	6
+102	5
+103	2
+104	3
+Total Nodes covered: 51
+100	35
+101	7
+102	5
+103	2
+104	1
+Total Nodes covered: 50
+100	39
+101	6
+102	5
+103	2
+104	0
+Total Nodes covered: 52
+100	42
+101	4
+102	0
+103	0
+104	0
+Total Nodes covered: 46
+100	41
+101	4
+102	3
+103	0
+104	0
+Total Nodes covered: 48
+100	41
+101	5
+102	4
+103	0
+104	0
+Total Nodes covered: 50
+100	42
+101	4
+102	4
+103	2
+104	0
+Total Nodes covered: 52
+100	42
+101	5
+102	3
+103	2
+104	0
+Total Nodes covered: 52
+100	42
+101	5
+102	3
+103	2
+104	0
+Total Nodes covered: 52
+100	41
+101	5
+102	4
+103	2
+104	0
+Total Nodes covered: 52
+100	41
+101	5
+102	4
+103	2
+104	0
+Total Nodes covered: 52
+100	39
+101	5
+102	3
+103	0
+104	0
+Total Nodes covered: 47
+100	40
+101	6
+102	4
+103	0
+104	0
+Total Nodes covered: 50
+100	39
+101	5
+102	3
+103	0
+104	0
+Total Nodes covered: 47
+100	39
+101	7
+102	4
+103	0
+104	0
+Total Nodes covered: 50
+100	38
+101	7
+102	5
+103	2
+104	0
+Total Nodes covered: 52
+100	37
+101	6
+102	7
+103	2
+104	0
+Total Nodes covered: 52
+100	39
+101	6
+102	5
+103	2
+104	0
+Total Nodes covered: 52
+100	41
+101	6
+102	3
+103	2
+104	0
+Total Nodes covered: 52
+100	39
+101	6
+102	5
+103	2
+104	0
+Total Nodes covered: 52
+100	40
+101	5
+102	5
+103	2
+104	0
+Total Nodes covered: 52
+100	39
+101	4
+102	3
+103	0
+104	0
+Total Nodes covered: 46
+100	37
+101	5
+102	3
+103	6
+104	0
+Total Nodes covered: 51
+100	34
+101	6
+102	8
+103	0
+104	0
+Total Nodes covered: 48
+100	37
+101	5
+102	6
+103	3
+104	0
+Total Nodes covered: 51
+100	36
+101	5
+102	7
+103	3
+104	0
+Total Nodes covered: 51
+100	36
+101	5
+102	7
+103	3
+104	1
+Total Nodes covered: 52
+100	35
+101	7
+102	6
+103	3
+104	1
+Total Nodes covered: 52
+100	34
+101	6
+102	5
+103	0
+104	0
+Total Nodes covered: 45
+100	34
+101	6
+102	5
+103	0
+104	0
+Total Nodes covered: 45
+100	35
+101	6
+102	4
+103	6
+104	0
+Total Nodes covered: 51
+100	35
+101	6
+102	3
+103	0
+104	0
+Total Nodes covered: 44
+100	34
+101	7
+102	4
+103	6
+104	0
+Total Nodes covered: 51
+100	34
+101	6
+102	4
+103	0
+104	0
+Total Nodes covered: 44
+100	33
+101	7
+102	4
+103	0
+104	0
+Total Nodes covered: 44
+100	34
+101	7
+102	4
+103	6
+104	0
+Total Nodes covered: 51
+100	34
+101	7
+102	4
+103	0
+104	0
+Total Nodes covered: 45
+100	35
+101	6
+102	4
+103	6
+104	0
+Total Nodes covered: 51
+100	34
+101	6
+102	4
+103	7
+104	0
+Total Nodes covered: 51
+100	35
+101	6
+102	7
+103	1
+104	0
+Total Nodes covered: 49
+100	35
+101	6
+102	8
+103	0
+104	0
+Total Nodes covered: 49
+100	35
+101	6
+102	7
+103	0
+104	0
+Total Nodes covered: 48
+100	35
+101	5
+102	8
+103	2
+104	2
+Total Nodes covered: 52
+100	36
+101	8
+102	2
+103	1
+104	0
+Total Nodes covered: 47
+100	36
+101	5
+102	3
+103	0
+104	0
+Total Nodes covered: 44
+100	36
+101	8
+102	6
+103	2
+104	0
+Total Nodes covered: 52
+100	38
+101	5
+102	3
+103	5
+104	0
+Total Nodes covered: 51
+100	35
+101	5
+102	9
+103	1
+104	0
+Total Nodes covered: 50
+100	36
+101	8
+102	2
+103	1
+104	0
+Total Nodes covered: 47
+100	36
+101	7
+102	6
+103	0
+104	0
+Total Nodes covered: 49
+100	33
+101	9
+102	7
+103	2
+104	0
+Total Nodes covered: 51
+100	32
+101	8
+102	4
+103	2
+104	0
+Total Nodes covered: 46
+100	31
+101	9
+102	8
+103	0
+104	0
+Total Nodes covered: 48
+100	30
+101	10
+102	4
+103	2
+104	0
+Total Nodes covered: 46
+100	32
+101	10
+102	6
+103	1
+104	0
+Total Nodes covered: 49
+100	32
+101	10
+102	6
+103	3
+104	0
+Total Nodes covered: 51
+100	33
+101	10
+102	5
+103	1
+104	0
+Total Nodes covered: 49
+100	32
+101	6
+102	10
+103	1
+104	0
+Total Nodes covered: 49
+100	34
+101	5
+102	9
+103	1
+104	0
+Total Nodes covered: 49
+100	32
+101	6
+102	10
+103	1
+104	0
+Total Nodes covered: 49
+100	34
+101	5
+102	9
+103	1
+104	0
+Total Nodes covered: 49
+100	34
+101	5
+102	9
+103	1
+104	0
+Total Nodes covered: 49
+100	33
+101	6
+102	9
+103	1
+104	0
+Total Nodes covered: 49
+100	35
+101	5
+102	9
+103	0
+104	0
+Total Nodes covered: 49
+100	34
+101	5
+102	4
+103	9
+104	0
+Total Nodes covered: 52
+100	34
+101	5
+102	10
+103	0
+104	0
+Total Nodes covered: 49
+100	34
+101	4
+102	5
+103	9
+104	0
+Total Nodes covered: 52
+100	36
+101	4
+102	4
+103	2
+104	0
+Total Nodes covered: 46
+100	35
+101	5
+102	8
+103	1
+104	0
+Total Nodes covered: 49
+100	36
+101	4
+102	4
+103	3
+104	0
+Total Nodes covered: 47
+100	1
+101	6
+102	10
+103	3
+104	12
+Total Nodes covered: 32
+100	4
+101	8
+102	12
+103	23
+104	1
+Total Nodes covered: 48
+100	6
+101	12
+102	16
+103	16
+104	18
+Total Nodes covered: 68
+100	13
+101	15
+102	20
+103	20
+104	16
+Total Nodes covered: 84
+100	22
+101	20
+102	16
+103	18
+104	16
+Total Nodes covered: 92
+100	23
+101	25
+102	17
+103	15
+104	4
+Total Nodes covered: 84
+100	25
+101	25
+102	16
+103	12
+104	11
+Total Nodes covered: 89
+100	21
+101	18
+102	13
+103	12
+104	9
+Total Nodes covered: 73
+100	17
+101	12
+102	14
+103	11
+104	23
+Total Nodes covered: 77
+100	14
+101	11
+102	11
+103	26
+104	4
+Total Nodes covered: 66
+100	7
+101	17
+102	10
+103	26
+104	2
+Total Nodes covered: 62
+100	1
+101	19
+102	8
+103	17
+104	19
+Total Nodes covered: 64
+100	33
+101	0
+102	9
+103	4
+104	5
+Total Nodes covered: 51
+100	32
+101	10
+102	6
+103	3
+104	0
+Total Nodes covered: 51
+100	32
+101	10
+102	6
+103	3
+104	0
+Total Nodes covered: 51
+100	33
+101	6
+102	5
+103	7
+104	0
+Total Nodes covered: 51
+100	33
+101	7
+102	8
+103	1
+104	0
+Total Nodes covered: 49
+100	34
+101	7
+102	4
+103	6
+104	1
+Total Nodes covered: 52
+100	34
+101	7
+102	4
+103	1
+104	0
+Total Nodes covered: 46
+100	31
+101	9
+102	7
+103	1
+104	0
+Total Nodes covered: 48
+100	30
+101	9
+102	8
+103	3
+104	0
+Total Nodes covered: 50
+100	29
+101	9
+102	10
+103	3
+104	1
+Total Nodes covered: 52
+100	30
+101	8
+102	10
+103	3
+104	1
+Total Nodes covered: 52
+100	1
+101	12
+102	5
+103	18
+104	15
+Total Nodes covered: 51
+100	3
+101	8
+102	7
+103	15
+104	16
+Total Nodes covered: 49
+100	4
+101	8
+102	19
+103	3
+104	9
+Total Nodes covered: 43
+100	5
+101	9
+102	15
+103	4
+104	15
+Total Nodes covered: 48
+100	5
+101	11
+102	11
+103	6
+104	10
+Total Nodes covered: 43
+100	3
+101	12
+102	10
+103	16
+104	5
+Total Nodes covered: 46
+100	31
+101	9
+102	7
+103	4
+104	1
+Total Nodes covered: 52
+100	31
+101	8
+102	4
+103	1
+104	0
+Total Nodes covered: 44
+100	30
+101	7
+102	9
+103	4
+104	1
+Total Nodes covered: 51
+100	31
+101	9
+102	4
+103	1
+104	0
+Total Nodes covered: 45
+100	32
+101	8
+102	8
+103	1
+104	0
+Total Nodes covered: 49
+100	30
+101	8
+102	9
+103	4
+104	1
+Total Nodes covered: 52
+100	32
+101	7
+102	9
+103	3
+104	1
+Total Nodes covered: 52
+100	1
+101	10
+102	25
+103	12
+104	15
+Total Nodes covered: 63
+100	2
+101	16
+102	21
+103	9
+104	3
+Total Nodes covered: 51
+100	1
+101	0
+102	10
+103	26
+104	10
+Total Nodes covered: 47
+100	34
+101	0
+102	8
+103	6
+104	2
+Total Nodes covered: 50
+100	34
+101	7
+102	4
+103	6
+104	0
+Total Nodes covered: 51
+100	32
+101	7
+102	5
+103	7
+104	1
+Total Nodes covered: 52
+100	31
+101	7
+102	9
+103	2
+104	2
+Total Nodes covered: 51
+100	33
+101	7
+102	2
+103	3
+104	0
+Total Nodes covered: 45
+100	31
+101	8
+102	8
+103	1
+104	1
+Total Nodes covered: 49
+100	31
+101	8
+102	8
+103	3
+104	0
+Total Nodes covered: 50
+100	33
+101	7
+102	7
+103	3
+104	1
+Total Nodes covered: 51
+100	30
+101	9
+102	8
+103	3
+104	1
+Total Nodes covered: 51
+100	31
+101	9
+102	6
+103	2
+104	2
+Total Nodes covered: 50
+100	30
+101	8
+102	9
+103	2
+104	1
+Total Nodes covered: 50
+100	30
+101	8
+102	8
+103	2
+104	2
+Total Nodes covered: 50
+100	31
+101	8
+102	7
+103	2
+104	2
+Total Nodes covered: 50
+100	29
+101	9
+102	8
+103	3
+104	2
+Total Nodes covered: 51
+100	3
+101	8
+102	3
+103	12
+104	26
+Total Nodes covered: 52
+100	3
+101	9
+102	12
+103	4
+104	11
+Total Nodes covered: 39
+100	3
+101	7
+102	15
+103	3
+104	14
+Total Nodes covered: 42
+100	3
+101	7
+102	16
+103	4
+104	15
+Total Nodes covered: 45
+100	3
+101	7
+102	4
+103	15
+104	25
+Total Nodes covered: 54
+100	6
+101	5
+102	16
+103	21
+104	5
+Total Nodes covered: 53
+100	8
+101	7
+102	18
+103	15
+104	6
+Total Nodes covered: 54
+100	9
+101	11
+102	23
+103	8
+104	9
+Total Nodes covered: 60
+100	11
+101	16
+102	25
+103	14
+104	4
+Total Nodes covered: 70
+100	10
+101	22
+102	7
+103	25
+104	6
+Total Nodes covered: 70
+100	12
+101	23
+102	17
+103	16
+104	6
+Total Nodes covered: 74
+100	13
+101	23
+102	9
+103	7
+104	4
+Total Nodes covered: 56
+100	15
+101	27
+102	21
+103	9
+104	4
+Total Nodes covered: 76
+100	11
+101	28
+102	22
+103	5
+104	3
+Total Nodes covered: 69
+100	10
+101	22
+102	5
+103	15
+104	9
+Total Nodes covered: 61
+100	9
+101	20
+102	20
+103	11
+104	7
+Total Nodes covered: 67
+100	11
+101	15
+102	14
+103	9
+104	5
+Total Nodes covered: 54
+100	8
+101	12
+102	16
+103	9
+104	4
+Total Nodes covered: 49
+100	6
+101	9
+102	17
+103	10
+104	7
+Total Nodes covered: 49
+100	3
+101	8
+102	17
+103	11
+104	7
+Total Nodes covered: 46
+100	2
+101	5
+102	2
+103	14
+104	4
+Total Nodes covered: 27
+100	2
+101	4
+102	13
+103	16
+104	10
+Total Nodes covered: 45
+100	28
+101	9
+102	4
+103	3
+104	3
+Total Nodes covered: 47
+100	28
+101	9
+102	3
+103	1
+104	2
+Total Nodes covered: 43
+100	27
+101	9
+102	3
+103	5
+104	1
+Total Nodes covered: 45
+100	26
+101	10
+102	5
+103	3
+104	2
+Total Nodes covered: 46
+100	26
+101	10
+102	5
+103	3
+104	2
+Total Nodes covered: 46
+100	27
+101	9
+102	5
+103	3
+104	2
+Total Nodes covered: 46
+100	27
+101	10
+102	5
+103	3
+104	1
+Total Nodes covered: 46
+100	27
+101	9
+102	5
+103	3
+104	2
+Total Nodes covered: 46
+100	27
+101	10
+102	6
+103	3
+104	1
+Total Nodes covered: 47
+100	27
+101	9
+102	5
+103	3
+104	3
+Total Nodes covered: 47
+100	27
+101	9
+102	5
+103	2
+104	1
+Total Nodes covered: 44
+100	27
+101	9
+102	5
+103	3
+104	2
+Total Nodes covered: 46
+100	27
+101	9
+102	5
+103	2
+104	1
+Total Nodes covered: 44
+100	27
+101	9
+102	5
+103	3
+104	3
+Total Nodes covered: 47
+100	27
+101	8
+102	5
+103	4
+104	3
+Total Nodes covered: 47
+100	28
+101	8
+102	5
+103	3
+104	2
+Total Nodes covered: 46
+100	28
+101	8
+102	5
+103	3
+104	2
+Total Nodes covered: 46
+100	27
+101	8
+102	6
+103	2
+104	3
+Total Nodes covered: 46
+100	27
+101	8
+102	6
+103	3
+104	3
+Total Nodes covered: 47
+100	27
+101	9
+102	5
+103	3
+104	2
+Total Nodes covered: 46
+100	27
+101	9
+102	5
+103	3
+104	2
+Total Nodes covered: 46
+100	27
+101	9
+102	5
+103	2
+104	2
+Total Nodes covered: 45
+100	28
+101	9
+102	4
+103	3
+104	2
+Total Nodes covered: 46
+100	27
+101	9
+102	4
+103	2
+104	1
+Total Nodes covered: 43
+100	27
+101	9
+102	3
+103	2
+104	1
+Total Nodes covered: 42
+100	29
+101	9
+102	2
+103	2
+104	1
+Total Nodes covered: 43
+100	28
+101	9
+102	3
+103	2
+104	1
+Total Nodes covered: 43
+100	27
+101	9
+102	3
+103	2
+104	1
+Total Nodes covered: 42
+100	27
+101	8
+102	3
+103	3
+104	1
+Total Nodes covered: 42
+100	28
+101	8
+102	3
+103	2
+104	1
+Total Nodes covered: 42
+100	27
+101	9
+102	3
+103	2
+104	1
+Total Nodes covered: 42
+100	28
+101	10
+102	3
+103	1
+104	4
+Total Nodes covered: 46
+100	28
+101	9
+102	2
+103	2
+104	1
+Total Nodes covered: 42
+100	27
+101	10
+102	2
+103	4
+104	2
+Total Nodes covered: 45
+100	26
+101	10
+102	2
+103	5
+104	3
+Total Nodes covered: 46
+100	26
+101	10
+102	2
+103	4
+104	1
+Total Nodes covered: 43
+100	24
+101	10
+102	2
+103	6
+104	2
+Total Nodes covered: 44
+100	27
+101	9
+102	3
+103	3
+104	4
+Total Nodes covered: 46
+100	26
+101	9
+102	4
+103	3
+104	4
+Total Nodes covered: 46
+100	30
+101	7
+102	4
+103	4
+104	2
+Total Nodes covered: 47
+100	34
+101	6
+102	5
+103	4
+104	1
+Total Nodes covered: 50
+100	35
+101	6
+102	4
+103	1
+104	1
+Total Nodes covered: 47
+100	35
+101	7
+102	4
+103	2
+104	2
+Total Nodes covered: 50
+100	35
+101	7
+102	3
+103	2
+104	2
+Total Nodes covered: 49
+100	37
+101	4
+102	2
+103	1
+104	1
+Total Nodes covered: 45
+100	35
+101	4
+102	7
+103	2
+104	1
+Total Nodes covered: 49
+100	35
+101	4
+102	3
+103	2
+104	2
+Total Nodes covered: 46
+100	35
+101	7
+102	3
+103	3
+104	1
+Total Nodes covered: 49
+100	35
+101	4
+102	3
+103	2
+104	1
+Total Nodes covered: 45
+100	36
+101	4
+102	2
+103	2
+104	2
+Total Nodes covered: 46
+100	36
+101	8
+102	3
+103	1
+104	1
+Total Nodes covered: 49
+100	36
+101	4
+102	3
+103	1
+104	1
+Total Nodes covered: 45
+100	36
+101	7
+102	3
+103	1
+104	1
+Total Nodes covered: 48
+100	35
+101	8
+102	3
+103	2
+104	1
+Total Nodes covered: 49
+100	36
+101	4
+102	3
+103	1
+104	1
+Total Nodes covered: 45
+100	36
+101	4
+102	3
+103	1
+104	1
+Total Nodes covered: 45
+100	37
+101	4
+102	6
+103	1
+104	1
+Total Nodes covered: 49
+100	37
+101	4
+102	2
+103	1
+104	1
+Total Nodes covered: 45
+100	37
+101	7
+102	3
+103	1
+104	2
+Total Nodes covered: 50
+100	38
+101	4
+102	2
+103	1
+104	2
+Total Nodes covered: 47
+100	38
+101	4
+102	1
+103	1
+104	1
+Total Nodes covered: 45
+100	38
+101	4
+102	1
+103	1
+104	1
+Total Nodes covered: 45
+100	37
+101	4
+102	6
+103	1
+104	1
+Total Nodes covered: 49
+100	37
+101	4
+102	1
+103	2
+104	1
+Total Nodes covered: 45
+100	37
+101	4
+102	1
+103	1
+104	1
+Total Nodes covered: 44
+100	37
+101	4
+102	1
+103	1
+104	1
+Total Nodes covered: 44
+100	37
+101	4
+102	1
+103	2
+104	1
+Total Nodes covered: 45
+100	37
+101	4
+102	1
+103	1
+104	1
+Total Nodes covered: 44
+100	36
+101	4
+102	1
+103	1
+104	1
+Total Nodes covered: 43
+100	36
+101	4
+102	1
+103	2
+104	1
+Total Nodes covered: 44
+100	38
+101	4
+102	1
+103	1
+104	0
+Total Nodes covered: 44
+100	38
+101	4
+102	2
+103	1
+104	0
+Total Nodes covered: 45
+100	1
+101	4
+102	1
+103	10
+104	23
+Total Nodes covered: 39
+100	1
+101	4
+102	8
+103	17
+104	18
+Total Nodes covered: 48
+100	1
+101	5
+102	7
+103	16
+104	19
+Total Nodes covered: 48
+100	1
+101	3
+102	8
+103	18
+104	14
+Total Nodes covered: 44
+100	1
+101	4
+102	8
+103	2
+104	2
+Total Nodes covered: 17
+100	2
+101	4
+102	4
+103	20
+104	15
+Total Nodes covered: 45
+100	2
+101	4
+102	4
+103	18
+104	21
+Total Nodes covered: 49
+100	2
+101	2
+102	4
+103	14
+104	24
+Total Nodes covered: 46
+100	33
+101	0
+102	6
+103	4
+104	5
+Total Nodes covered: 48
+100	32
+101	5
+102	2
+103	1
+104	1
+Total Nodes covered: 41
+100	32
+101	5
+102	5
+103	1
+104	1
+Total Nodes covered: 44
+100	31
+101	7
+102	5
+103	1
+104	1
+Total Nodes covered: 45
+100	31
+101	7
+102	5
+103	2
+104	1
+Total Nodes covered: 46
+100	32
+101	6
+102	5
+103	2
+104	1
+Total Nodes covered: 46
+100	32
+101	7
+102	4
+103	2
+104	1
+Total Nodes covered: 46
+100	0
+101	9
+102	7
+103	3
+104	1
+Total Nodes covered: 20
+100	32
+101	6
+102	5
+103	4
+104	2
+Total Nodes covered: 49
+100	31
+101	7
+102	5
+103	2
+104	1
+Total Nodes covered: 46
+100	32
+101	6
+102	5
+103	2
+104	1
+Total Nodes covered: 46
+100	30
+101	7
+102	5
+103	2
+104	1
+Total Nodes covered: 45
+100	32
+101	6
+102	5
+103	2
+104	1
+Total Nodes covered: 46
+100	32
+101	6
+102	4
+103	2
+104	1
+Total Nodes covered: 45
+100	31
+101	8
+102	4
+103	2
+104	1
+Total Nodes covered: 46
+100	31
+101	7
+102	5
+103	2
+104	1
+Total Nodes covered: 46
+100	32
+101	6
+102	5
+103	2
+104	1
+Total Nodes covered: 46
+100	32
+101	7
+102	4
+103	2
+104	1
+Total Nodes covered: 46
+100	34
+101	5
+102	3
+103	4
+104	1
+Total Nodes covered: 47
+100	33
+101	5
+102	5
+103	3
+104	1
+Total Nodes covered: 47
+100	32
+101	5
+102	5
+103	5
+104	1
+Total Nodes covered: 48
+100	32
+101	5
+102	5
+103	4
+104	1
+Total Nodes covered: 47
+100	32
+101	5
+102	5
+103	5
+104	1
+Total Nodes covered: 48
+100	34
+101	6
+102	4
+103	2
+104	5
+Total Nodes covered: 51
+100	34
+101	5
+102	4
+103	2
+104	1
+Total Nodes covered: 46
+100	34
+101	5
+102	4
+103	3
+104	4
+Total Nodes covered: 50
+100	31
+101	6
+102	5
+103	5
+104	1
+Total Nodes covered: 48
+100	32
+101	6
+102	4
+103	4
+104	1
+Total Nodes covered: 47
+100	29
+101	7
+102	4
+103	5
+104	1
+Total Nodes covered: 46
+100	31
+101	6
+102	4
+103	5
+104	1
+Total Nodes covered: 47
+100	31
+101	5
+102	4
+103	5
+104	2
+Total Nodes covered: 47
+100	33
+101	5
+102	4
+103	4
+104	0
+Total Nodes covered: 46
+100	31
+101	6
+102	5
+103	4
+104	1
+Total Nodes covered: 47
+100	30
+101	5
+102	6
+103	5
+104	5
+Total Nodes covered: 51
+100	31
+101	6
+102	4
+103	4
+104	2
+Total Nodes covered: 47
+100	30
+101	5
+102	5
+103	1
+104	1
+Total Nodes covered: 42
+100	30
+101	5
+102	5
+103	6
+104	4
+Total Nodes covered: 50
+100	30
+101	5
+102	5
+103	4
+104	5
+Total Nodes covered: 49
+100	28
+101	7
+102	5
+103	5
+104	4
+Total Nodes covered: 49
+100	26
+101	8
+102	7
+103	4
+104	5
+Total Nodes covered: 50
+100	27
+101	7
+102	4
+103	5
+104	2
+Total Nodes covered: 45
+100	27
+101	8
+102	6
+103	4
+104	4
+Total Nodes covered: 49
+100	29
+101	6
+102	5
+103	3
+104	1
+Total Nodes covered: 44
+100	28
+101	6
+102	5
+103	2
+104	1
+Total Nodes covered: 42
+100	28
+101	6
+102	5
+103	5
+104	4
+Total Nodes covered: 48
+100	28
+101	6
+102	5
+103	5
+104	2
+Total Nodes covered: 46
+100	30
+101	6
+102	5
+103	4
+104	2
+Total Nodes covered: 47
+100	31
+101	7
+102	4
+103	3
+104	2
+Total Nodes covered: 47
+100	29
+101	6
+102	5
+103	4
+104	2
+Total Nodes covered: 46
+100	29
+101	7
+102	4
+103	4
+104	4
+Total Nodes covered: 48
+100	28
+101	6
+102	5
+103	5
+104	4
+Total Nodes covered: 48
+100	28
+101	6
+102	5
+103	5
+104	4
+Total Nodes covered: 48
+100	29
+101	6
+102	5
+103	5
+104	3
+Total Nodes covered: 48
+100	27
+101	8
+102	6
+103	4
+104	1
+Total Nodes covered: 46
+100	28
+101	8
+102	4
+103	4
+104	1
+Total Nodes covered: 45
+100	28
+101	8
+102	4
+103	5
+104	1
+Total Nodes covered: 46
+100	28
+101	8
+102	4
+103	5
+104	3
+Total Nodes covered: 48
+100	29
+101	8
+102	4
+103	3
+104	1
+Total Nodes covered: 45
+100	28
+101	7
+102	5
+103	3
+104	2
+Total Nodes covered: 45
+100	29
+101	8
+102	5
+103	3
+104	3
+Total Nodes covered: 48
+100	28
+101	7
+102	5
+103	3
+104	5
+Total Nodes covered: 48
+100	28
+101	8
+102	4
+103	4
+104	1
+Total Nodes covered: 45
+100	28
+101	7
+102	4
+103	5
+104	4
+Total Nodes covered: 48
+100	28
+101	7
+102	6
+103	3
+104	1
+Total Nodes covered: 45
+100	28
+101	6
+102	5
+103	5
+104	1
+Total Nodes covered: 45
+100	27
+101	6
+102	4
+103	5
+104	1
+Total Nodes covered: 43
+100	27
+101	6
+102	6
+103	3
+104	1
+Total Nodes covered: 43
+100	29
+101	6
+102	4
+103	4
+104	1
+Total Nodes covered: 44
+100	29
+101	5
+102	4
+103	4
+104	1
+Total Nodes covered: 43
+100	29
+101	6
+102	5
+103	3
+104	1
+Total Nodes covered: 44
+100	30
+101	5
+102	3
+103	4
+104	1
+Total Nodes covered: 43
+100	31
+101	5
+102	4
+103	3
+104	1
+Total Nodes covered: 44
+100	30
+101	4
+102	4
+103	4
+104	1
+Total Nodes covered: 43
+100	28
+101	5
+102	4
+103	3
+104	1
+Total Nodes covered: 41
+100	28
+101	6
+102	4
+103	4
+104	1
+Total Nodes covered: 43
+100	27
+101	5
+102	5
+103	3
+104	1
+Total Nodes covered: 41
+100	29
+101	4
+102	4
+103	4
+104	1
+Total Nodes covered: 42
+100	27
+101	6
+102	4
+103	3
+104	1
+Total Nodes covered: 41
+100	29
+101	6
+102	6
+103	3
+104	3
+Total Nodes covered: 47
+100	28
+101	5
+102	6
+103	3
+104	3
+Total Nodes covered: 45
+100	29
+101	6
+102	5
+103	3
+104	1
+Total Nodes covered: 44
+100	27
+101	5
+102	4
+103	7
+104	1
+Total Nodes covered: 44
+100	29
+101	8
+102	5
+103	2
+104	3
+Total Nodes covered: 47
+100	29
+101	7
+102	9
+103	2
+104	2
+Total Nodes covered: 49
+100	33
+101	7
+102	7
+103	2
+104	2
+Total Nodes covered: 51
+100	33
+101	6
+102	8
+103	2
+104	2
+Total Nodes covered: 51
+100	35
+101	7
+102	6
+103	2
+104	1
+Total Nodes covered: 51
+100	35
+101	7
+102	6
+103	2
+104	1
+Total Nodes covered: 51
+100	38
+101	7
+102	4
+103	1
+104	1
+Total Nodes covered: 51
+100	40
+101	7
+102	3
+103	1
+104	0
+Total Nodes covered: 51
+100	40
+101	7
+102	3
+103	1
+104	0
+Total Nodes covered: 51
+100	39
+101	7
+102	4
+103	1
+104	0
+Total Nodes covered: 51
+100	38
+101	7
+102	4
+103	1
+104	0
+Total Nodes covered: 50
+100	40
+101	7
+102	3
+103	1
+104	0
+Total Nodes covered: 51
+100	41
+101	6
+102	2
+103	1
+104	0
+Total Nodes covered: 50
+100	39
+101	7
+102	4
+103	1
+104	0
+Total Nodes covered: 51
+100	38
+101	7
+102	4
+103	1
+104	0
+Total Nodes covered: 50
+100	39
+101	7
+102	3
+103	1
+104	1
+Total Nodes covered: 51
+100	40
+101	6
+102	3
+103	1
+104	1
+Total Nodes covered: 51
+100	40
+101	7
+102	2
+103	1
+104	1
+Total Nodes covered: 51
+100	40
+101	7
+102	2
+103	1
+104	1
+Total Nodes covered: 51
+100	41
+101	7
+102	2
+103	1
+104	0
+Total Nodes covered: 51
+100	41
+101	7
+102	2
+103	1
+104	0
+Total Nodes covered: 51
+100	40
+101	7
+102	3
+103	1
+104	0
+Total Nodes covered: 51
+100	41
+101	6
+102	3
+103	1
+104	0
+Total Nodes covered: 51
+100	40
+101	6
+102	3
+103	1
+104	0
+Total Nodes covered: 50
+100	40
+101	6
+102	4
+103	1
+104	0
+Total Nodes covered: 51
+100	37
+101	8
+102	5
+103	1
+104	0
+Total Nodes covered: 51
+100	39
+101	7
+102	4
+103	1
+104	0
+Total Nodes covered: 51
+100	38
+101	6
+102	6
+103	1
+104	0
+Total Nodes covered: 51
+100	2
+101	7
+102	18
+103	8
+104	7
+Total Nodes covered: 42
+100	2
+101	13
+102	22
+103	13
+104	2
+Total Nodes covered: 52
+100	3
+101	24
+102	14
+103	14
+104	5
+Total Nodes covered: 60
+100	6
+101	31
+102	16
+103	12
+104	14
+Total Nodes covered: 79
+100	10
+101	18
+102	8
+103	5
+104	3
+Total Nodes covered: 44
+100	24
+101	17
+102	20
+103	15
+104	3
+Total Nodes covered: 79
+100	38
+101	14
+102	14
+103	7
+104	3
+Total Nodes covered: 76
+100	47
+101	17
+102	11
+103	7
+104	5
+Total Nodes covered: 87
+100	54
+101	14
+102	10
+103	5
+104	4
+Total Nodes covered: 87
+100	56
+101	14
+102	9
+103	3
+104	4
+Total Nodes covered: 86
+100	56
+101	15
+102	8
+103	2
+104	2
+Total Nodes covered: 83
+100	51
+101	16
+102	10
+103	4
+104	4
+Total Nodes covered: 85
+100	39
+101	18
+102	12
+103	4
+104	7
+Total Nodes covered: 80
+100	19
+101	21
+102	15
+103	5
+104	10
+Total Nodes covered: 70
+100	7
+101	26
+102	16
+103	7
+104	9
+Total Nodes covered: 65
+100	3
+101	21
+102	18
+103	10
+104	16
+Total Nodes covered: 68
+100	37
+101	0
+102	0
+103	6
+104	6
+Total Nodes covered: 49
+100	38
+101	6
+102	5
+103	2
+104	0
+Total Nodes covered: 51
+100	37
+101	6
+102	0
+103	0
+104	0
+Total Nodes covered: 43
+100	37
+101	6
+102	6
+103	2
+104	0
+Total Nodes covered: 51
+100	38
+101	5
+102	5
+103	2
+104	1
+Total Nodes covered: 51
+100	39
+101	5
+102	5
+103	2
+104	0
+Total Nodes covered: 51
+100	38
+101	6
+102	5
+103	2
+104	0
+Total Nodes covered: 51
+100	37
+101	6
+102	0
+103	0
+104	0
+Total Nodes covered: 43
+100	39
+101	5
+102	5
+103	2
+104	0
+Total Nodes covered: 51
+100	39
+101	5
+102	5
+103	2
+104	0
+Total Nodes covered: 51
+100	38
+101	6
+102	5
+103	2
+104	0
+Total Nodes covered: 51
+100	39
+101	5
+102	5
+103	2
+104	0
+Total Nodes covered: 51
+100	37
+101	7
+102	6
+103	1
+104	0
+Total Nodes covered: 51
+100	38
+101	6
+102	6
+103	1
+104	0
+Total Nodes covered: 51
+100	38
+101	6
+102	5
+103	2
+104	0
+Total Nodes covered: 51
+100	38
+101	7
+102	6
+103	1
+104	0
+Total Nodes covered: 52
+100	37
+101	8
+102	0
+103	0
+104	0
+Total Nodes covered: 45
+100	38
+101	7
+102	5
+103	2
+104	0
+Total Nodes covered: 52
+100	39
+101	6
+102	5
+103	2
+104	0
+Total Nodes covered: 52
+100	38
+101	6
+102	2
+103	0
+104	0
+Total Nodes covered: 46
+100	37
+101	7
+102	6
+103	0
+104	0
+Total Nodes covered: 50
+100	37
+101	7
+102	0
+103	0
+104	0
+Total Nodes covered: 44
+100	37
+101	7
+102	6
+103	2
+104	0
+Total Nodes covered: 52
+100	38
+101	6
+102	6
+103	2
+104	0
+Total Nodes covered: 52
+100	37
+101	6
+102	2
+103	0
+104	0
+Total Nodes covered: 45
+100	37
+101	6
+102	7
+103	2
+104	0
+Total Nodes covered: 52
+100	37
+101	7
+102	6
+103	2
+104	0
+Total Nodes covered: 52
+100	36
+101	8
+102	6
+103	2
+104	0
+Total Nodes covered: 52
+100	37
+101	8
+102	5
+103	2
+104	0
+Total Nodes covered: 52
+100	35
+101	9
+102	6
+103	2
+104	0
+Total Nodes covered: 52
+100	36
+101	6
+102	2
+103	0
+104	0
+Total Nodes covered: 44
+100	35
+101	9
+102	0
+103	0
+104	0
+Total Nodes covered: 44
+100	35
+101	9
+102	6
+103	2
+104	0
+Total Nodes covered: 52
+100	36
+101	8
+102	6
+103	2
+104	0
+Total Nodes covered: 52
+100	35
+101	9
+102	6
+103	2
+104	0
+Total Nodes covered: 52
+100	36
+101	9
+102	5
+103	2
+104	0
+Total Nodes covered: 52
+100	35
+101	7
+102	2
+103	0
+104	0
+Total Nodes covered: 44
+100	35
+101	8
+102	0
+103	0
+104	0
+Total Nodes covered: 43
+100	35
+101	7
+102	7
+103	2
+104	0
+Total Nodes covered: 51
+100	36
+101	8
+102	5
+103	2
+104	0
+Total Nodes covered: 51
+100	34
+101	8
+102	7
+103	2
+104	0
+Total Nodes covered: 51
+100	35
+101	8
+102	6
+103	2
+104	0
+Total Nodes covered: 51
+100	34
+101	8
+102	7
+103	2
+104	0
+Total Nodes covered: 51
+100	35
+101	7
+102	6
+103	2
+104	0
+Total Nodes covered: 50
+100	35
+101	7
+102	6
+103	2
+104	0
+Total Nodes covered: 50
+100	36
+101	7
+102	5
+103	2
+104	0
+Total Nodes covered: 50
+100	36
+101	6
+102	6
+103	2
+104	0
+Total Nodes covered: 50
+100	36
+101	6
+102	6
+103	2
+104	0
+Total Nodes covered: 50
+100	37
+101	7
+102	4
+103	2
+104	0
+Total Nodes covered: 50
+100	38
+101	6
+102	4
+103	2
+104	0
+Total Nodes covered: 50
+100	37
+101	7
+102	4
+103	2
+104	0
+Total Nodes covered: 50
+100	38
+101	6
+102	4
+103	2
+104	0
+Total Nodes covered: 50
+100	39
+101	5
+102	4
+103	2
+104	0
+Total Nodes covered: 50
+100	39
+101	5
+102	4
+103	2
+104	0
+Total Nodes covered: 50
+100	39
+101	5
+102	4
+103	2
+104	0
+Total Nodes covered: 50
+100	38
+101	6
+102	4
+103	2
+104	0
+Total Nodes covered: 50
+100	38
+101	5
+102	4
+103	1
+104	0
+Total Nodes covered: 48
+100	37
+101	6
+102	4
+103	2
+104	0
+Total Nodes covered: 49
+100	38
+101	5
+102	4
+103	2
+104	0
+Total Nodes covered: 49
+100	37
+101	6
+102	4
+103	2
+104	0
+Total Nodes covered: 49
+100	37
+101	6
+102	4
+103	2
+104	0
+Total Nodes covered: 49
+100	37
+101	7
+102	4
+103	2
+104	0
+Total Nodes covered: 50
+100	38
+101	6
+102	4
+103	2
+104	0
+Total Nodes covered: 50
+100	37
+101	7
+102	4
+103	2
+104	0
+Total Nodes covered: 50
+100	39
+101	4
+102	4
+103	2
+104	0
+Total Nodes covered: 49
+100	36
+101	7
+102	4
+103	2
+104	0
+Total Nodes covered: 49
+100	38
+101	6
+102	4
+103	2
+104	0
+Total Nodes covered: 50
+100	39
+101	5
+102	4
+103	2
+104	0
+Total Nodes covered: 50
+100	38
+101	5
+102	2
+103	0
+104	0
+Total Nodes covered: 45
+100	38
+101	6
+102	0
+103	0
+104	0
+Total Nodes covered: 44
+100	38
+101	5
+102	2
+103	0
+104	0
+Total Nodes covered: 45
+100	39
+101	5
+102	5
+103	1
+104	0
+Total Nodes covered: 50
+100	37
+101	7
+102	5
+103	1
+104	0
+Total Nodes covered: 50
+100	38
+101	5
+102	6
+103	1
+104	0
+Total Nodes covered: 50
+100	37
+101	6
+102	6
+103	1
+104	0
+Total Nodes covered: 50
+100	38
+101	6
+102	5
+103	1
+104	0
+Total Nodes covered: 50
+100	37
+101	7
+102	5
+103	0
+104	0
+Total Nodes covered: 49
+100	36
+101	8
+102	5
+103	0
+104	0
+Total Nodes covered: 49
+100	34
+101	8
+102	6
+103	0
+104	0
+Total Nodes covered: 48
+100	32
+101	8
+102	8
+103	0
+104	0
+Total Nodes covered: 48
+100	32
+101	8
+102	9
+103	0
+104	0
+Total Nodes covered: 49
+100	33
+101	7
+102	9
+103	0
+104	0
+Total Nodes covered: 49
+100	33
+101	8
+102	8
+103	0
+104	0
+Total Nodes covered: 49
+100	33
+101	8
+102	8
+103	0
+104	0
+Total Nodes covered: 49
+100	33
+101	8
+102	8
+103	0
+104	0
+Total Nodes covered: 49
+100	32
+101	9
+102	8
+103	0
+104	0
+Total Nodes covered: 49
+100	31
+101	10
+102	8
+103	0
+104	0
+Total Nodes covered: 49
+100	31
+101	10
+102	8
+103	0
+104	0
+Total Nodes covered: 49
+100	31
+101	10
+102	8
+103	0
+104	0
+Total Nodes covered: 49
+100	32
+101	9
+102	8
+103	0
+104	0
+Total Nodes covered: 49
+100	32
+101	9
+102	8
+103	0
+104	0
+Total Nodes covered: 49
+100	29
+101	10
+102	10
+103	0
+104	0
+Total Nodes covered: 49
+100	31
+101	9
+102	9
+103	0
+104	0
+Total Nodes covered: 49
+100	30
+101	10
+102	8
+103	0
+104	0
+Total Nodes covered: 48
+100	28
+101	11
+102	9
+103	0
+104	0
+Total Nodes covered: 48
+100	28
+101	11
+102	10
+103	0
+104	0
+Total Nodes covered: 49
+100	28
+101	11
+102	10
+103	1
+104	0
+Total Nodes covered: 50
+100	29
+101	9
+102	9
+103	1
+104	1
+Total Nodes covered: 49
+100	29
+101	9
+102	9
+103	1
+104	1
+Total Nodes covered: 49
+100	28
+101	11
+102	9
+103	1
+104	1
+Total Nodes covered: 50
+100	30
+101	11
+102	7
+103	1
+104	1
+Total Nodes covered: 50
+100	32
+101	9
+102	7
+103	2
+104	0
+Total Nodes covered: 50
+100	33
+101	8
+102	7
+103	1
+104	0
+Total Nodes covered: 49
+100	32
+101	8
+102	1
+103	1
+104	0
+Total Nodes covered: 42
+100	31
+101	9
+102	8
+103	0
+104	0
+Total Nodes covered: 48
+100	32
+101	9
+102	7
+103	1
+104	1
+Total Nodes covered: 50
+100	30
+101	9
+102	0
+103	0
+104	0
+Total Nodes covered: 39
+100	30
+101	10
+102	8
+103	1
+104	1
+Total Nodes covered: 50
+100	31
+101	9
+102	1
+103	1
+104	0
+Total Nodes covered: 42
+100	31
+101	9
+102	8
+103	0
+104	0
+Total Nodes covered: 48
+100	30
+101	9
+102	0
+103	0
+104	0
+Total Nodes covered: 39
+100	29
+101	10
+102	1
+103	1
+104	0
+Total Nodes covered: 41
+100	30
+101	9
+102	0
+103	0
+104	0
+Total Nodes covered: 39
+100	29
+101	11
+102	1
+103	1
+104	0
+Total Nodes covered: 42
+100	28
+101	12
+102	9
+103	0
+104	0
+Total Nodes covered: 49
+100	28
+101	12
+102	9
+103	0
+104	0
+Total Nodes covered: 49
+100	27
+101	12
+102	10
+103	0
+104	0
+Total Nodes covered: 49
+100	28
+101	12
+102	9
+103	0
+104	0
+Total Nodes covered: 49
+100	27
+101	12
+102	10
+103	0
+104	0
+Total Nodes covered: 49
+100	29
+101	12
+102	8
+103	0
+104	0
+Total Nodes covered: 49
+100	29
+101	12
+102	8
+103	0
+104	0
+Total Nodes covered: 49
+100	28
+101	12
+102	9
+103	0
+104	0
+Total Nodes covered: 49
+100	28
+101	12
+102	9
+103	0
+104	0
+Total Nodes covered: 49
+100	28
+101	12
+102	9
+103	0
+104	0
+Total Nodes covered: 49
+100	28
+101	12
+102	9
+103	0
+104	0
+Total Nodes covered: 49
+100	28
+101	12
+102	9
+103	0
+104	0
+Total Nodes covered: 49
+100	28
+101	12
+102	9
+103	0
+104	0
+Total Nodes covered: 49
+100	29
+101	12
+102	8
+103	0
+104	0
+Total Nodes covered: 49
+100	29
+101	12
+102	8
+103	0
+104	0
+Total Nodes covered: 49
+100	29
+101	11
+102	8
+103	0
+104	0
+Total Nodes covered: 48
+100	28
+101	12
+102	9
+103	0
+104	0
+Total Nodes covered: 49
+100	29
+101	12
+102	8
+103	0
+104	0
+Total Nodes covered: 49
+100	1
+101	9
+102	7
+103	13
+104	2
+Total Nodes covered: 32
+100	6
+101	5
+102	4
+103	17
+104	13
+Total Nodes covered: 45
+100	7
+101	11
+102	7
+103	15
+104	10
+Total Nodes covered: 50
+100	13
+101	13
+102	1
+103	4
+104	0
+Total Nodes covered: 31
+100	17
+101	15
+102	16
+103	14
+104	10
+Total Nodes covered: 72
+100	15
+101	15
+102	14
+103	11
+104	1
+Total Nodes covered: 56
+100	12
+101	14
+102	15
+103	11
+104	12
+Total Nodes covered: 64
+100	9
+101	15
+102	15
+103	10
+104	10
+Total Nodes covered: 59
+100	7
+101	15
+102	15
+103	10
+104	8
+Total Nodes covered: 55
+100	4
+101	12
+102	13
+103	14
+104	9
+Total Nodes covered: 52
+100	4
+101	10
+102	13
+103	16
+104	7
+Total Nodes covered: 50
+100	3
+101	9
+102	13
+103	12
+104	7
+Total Nodes covered: 44
+100	2
+101	8
+102	13
+103	12
+104	7
+Total Nodes covered: 42
+100	1
+101	6
+102	13
+103	13
+104	8
+Total Nodes covered: 41
+100	31
+101	10
+102	6
+103	1
+104	0
+Total Nodes covered: 48
+100	32
+101	10
+102	5
+103	1
+104	0
+Total Nodes covered: 48
+100	30
+101	10
+102	7
+103	1
+104	0
+Total Nodes covered: 48
+100	30
+101	11
+102	7
+103	0
+104	0
+Total Nodes covered: 48
+100	31
+101	10
+102	6
+103	1
+104	0
+Total Nodes covered: 48
+100	31
+101	10
+102	6
+103	1
+104	0
+Total Nodes covered: 48
+100	32
+101	9
+102	6
+103	1
+104	0
+Total Nodes covered: 48
+100	32
+101	10
+102	6
+103	0
+104	0
+Total Nodes covered: 48
+100	32
+101	10
+102	6
+103	0
+104	0
+Total Nodes covered: 48
+100	32
+101	9
+102	6
+103	1
+104	0
+Total Nodes covered: 48
+100	31
+101	10
+102	7
+103	0
+104	0
+Total Nodes covered: 48
+100	31
+101	9
+102	7
+103	1
+104	0
+Total Nodes covered: 48
+100	31
+101	10
+102	6
+103	1
+104	0
+Total Nodes covered: 48
+100	31
+101	9
+102	7
+103	1
+104	0
+Total Nodes covered: 48
+100	30
+101	9
+102	8
+103	1
+104	0
+Total Nodes covered: 48
+100	31
+101	8
+102	8
+103	1
+104	0
+Total Nodes covered: 48
+100	31
+101	8
+102	8
+103	1
+104	0
+Total Nodes covered: 48
+100	30
+101	9
+102	8
+103	1
+104	0
+Total Nodes covered: 48
+100	29
+101	9
+102	9
+103	2
+104	1
+Total Nodes covered: 50
+100	30
+101	10
+102	8
+103	1
+104	0
+Total Nodes covered: 49
+100	28
+101	9
+102	9
+103	2
+104	1
+Total Nodes covered: 49
+100	30
+101	6
+102	9
+103	2
+104	1
+Total Nodes covered: 48
+100	31
+101	6
+102	8
+103	2
+104	1
+Total Nodes covered: 48
+100	30
+101	9
+102	6
+103	2
+104	1
+Total Nodes covered: 48
+100	30
+101	7
+102	2
+103	1
+104	0
+Total Nodes covered: 40
+100	30
+101	7
+102	9
+103	0
+104	0
+Total Nodes covered: 46
+100	31
+101	7
+102	8
+103	2
+104	1
+Total Nodes covered: 49
+100	30
+101	7
+102	9
+103	2
+104	1
+Total Nodes covered: 49
+100	30
+101	6
+102	9
+103	2
+104	1
+Total Nodes covered: 48
+100	30
+101	9
+102	6
+103	2
+104	1
+Total Nodes covered: 48
+100	29
+101	6
+102	2
+103	1
+104	1
+Total Nodes covered: 39
+100	29
+101	10
+102	7
+103	0
+104	0
+Total Nodes covered: 46
+100	31
+101	8
+102	7
+103	2
+104	1
+Total Nodes covered: 49
+100	31
+101	8
+102	7
+103	2
+104	0
+Total Nodes covered: 48
+100	31
+101	8
+102	7
+103	2
+104	0
+Total Nodes covered: 48
+100	31
+101	8
+102	7
+103	2
+104	1
+Total Nodes covered: 49
+100	31
+101	7
+102	7
+103	2
+104	0
+Total Nodes covered: 47
+100	30
+101	9
+102	7
+103	2
+104	1
+Total Nodes covered: 49
+100	31
+101	7
+102	7
+103	2
+104	0
+Total Nodes covered: 47
+100	30
+101	8
+102	7
+103	2
+104	1
+Total Nodes covered: 48
+100	29
+101	10
+102	6
+103	3
+104	0
+Total Nodes covered: 48
+100	30
+101	9
+102	7
+103	2
+104	1
+Total Nodes covered: 49
+100	28
+101	11
+102	7
+103	3
+104	1
+Total Nodes covered: 50
+100	29
+101	11
+102	6
+103	3
+104	1
+Total Nodes covered: 50
+100	28
+101	11
+102	6
+103	3
+104	0
+Total Nodes covered: 48
+100	27
+101	11
+102	6
+103	3
+104	1
+Total Nodes covered: 48
+100	28
+101	10
+102	6
+103	3
+104	1
+Total Nodes covered: 48
+100	27
+101	12
+102	6
+103	3
+104	1
+Total Nodes covered: 49
+100	27
+101	12
+102	6
+103	3
+104	1
+Total Nodes covered: 49
+100	28
+101	11
+102	6
+103	3
+104	1
+Total Nodes covered: 49
+100	28
+101	10
+102	6
+103	3
+104	1
+Total Nodes covered: 48
+100	27
+101	6
+102	3
+103	11
+104	1
+Total Nodes covered: 48
+100	28
+101	6
+102	11
+103	0
+104	0
+Total Nodes covered: 45
+100	28
+101	6
+102	10
+103	3
+104	1
+Total Nodes covered: 48
+100	27
+101	6
+102	10
+103	3
+104	1
+Total Nodes covered: 47
+100	28
+101	9
+102	5
+103	4
+104	1
+Total Nodes covered: 47
+100	28
+101	5
+102	4
+103	9
+104	1
+Total Nodes covered: 47
+100	28
+101	6
+102	11
+103	0
+104	0
+Total Nodes covered: 45
+100	28
+101	6
+102	10
+103	3
+104	1
+Total Nodes covered: 48
+100	28
+101	6
+102	10
+103	3
+104	1
+Total Nodes covered: 48
+100	29
+101	6
+102	9
+103	3
+104	1
+Total Nodes covered: 48
+100	28
+101	6
+102	9
+103	3
+104	1
+Total Nodes covered: 47
+100	28
+101	6
+102	9
+103	3
+104	1
+Total Nodes covered: 47
+100	28
+101	6
+102	9
+103	3
+104	1
+Total Nodes covered: 47
+100	28
+101	6
+102	9
+103	3
+104	1
+Total Nodes covered: 47
+100	29
+101	6
+102	10
+103	3
+104	1
+Total Nodes covered: 49
+100	28
+101	6
+102	10
+103	3
+104	1
+Total Nodes covered: 48
+100	27
+101	12
+102	6
+103	3
+104	1
+Total Nodes covered: 49
+100	28
+101	11
+102	6
+103	3
+104	1
+Total Nodes covered: 49
+100	30
+101	6
+102	3
+103	1
+104	0
+Total Nodes covered: 40
+100	30
+101	7
+102	9
+103	0
+104	0
+Total Nodes covered: 46
+100	31
+101	9
+102	0
+103	0
+104	0
+Total Nodes covered: 40
+100	29
+101	11
+102	7
+103	2
+104	1
+Total Nodes covered: 50
+100	30
+101	9
+102	8
+103	2
+104	1
+Total Nodes covered: 50
+100	30
+101	9
+102	7
+103	2
+104	1
+Total Nodes covered: 49
+100	29
+101	10
+102	8
+103	2
+104	1
+Total Nodes covered: 50
+100	30
+101	9
+102	7
+103	2
+104	1
+Total Nodes covered: 49
+100	30
+101	8
+102	8
+103	2
+104	1
+Total Nodes covered: 49
+100	29
+101	9
+102	8
+103	2
+104	1
+Total Nodes covered: 49
+100	28
+101	9
+102	8
+103	2
+104	1
+Total Nodes covered: 48
+100	29
+101	9
+102	8
+103	2
+104	1
+Total Nodes covered: 49
+100	28
+101	9
+102	9
+103	2
+104	1
+Total Nodes covered: 49
+100	29
+101	9
+102	8
+103	2
+104	1
+Total Nodes covered: 49
+100	29
+101	9
+102	8
+103	2
+104	1
+Total Nodes covered: 49
+100	30
+101	9
+102	7
+103	2
+104	1
+Total Nodes covered: 49
+100	30
+101	9
+102	7
+103	2
+104	1
+Total Nodes covered: 49
+100	30
+101	9
+102	7
+103	2
+104	1
+Total Nodes covered: 49
+100	29
+101	9
+102	8
+103	2
+104	1
+Total Nodes covered: 49
+100	29
+101	10
+102	8
+103	2
+104	1
+Total Nodes covered: 50
+100	29
+101	10
+102	8
+103	2
+104	1
+Total Nodes covered: 50
+100	30
+101	9
+102	8
+103	2
+104	1
+Total Nodes covered: 50
+100	29
+101	9
+102	8
+103	2
+104	1
+Total Nodes covered: 49
+100	29
+101	10
+102	7
+103	3
+104	1
+Total Nodes covered: 50
+100	29
+101	10
+102	7
+103	3
+104	1
+Total Nodes covered: 50
+100	29
+101	10
+102	8
+103	2
+104	1
+Total Nodes covered: 50
+100	29
+101	10
+102	7
+103	3
+104	1
+Total Nodes covered: 50
+100	29
+101	10
+102	7
+103	3
+104	1
+Total Nodes covered: 50
+100	29
+101	9
+102	8
+103	0
+104	0
+Total Nodes covered: 46
+100	29
+101	9
+102	8
+103	2
+104	1
+Total Nodes covered: 49
+100	29
+101	9
+102	8
+103	2
+104	1
+Total Nodes covered: 49
+100	29
+101	9
+102	7
+103	3
+104	1
+Total Nodes covered: 49
+100	29
+101	9
+102	7
+103	3
+104	1
+Total Nodes covered: 49
+100	29
+101	9
+102	7
+103	3
+104	1
+Total Nodes covered: 49
+100	29
+101	9
+102	7
+103	3
+104	1
+Total Nodes covered: 49
+100	28
+101	10
+102	7
+103	0
+104	0
+Total Nodes covered: 45
+100	28
+101	10
+102	7
+103	3
+104	1
+Total Nodes covered: 49
+100	28
+101	10
+102	7
+103	3
+104	1
+Total Nodes covered: 49
+100	29
+101	10
+102	6
+103	3
+104	1
+Total Nodes covered: 49
+100	29
+101	10
+102	6
+103	3
+104	1
+Total Nodes covered: 49
+100	29
+101	10
+102	6
+103	3
+104	1
+Total Nodes covered: 49
+100	29
+101	10
+102	7
+103	2
+104	1
+Total Nodes covered: 49
+100	29
+101	10
+102	7
+103	2
+104	1
+Total Nodes covered: 49
+100	29
+101	11
+102	7
+103	2
+104	1
+Total Nodes covered: 50
+100	28
+101	7
+102	2
+103	1
+104	1
+Total Nodes covered: 39
+100	28
+101	11
+102	7
+103	2
+104	1
+Total Nodes covered: 49
+100	28
+101	11
+102	6
+103	2
+104	2
+Total Nodes covered: 49
+100	28
+101	11
+102	7
+103	1
+104	2
+Total Nodes covered: 49
+100	28
+101	8
+102	1
+103	1
+104	2
+Total Nodes covered: 40
+100	26
+101	9
+102	10
+103	1
+104	2
+Total Nodes covered: 48
+100	27
+101	8
+102	10
+103	1
+104	2
+Total Nodes covered: 48
+100	27
+101	12
+102	7
+103	2
+104	2
+Total Nodes covered: 50
+100	27
+101	8
+102	1
+103	2
+104	0
+Total Nodes covered: 38
+100	27
+101	9
+102	10
+103	0
+104	0
+Total Nodes covered: 46
+100	28
+101	7
+102	11
+103	1
+104	2
+Total Nodes covered: 49
+100	27
+101	8
+102	11
+103	2
+104	1
+Total Nodes covered: 49
+100	29
+101	7
+102	9
+103	3
+104	1
+Total Nodes covered: 49
+100	29
+101	7
+102	8
+103	3
+104	1
+Total Nodes covered: 48
+100	28
+101	8
+102	9
+103	2
+104	1
+Total Nodes covered: 48
+100	29
+101	6
+102	8
+103	4
+104	1
+Total Nodes covered: 48
+100	30
+101	7
+102	8
+103	3
+104	1
+Total Nodes covered: 49
+100	29
+101	10
+102	0
+103	0
+104	0
+Total Nodes covered: 39
+100	29
+101	8
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	30
+101	7
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	29
+101	9
+102	6
+103	4
+104	1
+Total Nodes covered: 49
+100	29
+101	9
+102	6
+103	4
+104	1
+Total Nodes covered: 49
+100	29
+101	9
+102	6
+103	4
+104	1
+Total Nodes covered: 49
+100	27
+101	11
+102	6
+103	4
+104	1
+Total Nodes covered: 49
+100	28
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 49
+100	27
+101	11
+102	6
+103	4
+104	1
+Total Nodes covered: 49
+100	27
+101	11
+102	6
+103	4
+104	1
+Total Nodes covered: 49
+100	27
+101	11
+102	6
+103	4
+104	1
+Total Nodes covered: 49
+100	27
+101	11
+102	6
+103	4
+104	1
+Total Nodes covered: 49
+100	27
+101	11
+102	6
+103	4
+104	1
+Total Nodes covered: 49
+100	27
+101	11
+102	6
+103	4
+104	1
+Total Nodes covered: 49
+100	27
+101	11
+102	6
+103	4
+104	1
+Total Nodes covered: 49
+100	26
+101	12
+102	6
+103	4
+104	1
+Total Nodes covered: 49
+100	27
+101	11
+102	6
+103	4
+104	1
+Total Nodes covered: 49
+100	26
+101	12
+102	6
+103	4
+104	1
+Total Nodes covered: 49
+100	25
+101	13
+102	6
+103	4
+104	1
+Total Nodes covered: 49
+100	27
+101	11
+102	6
+103	4
+104	1
+Total Nodes covered: 49
+100	26
+101	12
+102	6
+103	4
+104	1
+Total Nodes covered: 49
+100	26
+101	12
+102	6
+103	4
+104	1
+Total Nodes covered: 49
+100	26
+101	12
+102	6
+103	4
+104	1
+Total Nodes covered: 49
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	25
+101	13
+102	6
+103	4
+104	1
+Total Nodes covered: 49
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	26
+101	6
+102	4
+103	1
+104	1
+Total Nodes covered: 38
+100	27
+101	10
+102	1
+103	4
+104	0
+Total Nodes covered: 42
+100	27
+101	6
+102	4
+103	1
+104	0
+Total Nodes covered: 38
+100	27
+101	10
+102	1
+103	4
+104	0
+Total Nodes covered: 42
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	26
+101	11
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	25
+101	12
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	27
+101	9
+102	6
+103	4
+104	1
+Total Nodes covered: 47
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	27
+101	10
+102	6
+103	4
+104	1
+Total Nodes covered: 48
+100	27
+101	10
+102	6
+103	3
+104	2
+Total Nodes covered: 48
+100	27
+101	9
+102	6
+103	3
+104	2
+Total Nodes covered: 47
+100	26
+101	11
+102	6
+103	3
+104	1
+Total Nodes covered: 47
+100	27
+101	10
+102	4
+103	3
+104	1
+Total Nodes covered: 45
+100	23
+101	12
+102	7
+103	4
+104	2
+Total Nodes covered: 48
+100	25
+101	9
+102	4
+103	3
+104	1
+Total Nodes covered: 42
+100	24
+101	10
+102	5
+103	1
+104	4
+Total Nodes covered: 44
+100	23
+101	12
+102	6
+103	2
+104	2
+Total Nodes covered: 45
+100	25
+101	10
+102	5
+103	4
+104	2
+Total Nodes covered: 46
+100	24
+101	12
+102	5
+103	3
+104	2
+Total Nodes covered: 46
+100	27
+101	9
+102	6
+103	3
+104	1
+Total Nodes covered: 46
+100	25
+101	11
+102	6
+103	3
+104	1
+Total Nodes covered: 46
+100	27
+101	9
+102	7
+103	2
+104	1
+Total Nodes covered: 46
+100	26
+101	10
+102	7
+103	2
+104	1
+Total Nodes covered: 46
+100	26
+101	11
+102	6
+103	2
+104	1
+Total Nodes covered: 46
+100	27
+101	9
+102	6
+103	3
+104	1
+Total Nodes covered: 46
+100	26
+101	8
+102	2
+103	2
+104	2
+Total Nodes covered: 40
+100	25
+101	10
+102	6
+103	1
+104	0
+Total Nodes covered: 42
+100	26
+101	10
+102	7
+103	2
+104	2
+Total Nodes covered: 47
+100	25
+101	10
+102	7
+103	2
+104	2
+Total Nodes covered: 46
+100	25
+101	11
+102	7
+103	2
+104	2
+Total Nodes covered: 47
+100	27
+101	10
+102	5
+103	2
+104	2
+Total Nodes covered: 46
+100	25
+101	8
+102	2
+103	2
+104	1
+Total Nodes covered: 38
+100	27
+101	8
+102	8
+103	1
+104	2
+Total Nodes covered: 46
+100	27
+101	7
+102	2
+103	5
+104	3
+Total Nodes covered: 44
+100	26
+101	9
+102	6
+103	4
+104	1
+Total Nodes covered: 46
+100	26
+101	8
+102	6
+103	3
+104	2
+Total Nodes covered: 45
+100	28
+101	8
+102	5
+103	3
+104	1
+Total Nodes covered: 45
+100	28
+101	7
+102	6
+103	2
+104	3
+Total Nodes covered: 46
+100	28
+101	7
+102	5
+103	2
+104	2
+Total Nodes covered: 44
+100	28
+101	8
+102	5
+103	2
+104	3
+Total Nodes covered: 46
+100	27
+101	7
+102	2
+103	2
+104	1
+Total Nodes covered: 39
+100	26
+101	9
+102	6
+103	1
+104	1
+Total Nodes covered: 43
+100	25
+101	9
+102	7
+103	2
+104	2
+Total Nodes covered: 45
+100	26
+101	8
+102	7
+103	3
+104	2
+Total Nodes covered: 46
+100	25
+101	9
+102	7
+103	2
+104	3
+Total Nodes covered: 46
+100	24
+101	10
+102	6
+103	3
+104	2
+Total Nodes covered: 45
+100	23
+101	9
+102	6
+103	3
+104	3
+Total Nodes covered: 44
+100	23
+101	9
+102	6
+103	3
+104	3
+Total Nodes covered: 44
+100	23
+101	9
+102	7
+103	3
+104	3
+Total Nodes covered: 45
+100	23
+101	9
+102	7
+103	3
+104	3
+Total Nodes covered: 45
+100	22
+101	8
+102	7
+103	3
+104	3
+Total Nodes covered: 43
+100	23
+101	8
+102	6
+103	3
+104	3
+Total Nodes covered: 43
+100	24
+101	8
+102	5
+103	4
+104	1
+Total Nodes covered: 42
+100	22
+101	9
+102	7
+103	4
+104	2
+Total Nodes covered: 44
+100	22
+101	9
+102	7
+103	4
+104	1
+Total Nodes covered: 43
+100	22
+101	10
+102	7
+103	4
+104	2
+Total Nodes covered: 45
+100	22
+101	9
+102	7
+103	4
+104	1
+Total Nodes covered: 43
+100	22
+101	9
+102	7
+103	4
+104	1
+Total Nodes covered: 43
+100	21
+101	9
+102	3
+103	6
+104	0
+Total Nodes covered: 39
+100	20
+101	11
+102	7
+103	4
+104	2
+Total Nodes covered: 44
+100	20
+101	10
+102	3
+103	1
+104	6
+Total Nodes covered: 40
+100	20
+101	10
+102	3
+103	6
+104	3
+Total Nodes covered: 42
+100	19
+101	11
+102	3
+103	6
+104	1
+Total Nodes covered: 40
+100	18
+101	12
+102	3
+103	6
+104	1
+Total Nodes covered: 40
+100	4
+101	6
+102	2
+103	4
+104	11
+Total Nodes covered: 27
+100	4
+101	12
+102	9
+103	11
+104	5
+Total Nodes covered: 41
+100	5
+101	11
+102	10
+103	9
+104	5
+Total Nodes covered: 40
+100	5
+101	12
+102	10
+103	8
+104	9
+Total Nodes covered: 44
+100	4
+101	12
+102	10
+103	8
+104	14
+Total Nodes covered: 48
+100	2
+101	15
+102	11
+103	12
+104	22
+Total Nodes covered: 62
+100	2
+101	16
+102	12
+103	21
+104	13
+Total Nodes covered: 64
+100	1
+101	13
+102	13
+103	7
+104	5
+Total Nodes covered: 39
+100	1
+101	9
+102	32
+103	3
+104	2
+Total Nodes covered: 47
+100	21
+101	0
+102	0
+103	0
+104	0
+Total Nodes covered: 21
+100	21
+101	9
+102	4
+103	5
+104	2
+Total Nodes covered: 41
+100	21
+101	9
+102	4
+103	5
+104	1
+Total Nodes covered: 40
+100	20
+101	10
+102	4
+103	5
+104	1
+Total Nodes covered: 40
+100	19
+101	11
+102	7
+103	3
+104	2
+Total Nodes covered: 42
+100	18
+101	11
+102	7
+103	3
+104	1
+Total Nodes covered: 40
+100	19
+101	10
+102	7
+103	3
+104	3
+Total Nodes covered: 42
+100	21
+101	9
+102	7
+103	3
+104	3
+Total Nodes covered: 43
+100	21
+101	8
+102	6
+103	4
+104	3
+Total Nodes covered: 42
+100	20
+101	9
+102	6
+103	4
+104	3
+Total Nodes covered: 42
+100	18
+101	11
+102	8
+103	3
+104	2
+Total Nodes covered: 42
+100	19
+101	10
+102	7
+103	3
+104	3
+Total Nodes covered: 42
+100	18
+101	7
+102	3
+103	3
+104	3
+Total Nodes covered: 34
+100	19
+101	11
+102	4
+103	6
+104	1
+Total Nodes covered: 41
+100	18
+101	11
+102	7
+103	3
+104	1
+Total Nodes covered: 40
+100	18
+101	11
+102	6
+103	4
+104	1
+Total Nodes covered: 40
+100	19
+101	11
+102	6
+103	4
+104	3
+Total Nodes covered: 43
+100	19
+101	11
+102	5
+103	4
+104	4
+Total Nodes covered: 43
+100	18
+101	13
+102	6
+103	3
+104	3
+Total Nodes covered: 43
+100	18
+101	12
+102	6
+103	4
+104	3
+Total Nodes covered: 43
+100	19
+101	11
+102	6
+103	4
+104	3
+Total Nodes covered: 43
+100	19
+101	12
+102	6
+103	3
+104	3
+Total Nodes covered: 43
+100	19
+101	12
+102	6
+103	3
+104	1
+Total Nodes covered: 41
+100	20
+101	10
+102	5
+103	3
+104	2
+Total Nodes covered: 40
+100	21
+101	10
+102	6
+103	3
+104	1
+Total Nodes covered: 41
+100	21
+101	9
+102	6
+103	3
+104	1
+Total Nodes covered: 40
+100	20
+101	9
+102	6
+103	4
+104	1
+Total Nodes covered: 40
+100	20
+101	9
+102	6
+103	4
+104	1
+Total Nodes covered: 40
+100	2
+101	38
+102	10
+103	4
+104	0
+Total Nodes covered: 54
+100	6
+101	33
+102	15
+103	9
+104	7
+Total Nodes covered: 70
+100	7
+101	28
+102	20
+103	7
+104	0
+Total Nodes covered: 62
+100	9
+101	18
+102	28
+103	7
+104	7
+Total Nodes covered: 69
+100	11
+101	23
+102	18
+103	8
+104	4
+Total Nodes covered: 64
+100	11
+101	32
+102	9
+103	6
+104	3
+Total Nodes covered: 61
+100	12
+101	29
+102	18
+103	5
+104	7
+Total Nodes covered: 71
+100	11
+101	23
+102	24
+103	11
+104	0
+Total Nodes covered: 69
+100	8
+101	20
+102	28
+103	10
+104	3
+Total Nodes covered: 69
+100	7
+101	15
+102	32
+103	11
+104	2
+Total Nodes covered: 67
+100	5
+101	14
+102	31
+103	10
+104	5
+Total Nodes covered: 65
+100	6
+101	8
+102	26
+103	15
+104	0
+Total Nodes covered: 55
+100	4
+101	7
+102	1
+103	1
+104	0
+Total Nodes covered: 13
+100	19
+101	9
+102	3
+103	6
+104	1
+Total Nodes covered: 38
+100	20
+101	8
+102	4
+103	3
+104	2
+Total Nodes covered: 37
+100	19
+101	10
+102	4
+103	4
+104	1
+Total Nodes covered: 38
+100	19
+101	10
+102	5
+103	3
+104	2
+Total Nodes covered: 39
+100	19
+101	9
+102	5
+103	3
+104	2
+Total Nodes covered: 38
+100	18
+101	9
+102	6
+103	3
+104	2
+Total Nodes covered: 38
+100	18
+101	10
+102	6
+103	3
+104	2
+Total Nodes covered: 39
+100	18
+101	11
+102	5
+103	3
+104	3
+Total Nodes covered: 40
+100	20
+101	10
+102	6
+103	3
+104	2
+Total Nodes covered: 41
+100	20
+101	9
+102	5
+103	3
+104	2
+Total Nodes covered: 39
+100	19
+101	12
+102	5
+103	3
+104	2
+Total Nodes covered: 41
+100	18
+101	13
+102	4
+103	3
+104	2
+Total Nodes covered: 40
+100	19
+101	13
+102	3
+103	3
+104	2
+Total Nodes covered: 40
+100	17
+101	15
+102	3
+103	1
+104	5
+Total Nodes covered: 41
+100	21
+101	12
+102	4
+103	4
+104	3
+Total Nodes covered: 44
+100	29
+101	7
+102	6
+103	3
+104	2
+Total Nodes covered: 47
+100	30
+101	7
+102	6
+103	3
+104	0
+Total Nodes covered: 46
+100	31
+101	7
+102	5
+103	4
+104	2
+Total Nodes covered: 49
+100	35
+101	6
+102	3
+103	3
+104	2
+Total Nodes covered: 49
+100	39
+101	4
+102	3
+103	2
+104	0
+Total Nodes covered: 48
+100	44
+101	5
+102	1
+103	2
+104	0
+Total Nodes covered: 52
+100	46
+101	3
+102	0
+103	0
+104	0
+Total Nodes covered: 49
+100	47
+101	2
+102	3
+103	0
+104	0
+Total Nodes covered: 52
+100	46
+101	2
+102	4
+103	0
+104	0
+Total Nodes covered: 52
+100	48
+101	2
+102	0
+103	0
+104	0
+Total Nodes covered: 50
+100	46
+101	4
+102	0
+103	0
+104	0
+Total Nodes covered: 50
+100	49
+101	3
+102	0
+103	0
+104	0
+Total Nodes covered: 52
+100	49
+101	3
+102	0
+103	0
+104	0
+Total Nodes covered: 52
+100	49
+101	3
+102	0
+103	0
+104	0
+Total Nodes covered: 52
+100	50
+101	2
+102	0
+103	0
+104	0
+Total Nodes covered: 52
+100	51
+101	1
+102	0
+103	0
+104	0
+Total Nodes covered: 52
+100	48
+101	4
+102	0
+103	0
+104	0
+Total Nodes covered: 52
+100	49
+101	3
+102	0
+103	0
+104	0
+Total Nodes covered: 52
+100	48
+101	4
+102	0
+103	0
+104	0
+Total Nodes covered: 52
+100	48
+101	4
+102	0
+103	0
+104	0
+Total Nodes covered: 52
+100	48
+101	4
+102	0
+103	0
+104	0
+Total Nodes covered: 52
+100	47
+101	5
+102	0
+103	0
+104	0
+Total Nodes covered: 52
+100	48
+101	4
+102	0
+103	0
+104	0
+Total Nodes covered: 52
+100	47
+101	5
+102	0
+103	0
+104	0
+Total Nodes covered: 52
+100	47
+101	5
+102	0
+103	0
+104	0
+Total Nodes covered: 52
+100	47
+101	5
+102	0
+103	0
+104	0
+Total Nodes covered: 52
+100	48
+101	4
+102	0
+103	0
+104	0
+Total Nodes covered: 52
+100	46
+101	5
+102	1
+103	0
+104	0
+Total Nodes covered: 52
+100	46
+101	5
+102	1
+103	0
+104	0
+Total Nodes covered: 52
+100	46
+101	5
+102	1
+103	0
+104	0
+Total Nodes covered: 52
+100	46
+101	5
+102	1
+103	0
+104	0
+Total Nodes covered: 52
+100	46
+101	5
+102	1
+103	0
+104	0
+Total Nodes covered: 52
+100	45
+101	6
+102	1
+103	0
+104	0
+Total Nodes covered: 52
+100	46
+101	4
+102	2
+103	0
+104	0
+Total Nodes covered: 52
+100	46
+101	4
+102	2
+103	0
+104	0
+Total Nodes covered: 52
+100	45
+101	5
+102	2
+103	0
+104	0
+Total Nodes covered: 52
+100	45
+101	5
+102	2
+103	0
+104	0
+Total Nodes covered: 52
+100	45
+101	5
+102	2
+103	0
+104	0
+Total Nodes covered: 52
+100	45
+101	5
+102	2
+103	0
+104	0
+Total Nodes covered: 52
+100	46
+101	5
+102	1
+103	0
+104	0
+Total Nodes covered: 52
+100	47
+101	4
+102	1
+103	0
+104	0
+Total Nodes covered: 52
+100	46
+101	4
+102	2
+103	0
+104	0
+Total Nodes covered: 52
+100	45
+101	5
+102	2
+103	0
+104	0
+Total Nodes covered: 52
+100	45
+101	5
+102	2
+103	0
+104	0
+Total Nodes covered: 52
+100	45
+101	4
+102	3
+103	0
+104	0
+Total Nodes covered: 52
+100	46
+101	4
+102	2
+103	0
+104	0
+Total Nodes covered: 52
+100	45
+101	5
+102	2
+103	0
+104	0
+Total Nodes covered: 52
+100	44
+101	5
+102	3
+103	0
+104	0
+Total Nodes covered: 52
+100	45
+101	4
+102	0
+103	0
+104	0
+Total Nodes covered: 49
+100	44
+101	4
+102	0
+103	0
+104	0
+Total Nodes covered: 48
+100	43
+101	5
+102	0
+103	0
+104	0
+Total Nodes covered: 48
+100	45
+101	3
+102	0
+103	0
+104	0
+Total Nodes covered: 48
+100	45
+101	3
+102	1
+103	0
+104	0
+Total Nodes covered: 49
+100	45
+101	3
+102	1
+103	0
+104	0
+Total Nodes covered: 49
+100	45
+101	3
+102	0
+103	0
+104	0
+Total Nodes covered: 48
+100	45
+101	3
+102	0
+103	0
+104	0
+Total Nodes covered: 48
+100	45
+101	3
+102	1
+103	0
+104	0
+Total Nodes covered: 49
+100	44
+101	4
+102	0
+103	0
+104	0
+Total Nodes covered: 48
+100	44
+101	4
+102	0
+103	0
+104	0
+Total Nodes covered: 48
+100	45
+101	4
+102	0
+103	0
+104	0
+Total Nodes covered: 49
+100	44
+101	5
+102	3
+103	0
+104	0
+Total Nodes covered: 52
+100	45
+101	4
+102	3
+103	0
+104	0
+Total Nodes covered: 52
+100	44
+101	4
+102	4
+103	0
+104	0
+Total Nodes covered: 52
+100	44
+101	4
+102	4
+103	0
+104	0
+Total Nodes covered: 52
+100	43
+101	4
+102	5
+103	0
+104	0
+Total Nodes covered: 52
+100	44
+101	4
+102	4
+103	0
+104	0
+Total Nodes covered: 52
+100	43
+101	5
+102	4
+103	0
+104	0
+Total Nodes covered: 52
+100	44
+101	4
+102	3
+103	0
+104	0
+Total Nodes covered: 51
+100	43
+101	4
+102	4
+103	1
+104	0
+Total Nodes covered: 52
+100	43
+101	4
+102	4
+103	1
+104	0
+Total Nodes covered: 52
+100	43
+101	4
+102	4
+103	1
+104	0
+Total Nodes covered: 52
+100	43
+101	4
+102	4
+103	1
+104	0
+Total Nodes covered: 52
+100	44
+101	4
+102	3
+103	1
+104	0
+Total Nodes covered: 52
+100	45
+101	4
+102	2
+103	1
+104	0
+Total Nodes covered: 52
+100	45
+101	4
+102	2
+103	1
+104	0
+Total Nodes covered: 52
+100	45
+101	4
+102	2
+103	1
+104	0
+Total Nodes covered: 52
+100	44
+101	5
+102	2
+103	1
+104	0
+Total Nodes covered: 52
+100	45
+101	4
+102	2
+103	1
+104	0
+Total Nodes covered: 52
+100	45
+101	4
+102	2
+103	1
+104	0
+Total Nodes covered: 52
+100	45
+101	4
+102	2
+103	1
+104	0
+Total Nodes covered: 52
+100	45
+101	4
+102	2
+103	1
+104	0
+Total Nodes covered: 52
+100	44
+101	5
+102	2
+103	1
+104	0
+Total Nodes covered: 52
+100	44
+101	5
+102	2
+103	1
+104	0
+Total Nodes covered: 52
+100	43
+101	5
+102	3
+103	1
+104	0
+Total Nodes covered: 52
+100	42
+101	5
+102	4
+103	1
+104	0
+Total Nodes covered: 52
+100	43
+101	5
+102	3
+103	1
+104	0
+Total Nodes covered: 52
+100	43
+101	5
+102	3
+103	1
+104	0
+Total Nodes covered: 52
+100	42
+101	5
+102	4
+103	1
+104	0
+Total Nodes covered: 52
+100	42
+101	4
+102	1
+103	0
+104	0
+Total Nodes covered: 47
+100	42
+101	4
+102	5
+103	0
+104	0
+Total Nodes covered: 51
+100	41
+101	5
+102	5
+103	1
+104	0
+Total Nodes covered: 52
+100	43
+101	5
+102	3
+103	0
+104	0
+Total Nodes covered: 51
+100	40
+101	5
+102	1
+103	0
+104	0
+Total Nodes covered: 46
+100	41
+101	5
+102	5
+103	0
+104	0
+Total Nodes covered: 51
+100	41
+101	4
+102	6
+103	1
+104	0
+Total Nodes covered: 52
+100	41
+101	4
+102	6
+103	0
+104	0
+Total Nodes covered: 51
+100	41
+101	4
+102	5
+103	1
+104	0
+Total Nodes covered: 51
+100	41
+101	6
+102	2
+103	0
+104	0
+Total Nodes covered: 49
+100	42
+101	5
+102	3
+103	1
+104	1
+Total Nodes covered: 52
+100	42
+101	3
+102	5
+103	1
+104	1
+Total Nodes covered: 52
+100	42
+101	5
+102	2
+103	0
+104	0
+Total Nodes covered: 49
+100	43
+101	5
+102	2
+103	1
+104	1
+Total Nodes covered: 52
+100	43
+101	5
+102	2
+103	1
+104	0
+Total Nodes covered: 51
+100	42
+101	4
+102	1
+103	0
+104	0
+Total Nodes covered: 47
+100	42
+101	4
+102	1
+103	0
+104	0
+Total Nodes covered: 47
+100	42
+101	3
+102	2
+103	0
+104	0
+Total Nodes covered: 47
+100	42
+101	3
+102	2
+103	0
+104	0
+Total Nodes covered: 47
+100	42
+101	3
+102	2
+103	0
+104	0
+Total Nodes covered: 47
+100	42
+101	4
+102	3
+103	1
+104	1
+Total Nodes covered: 51
+100	42
+101	3
+102	3
+103	1
+104	2
+Total Nodes covered: 51
+100	42
+101	3
+102	3
+103	2
+104	1
+Total Nodes covered: 51
+100	42
+101	3
+102	3
+103	1
+104	1
+Total Nodes covered: 50
+100	42
+101	3
+102	3
+103	2
+104	1
+Total Nodes covered: 51
+100	41
+101	3
+102	3
+103	2
+104	1
+Total Nodes covered: 50
+100	41
+101	3
+102	3
+103	2
+104	1
+Total Nodes covered: 50
+100	42
+101	3
+102	3
+103	2
+104	1
+Total Nodes covered: 51
+100	42
+101	3
+102	2
+103	2
+104	0
+Total Nodes covered: 49
+100	42
+101	3
+102	2
+103	0
+104	0
+Total Nodes covered: 47
+100	42
+101	3
+102	2
+103	0
+104	0
+Total Nodes covered: 47
+100	42
+101	3
+102	2
+103	1
+104	1
+Total Nodes covered: 49
+100	42
+101	3
+102	2
+103	0
+104	0
+Total Nodes covered: 47
+100	42
+101	3
+102	2
+103	4
+104	1
+Total Nodes covered: 52
+100	42
+101	3
+102	2
+103	0
+104	0
+Total Nodes covered: 47
+100	42
+101	3
+102	1
+103	0
+104	0
+Total Nodes covered: 46
+100	42
+101	3
+102	1
+103	0
+104	0
+Total Nodes covered: 46
+100	41
+101	4
+102	2
+103	3
+104	1
+Total Nodes covered: 51
+100	40
+101	5
+102	2
+103	4
+104	1
+Total Nodes covered: 52
+100	1
+101	3
+102	5
+103	3
+104	22
+Total Nodes covered: 34
+100	40
+101	5
+102	4
+103	1
+104	1
+Total Nodes covered: 51
+100	39
+101	5
+102	4
+103	1
+104	1
+Total Nodes covered: 50
+100	37
+101	5
+102	6
+103	1
+104	1
+Total Nodes covered: 50
+100	40
+101	5
+102	4
+103	0
+104	0
+Total Nodes covered: 49
+100	37
+101	5
+102	7
+103	1
+104	0
+Total Nodes covered: 50
+100	39
+101	4
+102	7
+103	1
+104	0
+Total Nodes covered: 51
+100	39
+101	7
+102	1
+103	0
+104	0
+Total Nodes covered: 47
+100	39
+101	8
+102	3
+103	1
+104	0
+Total Nodes covered: 51
+100	40
+101	6
+102	4
+103	1
+104	1
+Total Nodes covered: 52
+100	40
+101	7
+102	3
+103	1
+104	0
+Total Nodes covered: 51
+100	41
+101	6
+102	3
+103	1
+104	0
+Total Nodes covered: 51
+100	38
+101	8
+102	3
+103	2
+104	0
+Total Nodes covered: 51
+100	38
+101	8
+102	3
+103	2
+104	1
+Total Nodes covered: 52
+100	37
+101	8
+102	4
+103	2
+104	1
+Total Nodes covered: 52
+100	37
+101	7
+102	4
+103	2
+104	2
+Total Nodes covered: 52
+100	38
+101	8
+102	3
+103	2
+104	1
+Total Nodes covered: 52
+100	38
+101	7
+102	4
+103	2
+104	1
+Total Nodes covered: 52
+100	38
+101	6
+102	4
+103	2
+104	1
+Total Nodes covered: 51
+100	39
+101	6
+102	3
+103	2
+104	0
+Total Nodes covered: 50
