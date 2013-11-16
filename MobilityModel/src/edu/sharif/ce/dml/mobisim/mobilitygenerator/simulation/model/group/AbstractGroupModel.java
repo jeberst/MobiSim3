@@ -92,6 +92,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
     
     private List<SensorNode> usedSensors = new LinkedList<>();
     List<SensorNode> visited = new LinkedList<>();
+    List<SensorNode> bridgenodes = new LinkedList<>();
     
     
             
@@ -339,9 +340,9 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                    Random rand = new Random(); 
                     int value = rand.nextInt(this.usedSensors.size()); 
                            //This needs to be changed to support searching through the nodes.
-                           //DataLocation newSensorLocation2 = BreadthFirstSearch(uncoveredNodes, this.usedSensors.get(value), sensor);
+                           newSensorLocation = BreadthFirstSearch(uncoveredNodes, this.usedSensors.get(value), sensor);
                            visited.clear();
-                           CandidateLocation placedsensor = DistributedBreadthFirstSearch(uncoveredNodes, this.usedSensors.get(0), sensor);
+                       /*    CandidateLocation placedsensor = DistributedBreadthFirstSearch(uncoveredNodes, this.usedSensors.get(0), sensor);
                          
                                         if(placedsensor.position == 1)
                                         {
@@ -366,7 +367,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                                             placedsensor.basenode.leftnode = sensor;
                                             sensor.rightnode = placedsensor.basenode; 
                                         }
-                                    newSensorLocation = placedsensor.candidateLocation;
+                                    newSensorLocation = placedsensor.candidateLocation;*/
                             
                            //newSensorLocation = new DataLocation(usedsensor.defaultnode.getLocation().getX(), usedsensor.defaultnode.getLocation().getY()+25);
                            sensor.idealcoverage = pollLocalSensor(allNodes, sensor.defaultnode, coveredNodes); 
@@ -797,9 +798,39 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
      return bestLocation;
  }
  
- public double canLinkDistance(List<SensorNode> sensorNodes)
+ public double canLinkDistance(List<SensorNode> sensorNodes, Cluster cluster)
  {
-     return super.getSensorRange();
+     //The shortest distance code should be moved to a different method, and passed to this.
+     SensorNode beststart = sensorNodes.get(0);
+     
+     double shortestdistance = 500;
+     double distance =0;
+    //This could probably use some work to figure out what the closest cluster it can reach is.
+     DataLocation clustercenter = calculateAverageCenter(cluster.getNodes());
+     
+     for(SensorNode sensor : sensorNodes)
+     {
+         distance = calcDistance(clustercenter, sensor.defaultnode.getLocation());
+         if( distance < shortestdistance)
+         {
+             shortestdistance = distance;
+             beststart = sensor;
+         }
+         
+         if(sensor.coverage < (cluster.clusterSize*.10) && sensor != beststart)
+         {
+             bridgenodes.add(sensor);
+         }
+        }
+     
+         if(shortestdistance < bridgenodes.size()*super.getSensorRange())
+         {
+             return shortestdistance;
+         }
+         else
+         {
+             return 501;
+         }
  }
          public int pollSensor(List<GeneratorNode> nodes, GeneratorNode sensor)
         {
@@ -872,6 +903,10 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         public double calcDistance(int x1, int x2, int y1, int y2)
         {
             return Math.sqrt((x1 - x2) * (x1 -x2) + (y1 - y2)*(y1-y2));
+        }
+        public double calcDistance(DataLocation one, DataLocation two)
+        {
+            return Math.sqrt((one.getX() - two.getX()) * (one.getX() -two.getX()) + (one.getY() - two.getY())*(one.getY()-two.getY()));
         }
         
         public DataLocation calculateAverageCenter (List<GeneratorNode> nodes)
