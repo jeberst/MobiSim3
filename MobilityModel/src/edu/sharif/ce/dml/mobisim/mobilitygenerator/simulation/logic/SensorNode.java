@@ -26,6 +26,9 @@ public class SensorNode extends GeneratorNode {
     public int coverage;
     public int idealcoverage;
     
+    public boolean bridgeNode;
+    public boolean bridgeDependent;
+    
     //These fields will be used for Distributed BFS
     int idealposition = 0;
     

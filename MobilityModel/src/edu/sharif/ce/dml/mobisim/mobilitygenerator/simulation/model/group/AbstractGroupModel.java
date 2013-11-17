@@ -295,7 +295,6 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                         //write("Node count for time: " + timeStep +  " = " + x);
                             Simulation.writecoverage(anyNodeInGroup.node.getName() + "\t" + s.coverage + "\r\n");
                             
-
                 }
             }
             
@@ -391,7 +390,10 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
          }
          else
          {
-         newSensorLocation = usedSensors.get(0).defaultnode.getLocation();
+            newSensorLocation = BreadthFirstSearch(uncoveredNodes, this.usedSensors.get(0), sensor);
+             sensor.idealcoverage = pollLocalSensor(allNodes, sensor.defaultnode, coveredNodes); 
+                           int localcoverage = sensor.idealcoverage;
+                           this.usedSensors.add(sensor);
          }
          
          //need an else here to figure out what to do when all the nodes are covered.
@@ -588,6 +590,8 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
      
      int debugi = 0;
      
+     if(!sensor.bridgeNode)
+     {
      while(!sensorqueue.isEmpty())
      {
          debugi++;
@@ -683,9 +687,16 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
          sensor.rightnode = basenode;
          return new DataLocation(basenode.defaultnode.getLocation().getX()-25, basenode.defaultnode.getLocation().getY());
      }
+   }
      
      //This is where we should input the logic for moving sensors with no values to bridge the gap between nodes that we can reach.
      //return new DataLocation(0,0);
+     Location bridge = buildABridge(sensor);
+     if(bridge!= null)
+     {
+        return new DataLocation((int)bridge.getX(), (int)bridge.getY());
+     }
+     
      return rootSensor.defaultnode.getLocation();
  }
  
@@ -815,10 +826,33 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
      return bestLocation;
  }
  
- public double canLinkDistance(List<SensorNode> sensorNodes, Cluster cluster)
+ public Cluster calculateBridgeCluster()
  {
-     //The shortest distance code should be moved to a different method, and passed to this.
-     SensorNode beststart = sensorNodes.get(0);
+     Cluster bestBridgeCluster = null;
+     Cluster biggestCluster = getBiggestCluster();
+     double closestClusterDistance = 500;
+     
+     for(Cluster cluster : getClusters())
+     {
+         if(cluster != biggestCluster)
+         {
+             cluster.ClusteredCenter = calculateAverageCenter(cluster.getNodes());
+             double candidateCluster = calcDistance(cluster.ClusteredCenter, biggestCluster.ClusteredCenter);
+             
+             if( cluster.getClusterSize() < 15)
+             {
+                 closestClusterDistance = candidateCluster;
+                 bestBridgeCluster = cluster;
+             }
+         }
+     }
+     return bestBridgeCluster;
+ }
+ 
+ public SensorNode calculateBestStartBridgeSensor(List<SensorNode> sensorNodes, Cluster cluster)
+ {
+          //The shortest distance code should be moved to a different method, and passed to this.
+     SensorNode beststart = null;
      
      double shortestdistance = 500;
      double distance =0;
@@ -833,21 +867,66 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
              shortestdistance = distance;
              beststart = sensor;
          }
-         
-         if(sensor.coverage < (cluster.getClusterSize()*.10) && sensor != beststart)
+     }
+     return beststart;
+ }
+ 
+ public boolean canLinkDistance(List<SensorNode> sensorNodes, Cluster cluster, SensorNode bestStartSensor)
+ {
+     //The shortest distance code should be moved to a different method, and passed to this.
+     
+     double shortestdistance = 500;
+     double distance =0;
+    //This could probably use some work to figure out what the closest cluster it can reach is.
+     cluster.ClusteredCenter = calculateAverageCenter(cluster.getNodes());
+     shortestdistance = calcDistance(cluster.ClusteredCenter, bestStartSensor.defaultnode.getLocation());
+     
+     for(SensorNode sensor : sensorNodes)
+     {
+         if(sensor.coverage < 5 && sensor != bestStartSensor)
          {
+             if(!bridgenodes.contains(sensor))
+             {
              bridgenodes.add(sensor);
+             sensor.bridgeNode = true;
+             }
          }
         }
+        int maxbridge = bridgenodes.size()*super.getSensorRange();
+        return shortestdistance < maxbridge;
+ }
+ 
+ public Location buildABridge(SensorNode sensor)
+ {
+     Cluster bestBridgeCluster = calculateBridgeCluster();
+     SensorNode bestStartSensor = null;
+     if(bestBridgeCluster != null)
+     {
+        bestStartSensor = calculateBestStartBridgeSensor(this.usedSensors, bestBridgeCluster);
+
+                //Maybe use the unit circle to figure out the relation of the best cluster center to the best sensor position.
+                //Start building the bridge it might be best to move each bridge node 25 in the cluster center direction.
+        
+        if(bestStartSensor != null)
+        {
+                Location clusterCenter = new Location(bestBridgeCluster.ClusteredCenter);
+                double bridgeDirection = Location.calculateRadianAngle(bestStartSensor.defaultnode.getDoubleLocation(), clusterCenter);
+
+                         Location nextBridgeLocation = new Location(bestStartSensor.defaultnode.getLocation().getX() +  25*Math.cos(bridgeDirection),
+                           bestStartSensor.defaultnode.getLocation().getY() +  25*Math.sin(bridgeDirection));
+
+                         return nextBridgeLocation;
+        }
+
+
+                   /*if(Math.toDegrees(bridgeDirection) >= 0 && Math.toDegrees(bridgeDirection) < 90)
+                   {
+
+                   }*/
+     }
+         return null;
      
-         if(shortestdistance < bridgenodes.size()*super.getSensorRange())
-         {
-             return shortestdistance;
-         }
-         else
-         {
-             return 501;
-         }
+     
  }
          public int pollSensor(List<GeneratorNode> nodes, GeneratorNode sensor)
         {
