@@ -87,7 +87,7 @@ public class Simulation extends ParameterableImplement implements TraceOwner, Wi
     private static Random randomGenerator;
     private long inputSeed;
     
-    private int SensorCount = 15;
+    private int SensorCount = 5;
     private int SensorRange = 25;
     
     private static FileWriter fw;
