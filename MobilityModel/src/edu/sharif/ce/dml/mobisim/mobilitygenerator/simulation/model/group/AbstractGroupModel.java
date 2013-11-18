@@ -96,6 +96,12 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
    
     Cluster biggestCluster;
     
+    boolean superSpeed = false;
+    boolean DBFS = false;
+    int numberToBridgeOn = 1;
+    int sensorSpeed = 5;
+    
+    
             
 
 
@@ -240,8 +246,8 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         super.setNodeCoverage(0);
         coverednodes.clear();
         usedSensors.clear();
-        
-        // biggestCluster = getBiggestCluster();
+        boolean calculatedcluster = false;
+         
         
         HashSet<GeneratorNode> localCoveredNodes = new HashSet<GeneratorNode>();
         
@@ -257,8 +263,15 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                 if (!anyNodeInGroup.isLeader()) {
                     getNextStep(timeStep, anyNodeInGroup.getNode());
                 }
+                
                 if(anyNodeInGroup.node.isSensorNode())
                 {
+                    
+                    if(!calculatedcluster)
+                    {
+                        biggestCluster = getBiggestCluster();
+                        calculatedcluster=true;
+                    }
                   /*  if(anyNodeInGroup.node.getIntName()==5)
                     {
                     /*anyNodeInGroup.node.setSpeed(0);
@@ -284,11 +297,11 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                     //anyNodeInGroup.node.setSpeed(1);
                     
                     
-                        s.setSpeed(5);
+                        s.setSpeed(sensorSpeed);
                 
-                                  
+                     
    
-                    getNextSensorStep(timeStep, anyNodeInGroup.node, localCoveredNodes);
+                    getNextSensorStep(timeStep, anyNodeInGroup.node, localCoveredNodes, biggestCluster);
                     
                      s.coverage = pollSensor(this.modelNodes, anyNodeInGroup.node);
                         Model.nodecoverage += s.coverage;
@@ -306,7 +319,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
     }
     
     
- public Location positionSensors(SensorNode sensor, HashSet coveredNodes, List<GeneratorNode> allNodes)
+ public Location positionSensors(SensorNode sensor, HashSet coveredNodes, List<GeneratorNode> allNodes, Cluster biggestCluster)
  {
      List<GeneratorNode> uncoveredNodes = new LinkedList<GeneratorNode>();
      uncoveredNodes.clear();
@@ -340,7 +353,6 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
              //Place the first node.
             if(sensor.getIntName() % 5 == 0)
             {
-                biggestCluster = getBiggestCluster();
                newSensorLocation = calculateAverageCenter(biggestCluster.getNodes());
                // newSensorLocation = uncoveredNodes.get(0).getLocation();
                sensor.idealcoverage = pollLocalSensor(allNodes, sensor.defaultnode, coveredNodes);
@@ -353,9 +365,15 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                    Random rand = new Random(); 
                     int value = rand.nextInt(this.usedSensors.size()); 
                            //This needs to be changed to support searching through the nodes.
-                           newSensorLocation = BreadthFirstSearch(uncoveredNodes, this.usedSensors.get(0), sensor);
-                           //visited.clear();
-                       /*    CandidateLocation placedsensor = DistributedBreadthFirstSearch(uncoveredNodes, this.usedSensors.get(0), sensor);
+                    
+                           if(!DBFS)
+                           {
+                           newSensorLocation = BreadthFirstSearch(uncoveredNodes, this.usedSensors.get(0), sensor, biggestCluster);
+                           }
+                           else
+                           {
+                           visited.clear();
+                           CandidateLocation placedsensor = DistributedBreadthFirstSearch(uncoveredNodes, this.usedSensors.get(0), sensor, biggestCluster);
                          
                                         if(placedsensor.position == 1)
                                         {
@@ -380,7 +398,8 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                                             placedsensor.basenode.leftnode = sensor;
                                             sensor.rightnode = placedsensor.basenode; 
                                         }
-                                    newSensorLocation = placedsensor.candidateLocation;*/
+                                    newSensorLocation = placedsensor.candidateLocation;
+                           }
                             
                            //newSensorLocation = new DataLocation(usedsensor.defaultnode.getLocation().getX(), usedsensor.defaultnode.getLocation().getY()+25);
                            sensor.idealcoverage = pollLocalSensor(allNodes, sensor.defaultnode, coveredNodes); 
@@ -390,10 +409,20 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
          }
          else
          {
-            newSensorLocation = BreadthFirstSearch(uncoveredNodes, this.usedSensors.get(0), sensor);
+             if(!DBFS)
+             {
+            newSensorLocation = BreadthFirstSearch(uncoveredNodes, this.usedSensors.get(0), sensor, biggestCluster);
              sensor.idealcoverage = pollLocalSensor(allNodes, sensor.defaultnode, coveredNodes); 
                            int localcoverage = sensor.idealcoverage;
                            this.usedSensors.add(sensor);
+             }
+             else
+             {
+                   newSensorLocation = DistributedBreadthFirstSearch(uncoveredNodes, this.usedSensors.get(0), sensor, biggestCluster).candidateLocation;
+             sensor.idealcoverage = pollLocalSensor(allNodes, sensor.defaultnode, coveredNodes); 
+                           int localcoverage = sensor.idealcoverage;
+                           this.usedSensors.add(sensor);
+             }
              
              
          }
@@ -580,7 +609,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
  }
  
  
- public DataLocation BreadthFirstSearch(List<GeneratorNode> nodes, SensorNode rootSensor, SensorNode sensor)
+ public DataLocation BreadthFirstSearch(List<GeneratorNode> nodes, SensorNode rootSensor, SensorNode sensor, Cluster biggestCluster)
  {
      Queue<SensorNode> sensorqueue = new LinkedList<>();
     List<SensorNode> BFSvisited = new LinkedList<>();
@@ -664,7 +693,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
          }
      }
      
-     if(bestcoverage < 2)
+     if(bestcoverage < numberToBridgeOn)
      {
          position = 0;
      }
@@ -697,7 +726,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
      
      //This is where we should input the logic for moving sensors with no values to bridge the gap between nodes that we can reach.
      //return new DataLocation(0,0);
-     Location bridge = buildABridge(sensor, nodes);
+     Location bridge = buildABridge(sensor, nodes, biggestCluster);
      if(bridge!= null)
      {
         return new DataLocation((int)bridge.getX(), (int)bridge.getY());
@@ -707,7 +736,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
  }
  
  //Is there a problem with the way it uses uncovered nodes to guess the best position?
- public CandidateLocation DistributedBreadthFirstSearch(List<GeneratorNode> nodes, SensorNode rootSensor, SensorNode sensor)
+ public CandidateLocation DistributedBreadthFirstSearch(List<GeneratorNode> nodes, SensorNode rootSensor, SensorNode sensor, Cluster biggestCluster)
  {
      Queue<SensorNode> sensorqueue = new LinkedList<>();
      sensorqueue.add(rootSensor);
@@ -730,61 +759,64 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
          
          s = rootSensor;
          visited.add(s);
+         
+       
+             
         
          if(s.topnode != null && !visited.contains(s.topnode) && s != sensor )
          {
-            candidateLocations.add(DistributedBreadthFirstSearch(nodes, s.topnode, sensor));
+            candidateLocations.add(DistributedBreadthFirstSearch(nodes, s.topnode, sensor, biggestCluster));
          }
          else
          {
              
-             int poll = pollPosition(nodes, new DataLocation(s.defaultnode.getLocation().getX(), s.defaultnode.getLocation().getY()+25));
+             int poll = pollPosition(nodes, new DataLocation(s.defaultnode.getLocation().getX(), s.defaultnode.getLocation().getY()+super.getSensorRange()));
              if( poll > bestcoverage)
              {
                  bestcoverage = poll;
-                 bestLocation = new CandidateLocation(poll, s, 1, new DataLocation(s.defaultnode.getLocation().getX(), s.defaultnode.getLocation().getY()+25));
+                 bestLocation = new CandidateLocation(poll, s, 1, new DataLocation(s.defaultnode.getLocation().getX(), s.defaultnode.getLocation().getY()+super.getSensorRange()));
                  candidateLocations.add(bestLocation);
              }
          }
          if(s.rightnode != null && !visited.contains(s.rightnode) && s != sensor)
          {
-             candidateLocations.add(DistributedBreadthFirstSearch(nodes,s.rightnode,sensor));
+             candidateLocations.add(DistributedBreadthFirstSearch(nodes,s.rightnode,sensor, biggestCluster));
          }
          else
          {
-             int poll = pollPosition(nodes, new DataLocation(s.defaultnode.getLocation().getX()+25, s.defaultnode.getLocation().getY()));
+             int poll = pollPosition(nodes, new DataLocation(s.defaultnode.getLocation().getX()+super.getSensorRange(), s.defaultnode.getLocation().getY()));
              if( poll > bestcoverage)
              {
                  bestcoverage = poll;
-                 bestLocation = new CandidateLocation(poll, s, 2, new DataLocation(s.defaultnode.getLocation().getX()+25, s.defaultnode.getLocation().getY()));
+                 bestLocation = new CandidateLocation(poll, s, 2, new DataLocation(s.defaultnode.getLocation().getX()+super.getSensorRange(), s.defaultnode.getLocation().getY()));
                  candidateLocations.add(bestLocation);
              }
          }
          if(s.bottomnode != null && !visited.contains(s.bottomnode) && s != sensor)
          {
-                candidateLocations.add(DistributedBreadthFirstSearch(nodes,s.bottomnode,sensor));
+                candidateLocations.add(DistributedBreadthFirstSearch(nodes,s.bottomnode,sensor, biggestCluster));
          }
           else
          {
-             int poll = pollPosition(nodes, new DataLocation(s.defaultnode.getLocation().getX(), s.defaultnode.getLocation().getY()-25));
+             int poll = pollPosition(nodes, new DataLocation(s.defaultnode.getLocation().getX(), s.defaultnode.getLocation().getY()-super.getSensorRange()));
              if( poll > bestcoverage)
              {
                  bestcoverage = poll;
-                 bestLocation = new CandidateLocation(poll, s, 3, new DataLocation(s.defaultnode.getLocation().getX(), s.defaultnode.getLocation().getY()-25));
+                 bestLocation = new CandidateLocation(poll, s, 3, new DataLocation(s.defaultnode.getLocation().getX(), s.defaultnode.getLocation().getY()-super.getSensorRange()));
                  candidateLocations.add(bestLocation);
              }
          }
          if(s.leftnode != null && !visited.contains(s.leftnode) && s != sensor)
          {
-             candidateLocations.add(DistributedBreadthFirstSearch(nodes,s.leftnode,sensor));
+             candidateLocations.add(DistributedBreadthFirstSearch(nodes,s.leftnode,sensor, biggestCluster));
          }
          else
          {
-             int poll = pollPosition(nodes, new DataLocation(s.defaultnode.getLocation().getX()-25, s.defaultnode.getLocation().getY()));
+             int poll = pollPosition(nodes, new DataLocation(s.defaultnode.getLocation().getX()-super.getSensorRange(), s.defaultnode.getLocation().getY()));
              if( poll > bestcoverage)
              {
                  bestcoverage = poll;
-                 bestLocation = new CandidateLocation(poll, s, 4, new DataLocation(s.defaultnode.getLocation().getX()-25, s.defaultnode.getLocation().getY()));
+                 bestLocation = new CandidateLocation(poll, s, 4, new DataLocation(s.defaultnode.getLocation().getX()-super.getSensorRange(), s.defaultnode.getLocation().getY()));
                  candidateLocations.add(bestLocation);
              }
          }
@@ -799,7 +831,14 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
          }
      }
      
- 
+       if(bestLocation.basenode.bridgeNode)
+      {
+          sensor.bridgeDependent = true;
+      }
+       
+      if(bestLocation.coverage > 2)
+      {
+          
       
      if(bestLocation.position == 1)
      {
@@ -825,6 +864,18 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
          //sensor.rightnode = bestLocation.basenode;
          return bestLocation; 
      }
+      }
+      else
+      {
+          //This is where we should input the logic for moving sensors with no values to bridge the gap between nodes that we can reach.
+     //return new DataLocation(0,0);
+     Location bridge = buildABridge(sensor, nodes, biggestCluster);
+     if(bridge!= null)
+     {
+        bestLocation = new CandidateLocation(0, s, 0, new DataLocation((int)bridge.getX(), (int)bridge.getY()));
+        sensor.bridgeNode = true;
+     }
+      }
      
      
      //This is where we should input the logic for moving sensors with no values to bridge the gap between nodes that we can reach.
@@ -832,10 +883,9 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
      return bestLocation;
  }
  
- public Cluster calculateBridgeCluster()
+ public Cluster calculateBridgeCluster( Cluster getBiggestCluster)
  {
      Cluster bestBridgeCluster = null;
-     Cluster biggestCluster = getBiggestCluster();
      double closestClusterDistance = 500;
      
      for(Cluster cluster : getClusters())
@@ -904,9 +954,9 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         return shortestdistance < maxbridge;
  }
  
- public Location buildABridge(SensorNode sensor, List<GeneratorNode> nodes)
+ public Location buildABridge(SensorNode sensor, List<GeneratorNode> nodes, Cluster biggestCluster)
  {
-     Cluster bestBridgeCluster = calculateBridgeCluster();
+     Cluster bestBridgeCluster = calculateBridgeCluster(biggestCluster);
      SensorNode bestStartSensor = null;
      if(bestBridgeCluster != null)
      {
@@ -921,8 +971,8 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
                 Location clusterCenter = new Location(bestBridgeCluster.ClusteredCenter);
                 double bridgeDirection = Location.calculateRadianAngle(bestStartSensor.defaultnode.getDoubleLocation(), clusterCenter);
 
-                         Location nextBridgeLocation = new Location(bestStartSensor.defaultnode.getLocation().getX() +  25*Math.cos(bridgeDirection),
-                           bestStartSensor.defaultnode.getLocation().getY() +  25*Math.sin(bridgeDirection));
+                         Location nextBridgeLocation = new Location(bestStartSensor.defaultnode.getLocation().getX() +  super.getSensorRange()*Math.cos(bridgeDirection),
+                           bestStartSensor.defaultnode.getLocation().getY() +  super.getSensorRange()*Math.sin(bridgeDirection));
                          
                          if(bestStartSensor.topnode == null)
                          {
@@ -1179,10 +1229,18 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         updateGroupNodeProperties(node, leaderNode);
     }
     
-      protected void getNextSensorStep(double timeStep, GeneratorNode node, HashSet localCoveredNodes) {
-         biggestCluster = getBiggestCluster();
-          
-          Location BestPosition = positionSensors(this.sensors.get(this.sensors.indexOf(node)), localCoveredNodes, this.modelNodes);
+      protected void getNextSensorStep(double timeStep, GeneratorNode node, HashSet localCoveredNodes, Cluster biggestCluster) {
+          Location BestPosition = null;
+            //Use this for BFS
+          if(!DBFS)
+          {
+           BestPosition = positionSensors(this.sensors.get(this.sensors.indexOf(node)), localCoveredNodes, this.modelNodes, biggestCluster);
+          }
+          else
+          {
+            //Use this for DBFS
+            BestPosition = positionSensors(this.sensors.get(this.sensors.indexOf(node)), localCoveredNodes, biggestCluster.getNodes(), biggestCluster);
+          }
         //update member node location according to speed and destNode location and map reflection
         Location loc = node.getDoubleLocation();
         node.setDirection(Location.calculateRadianAngle(loc, BestPosition));
@@ -1206,8 +1264,17 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         } else {
             loc.pasteCoordination(nextStepLoc);
         }*/
-        //loc.pasteCoordination(nextStepLoc);
+        
+        //This uses the velocities
+        if(!superSpeed)
+        {
+         loc.pasteCoordination(nextStepLoc);
+        }
+        else
+        {
+        //Instant Sensor Speed
         loc.pasteCoordination(BestPosition);
+        }
 //                    DevelopmentLogger.logger.debug(anyNode.getName()+" : "+nextStepLoc +" : "+mirror +" : "+ hit);
 
         GeneratorNode leaderNode = nodeNodeInGroup.get(node).getGroup().getLeader().getNode();
