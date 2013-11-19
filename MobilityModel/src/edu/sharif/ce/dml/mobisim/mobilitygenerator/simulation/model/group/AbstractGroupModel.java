@@ -96,11 +96,13 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
    
     Cluster biggestCluster;
     
+    
+    //Simulation Parameters for turning the knobs.
     boolean superSpeed = false;
     boolean DBFS = false;
     int numberToBridgeOn = 1;
     int sensorSpeed = 5;
-    
+    boolean clustersBySize = true;
     
             
 
@@ -315,6 +317,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         
         
              Simulation.writecoverage( "Total Nodes covered: " + Model.nodecoverage + "\r\n");
+             Simulation.averageNodeCoverage.add(Model.nodecoverage);
         updateRanges();
     }
     
@@ -453,7 +456,7 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
   * @return a list of Cluster objects
   */ 
  public List<Cluster> getClusters() {
-     final int CLUSTERING_THRESHOLD = 50;
+     final int CLUSTERING_THRESHOLD = 26;
      List<Cluster> clusters = new ArrayList<>();
      GeneratorNode[] nonSensorNodes = getNonSensorNodesArray();
      HashMap<String, Cluster> pairedNodes = new HashMap<>();
@@ -732,7 +735,16 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
         return new DataLocation((int)bridge.getX(), (int)bridge.getY());
      }
      
-     return rootSensor.defaultnode.getLocation();
+     //What do you do with a node that currently has no purpose?
+    
+     if(BFSvisited.get(BFSvisited.size()-1).defaultnode.getLocation() != null && BFSvisited.size() -1 >= 0)
+     {
+      return BFSvisited.get(BFSvisited.size()-1).defaultnode.getLocation();
+     }
+     else
+     {
+         return rootSensor.defaultnode.getLocation();
+     }
  }
  
  //Is there a problem with the way it uses uncovered nodes to guess the best position?
@@ -887,18 +899,43 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
  {
      Cluster bestBridgeCluster = null;
      double closestClusterDistance = 500;
+     int nextBiggestCluster = 0;
      
      for(Cluster cluster : getClusters())
      {
          if(cluster != biggestCluster)
          {
-             cluster.ClusteredCenter = calculateAverageCenter(cluster.getNodes());
-             double candidateCluster = calcDistance(cluster.ClusteredCenter, biggestCluster.ClusteredCenter);
-             
-             if( candidateCluster < closestClusterDistance && candidateCluster != 0)
+              int coverednodesincluster = 0;
+               for(GeneratorNode node : cluster.getNodes())
+               {
+                   if(coverednodes.contains(node))
+                   {
+                       coverednodesincluster++;
+                   }
+               }
+            cluster.ClusteredCenter = calculateAverageCenter(cluster.getNodes());
+               double candidateCluster = calcDistance(cluster.ClusteredCenter, biggestCluster.ClusteredCenter);
+             if(clustersBySize)
              {
-                 closestClusterDistance = candidateCluster;
-                 bestBridgeCluster = cluster;
+                if(cluster.getClusterSize() > nextBiggestCluster && candidateCluster > 15 && coverednodesincluster/cluster.getClusterSize() < .1)
+                {
+                    nextBiggestCluster = cluster.getClusterSize();
+                    bestBridgeCluster = cluster;
+                }
+             }
+             else{
+             
+                
+
+
+
+
+
+               if( candidateCluster < closestClusterDistance && candidateCluster > 15 && coverednodesincluster/cluster.getClusterSize() < .1)
+               {
+                   closestClusterDistance = candidateCluster;
+                   bestBridgeCluster = cluster;
+               }
              }
          }
      }

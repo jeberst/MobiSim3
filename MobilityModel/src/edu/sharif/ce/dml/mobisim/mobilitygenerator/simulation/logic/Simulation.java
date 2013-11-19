@@ -58,6 +58,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+
+
 /**
  * Created by IntelliJ IDEA.
  * User: Masoud
@@ -87,11 +89,15 @@ public class Simulation extends ParameterableImplement implements TraceOwner, Wi
     private static Random randomGenerator;
     private long inputSeed;
     
-    private int SensorCount = 25;
+    private int SensorCount = 50;
     private int SensorRange = 25;
     
     private static FileWriter fw;
     private static BufferedWriter bw;
+    
+    public static List<Integer> averageNodeCoverage = new LinkedList<>();
+    
+
 
     public Simulation() {
         super();
@@ -216,6 +222,8 @@ public class Simulation extends ParameterableImplement implements TraceOwner, Wi
         edu.sharif.ce.dml.mobisim.mobilitygenerator.simulation.model.maps.Map map = getCurrentModel().getMap();
         shower.setSize2(map.getWidth(), map.getHeight());
         
+
+        
     }
 
     public void reset() {
@@ -302,6 +310,8 @@ public class Simulation extends ParameterableImplement implements TraceOwner, Wi
 
             if (shower != null) {//so is graphical
                 MyTimer.play(this, shower.getSpeedRatio());
+                
+
  
             } else {
                 MyTimer.resetTime();
@@ -371,6 +381,18 @@ public class Simulation extends ParameterableImplement implements TraceOwner, Wi
     public void updateNodes() {
         getCurrentModel().updateNodes((int) MyTimer.calculationTimeStep);
         writeTraces(getTraceWriter());
+        
+                        if(MyTimer.getTime() == getMaxSimulationTime())
+                {
+                      int average = 0;
+              for(int i = 0; i<averageNodeCoverage.size(); i++)
+              {
+                  average = average + averageNodeCoverage.get(i);
+              }
+              average = average / averageNodeCoverage.size();
+              
+              Simulation.writecoverage("Average Coverage: " + average);
+                }
 
     }
 
@@ -396,6 +418,8 @@ public class Simulation extends ParameterableImplement implements TraceOwner, Wi
     ////////////////////////////output part
 
     private void flushAndClose() {
+
+        
         TraceWriter traceWriter = getTraceWriter();
         if (traceWriter != null) {
             traceWriter.flushAndClose();
