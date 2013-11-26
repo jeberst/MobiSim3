@@ -98,10 +98,11 @@ public abstract class AbstractGroupModel extends Model implements IncludableMap,
     
     
     //Simulation Parameters for turning the knobs.
-    boolean superSpeed = false;
+    boolean superSpeed = true;
     boolean DBFS = false;
     int numberToBridgeOn = 1;
     int sensorSpeed = 5;
+    //False = cluster by distance
     boolean clustersBySize = true;
     
             

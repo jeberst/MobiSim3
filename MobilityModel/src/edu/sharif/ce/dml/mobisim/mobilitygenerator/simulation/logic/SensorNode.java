@@ -70,38 +70,6 @@ public class SensorNode extends GeneratorNode {
         this.range = node.getRange();
     }
 
-    public void setSensorLocation(Location location, SensorNode node)
-    {
-        if(!center)
-        {
-            if(leftnode == null && rightnode == null)
-            {
-                if(isCenter(bottomnode))
-                {
-                    //this is the topnode
-                }
-                else
-                {
-                    //this is the bottomnode
-                }
-            }
-            else if(topnode == null && bottomnode == null)
-            {
-                if(isCenter(leftnode))
-                {
-                    //this is the rightnode
-                }
-                else
-                {
-                    //this is the leftnode
-                }
-            }  
-        }
-        else
-        {
-            //this is the center
-        }
-    }
     
     public boolean isCenter(SensorNode node)
     {
